@@ -1,32 +1,142 @@
 @import "tailwindcss";
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* THEME */
+:root {
+    --background: #ffffff;
+    --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
 }
 
 body {
-  background: #151515;
-  color: var(--foreground);
-  font-family: var(--font-montserrat), sans-serif;
+    background: #151515;
+    color: var(--foreground);
+    font-family: "Montserrat", sans-serif;
 }
 
-.nav-bar {
-  @apply flex flex-row items-center gap-15 pt-10 pl-20 font-semibold;
+/* MAIN PAGE */
+.mainPageContainer {
+    @apply flex flex-col items-start ml-16; /* was ml-20, now slightly smaller */
 }
-.filled-button {
-  @apply flex flex-col items-center justify-center bg-blue-700 w-[8rem] h-[3rem] rounded-4xl ml-50;
+
+/* NAVBAR */
+.nav-bar-no-logo {
+    @apply flex flex-row items-center justify-between pt-8 font-semibold w-full pr-8 text-base;
+}
+
+.nav-links {
+    @apply flex flex-row gap-25; /* use gap for spacing between links */
+}
+
+.nav-links > a {
+    @apply relative inline-block text-base; /* no horizontal padding */
+}
+
+.nav-links > a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 1.5rem; /* matches top-6 */
+    height: 3px;
+    width: 0;
+    background-color: rgb(37 99 235); /* blue-600 */
+    border-radius: 9999px;
+    transition: all 250ms;
+}
+.nav-links > a:hover::after {
+    width: 100%;
+}
+
+.nav-actions {
+    @apply flex flex-row items-center gap-6 pl-24 text-base;
+}
+
+/* BUTTONS */
+.primary-button {
+    @apply flex items-center justify-center bg-blue-600 
+         w-[8rem] h-[3.5rem] 
+         rounded-4xl cursor-pointer text-white 
+         text-base font-medium;
+}
+
+.secondary-button {
+    @apply flex items-center justify-center bg-transparent 
+         w-[8rem] h-[3.5rem] 
+         border-[4px] border-blue-600 
+         rounded-4xl cursor-pointer text-white 
+         text-base  font-medium;
+}
+
+/* TEXT */
+.hackInfo {
+    @apply mt-6 text-2xl font-medium;
+}
+
+.descriptionHack {
+    @apply mt-8 text-xl font-medium;
+}
+
+/* CODE BLOCK */
+.code-block {
+    @apply flex justify-center items-center 
+         w-[250px] h-[38px]
+         p-[22px]
+         bg-neutral-700/25 
+         rounded-xl 
+         border border-white/20 
+         text-blue-600 font-semibold
+         text-sm
+         mt-[30px];
+    font-family: var(--font-source-code-pro);
+}
+
+/* LOGO + TEXT */
+.logoAndText {
+    @apply flex flex-row justify-center items-center mt-8;
+}
+
+.logoAndText > h1 {
+    @apply font-bold text-6xl ml-8;
+}
+
+.logoHTB {
+    @apply w-[6em] h-[6em];
+}
+
+/* TERMINAL */
+.terminal {
+    @apply flex flex-col w-[48em] h-[20em] bg-[#333638]/50 rounded-2xl text-lg font-medium font-mono mt-10;
+}
+
+.topTerminalBar {
+    @apply flex flex-row items-center justify-between w-[48em] h-[36px] p-[2em] font-semibold rounded-t-2xl bg-[#555555]/50;
+}
+.bottomTerminalBar {
+    @apply pl-[2em];
+}
+.bottomTerminalBar > p {
+    @apply mt-6;
+}
+.circleContainer {
+    @apply flex flex-row items-center gap-3; /* evenly spaced */
+}
+
+.circleContainer [class*="circle"] {
+    @apply rounded-full w-3.5 h-3.5; /* visible dots */
+}
+
+.circleYellow {
+    @apply bg-yellow-300;
+}
+.circleRed {
+    @apply bg-red-600;
+}
+.circleGreen {
+    @apply bg-green-400;
 }
