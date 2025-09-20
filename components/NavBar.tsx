@@ -15,7 +15,7 @@ const NavBar = () => {
 
             {/* right side: buttons */}
             <div className="nav-actions">
-                <PrimaryButton />
+                <PrimaryButton> Register </PrimaryButton>
                 <SecondaryButton />
             </div>
         </nav>
