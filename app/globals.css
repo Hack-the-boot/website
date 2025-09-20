@@ -19,124 +19,159 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
-/* MAIN PAGE */
-.mainPageContainer {
-    @apply flex flex-col items-start ml-16; /* was ml-20, now slightly smaller */
+/* PAGE */
+.page {
+    @apply flex flex-row items-start w-full;
 }
 
-/* NAVBAR */
+.mainPageContainer {
+    @apply flex flex-col items-start w-full ml-20;
+}
+
+/* NAVBAR (kept as before) */
 .nav-bar-no-logo {
     @apply flex flex-row items-center justify-between pt-8 font-semibold w-full pr-8 text-base;
 }
-
 .nav-links {
-    @apply flex flex-row gap-25; /* use gap for spacing between links */
+    @apply flex flex-row gap-25;
 }
-
 .nav-links > a {
-    @apply relative inline-block text-base; /* no horizontal padding */
+    @apply relative inline-block text-base;
 }
-
 .nav-links > a::after {
     content: "";
     position: absolute;
     left: 0;
     bottom: 0;
-    top: 1.5rem; /* matches top-6 */
+    top: 1.5rem;
     height: 3px;
     width: 0;
-    background-color: rgb(37 99 235); /* blue-600 */
+    background-color: rgb(37 99 235);
     border-radius: 9999px;
     transition: all 250ms;
 }
 .nav-links > a:hover::after {
     width: 100%;
 }
-
 .nav-actions {
-    @apply flex flex-row items-center gap-6 pl-24 text-base;
+    @apply flex flex-row items-center gap-6 pl-24;
 }
 
 /* BUTTONS */
 .primary-button {
-    @apply flex items-center justify-center bg-blue-600 
-         w-[8rem] h-[3.5rem] 
-         rounded-4xl cursor-pointer text-white 
-         text-base font-medium;
+    @apply flex items-center justify-center bg-blue-600
+         w-[8rem] h-[3.5rem]
+         rounded-full cursor-pointer text-white
+         text-base font-semibold
+         hover:bg-blue-700 transition;
 }
 
 .secondary-button {
-    @apply flex items-center justify-center bg-transparent 
-         w-[8rem] h-[3.5rem] 
-         border-[4px] border-blue-600 
-         rounded-4xl cursor-pointer text-white 
-         text-base  font-medium;
+    @apply flex items-center justify-center bg-transparent
+         w-[8rem] h-[3.5rem]
+         rounded-full cursor-pointer
+         text-blue-600 text-base font-semibold
+         border-2 border-blue-600
+         hover:bg-blue-600 hover:text-white
+         transition
+         focus:outline-none focus:ring-2 focus:ring-blue-300;
 }
 
 /* TEXT */
 .hackInfo {
     @apply mt-6 text-2xl font-medium;
 }
-
 .descriptionHack {
     @apply mt-8 text-xl font-medium;
-}
-
-/* CODE BLOCK */
-.code-block {
-    @apply flex justify-center items-center 
-         w-[250px] h-[38px]
-         p-[22px]
-         bg-neutral-700/25 
-         rounded-xl 
-         border border-white/20 
-         text-blue-600 font-semibold
-         text-sm
-         mt-[30px];
-    font-family: var(--font-source-code-pro);
 }
 
 /* LOGO + TEXT */
 .logoAndText {
     @apply flex flex-row justify-center items-center mt-8;
 }
-
 .logoAndText > h1 {
     @apply font-bold text-6xl ml-8;
 }
-
 .logoHTB {
     @apply w-[6em] h-[6em];
 }
 
-/* TERMINAL */
+/* TERMINAL BLOCK
+   - .terminal-block (left aligned with rest of page)
+   - .terminal-center (single inner wrapper that centers terminal+button)
+*/
+.terminal-block {
+    @apply w-full flex flex-col items-start; /* keeps the block left-aligned in the page flow */
+}
+
+.terminal-center {
+    @apply w-[45em] flex flex-col items-center; /* centers terminal and button relative to each other */
+}
+.terminal-center > button {
+    @apply mt-10;
+}
+
+/* TERMINAL (macOS-like) */
 .terminal {
-    @apply flex flex-col w-[48em] h-[20em] bg-[#333638]/50 rounded-2xl text-lg font-medium font-mono mt-10;
+    @apply w-full max-w-[75em] flex flex-col rounded-2xl overflow-hidden font-mono text-[20px]
+         bg-[#1e1e1e] ring-1 ring-white/6
+         shadow-[0_6px_18px_rgba(0,0,0,0.24)] mt-10;
 }
 
-.topTerminalBar {
-    @apply flex flex-row items-center justify-between w-[48em] h-[36px] p-[2em] font-semibold rounded-t-2xl bg-[#555555]/50;
-}
-.bottomTerminalBar {
-    @apply pl-[2em];
-}
-.bottomTerminalBar > p {
-    @apply mt-6;
-}
-.circleContainer {
-    @apply flex flex-row items-center gap-3; /* evenly spaced */
+/* Top (title) bar */
+.terminal-top {
+    @apply relative flex items-center w-full h-7 px-3 rounded-t-2xl bg-[#2b2b2b]/95;
 }
 
-.circleContainer [class*="circle"] {
-    @apply rounded-full w-3.5 h-3.5; /* visible dots */
+.trafficLights {
+    @apply flex items-center gap-2;
+}
+.trafficLights .dot {
+    @apply w-3 h-3 rounded-full ring-1 ring-black/30;
+}
+.dot-red {
+    background: #ff5f57;
+}
+.dot-yellow {
+    background: #febc2e;
+}
+.dot-green {
+    background: #28c840;
 }
 
-.circleYellow {
-    @apply bg-yellow-300;
+/* centered title */
+.terminal-title {
+    @apply absolute left-1/2 -translate-x-1/2 text-xs text-gray-300;
 }
-.circleRed {
-    @apply bg-red-600;
+
+/* content */
+.terminal-content {
+    @apply px-4 py-3 text-gray-200 leading-relaxed;
+    background: radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, 0.05), transparent 60%);
 }
-.circleGreen {
-    @apply bg-green-400;
+
+/* Prompt + cursor */
+.prompt {
+    @apply text-blue-400 font-semibold;
+}
+.cmd-line {
+    @apply mt-2;
+}
+.cursor {
+    display: inline-block;
+    width: 0.6ch;
+    height: 1em;
+    background: currentColor;
+    vertical-align: -0.2em;
+    animation: blink 1s steps(1) infinite;
+}
+@keyframes blink {
+    0%,
+    49% {
+        opacity: 1;
+    }
+    50%,
+    100% {
+        opacity: 0;
+    }
 }
