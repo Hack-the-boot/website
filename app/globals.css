@@ -43,12 +43,12 @@ body {
 /* USERS - Enhanced Modern Design */
 .leftUser {
     @apply flex flex-row items-end justify-start;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     animation: slideInLeft 0.3s ease-out;
 }
 .rightUser {
     @apply flex flex-row items-end justify-end;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     animation: slideInRight 0.3s ease-out;
 }
 
@@ -261,6 +261,13 @@ body {
     @apply flex flex-row items-center gap-6 pl-24;
 }
 
+.applyButton {
+    @apply flex items-center justify-center bg-blue-600
+         w-[25rem] h-[3.5rem]
+         rounded-full cursor-pointer text-white
+         text-base font-semibold
+         hover:bg-blue-700 transition;
+}
 .primary-button {
     @apply flex items-center justify-center bg-blue-600
          w-[8rem] h-[3.5rem]
