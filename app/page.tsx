@@ -1,8 +1,8 @@
 import Image from "next/image";
 import NavBar from "@/components/NavBar";
-import PrimaryButton from "@/components/PrimaryButton";
 import LeftUser from "@/components/LeftUser";
 import RightUser from "@/components/RightUser";
+
 export default function Home() {
     return (
         <div className="page">
