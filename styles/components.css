@@ -1,0 +1,142 @@
+/* Chat window */
+.chatWindow {
+    @apply flex flex-col justify-center w-[85%] mt-7;
+    padding: 1.5rem;
+    gap: 0.75rem;
+}
+
+.leftUser {
+    @apply flex flex-row items-end justify-start;
+    margin-bottom: 3rem;
+    animation: slideInLeft 0.3s ease-out;
+}
+.rightUser {
+    @apply flex flex-row items-end justify-end;
+    margin-bottom: 3rem;
+    animation: slideInRight 0.3s ease-out;
+}
+
+.userText {
+    @apply max-w-[75%] px-5 py-3 text-lg leading-relaxed;
+    position: relative;
+    word-wrap: break-word;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s ease-in-out;
+}
+
+.userText:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+}
+
+/* Incoming bubble */
+.leftUser .userText {
+    background: linear-gradient(135deg, rgba(51, 65, 85, 0.95) 0%, rgba(30, 41, 59, 0.98) 100%);
+    color: #e2e8f0;
+    border-radius: 20px 20px 20px 4px;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.2), 0 1px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(148, 163, 184, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px) saturate(120%);
+}
+
+.leftUser .userText::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(148, 163, 184, 0.08) 0%, transparent 50%);
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.leftUser .userText:hover {
+    background: linear-gradient(135deg, rgba(71, 85, 105, 0.98) 0%, rgba(51, 65, 85, 1) 100%);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 6px 20px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(148, 163, 184, 0.2);
+    color: #f1f5f9;
+}
+
+/* Outgoing bubble */
+.rightUser .userText {
+    background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 30%, #2563eb 70%, #1d4ed8 100%);
+    color: white;
+    border-radius: 20px 20px 4px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 12px 40px rgba(79, 70, 229, 0.25), 0 4px 16px rgba(59, 130, 246, 0.2), 0 1px 4px rgba(29, 78, 216, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+}
+
+.rightUser .userText::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.rightUser .userText:hover {
+    background: linear-gradient(135deg, #5b21b6 0%, #4f46e5 30%, #3b82f6 70%, #2563eb 100%);
+    box-shadow: 0 16px 48px rgba(79, 70, 229, 0.35), 0 6px 20px rgba(59, 130, 246, 0.25), 0 2px 8px rgba(29, 78, 216, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.avatar {
+    @apply w-12 h-12 rounded-full flex items-center justify-center;
+    background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%);
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.25), 0 2px 8px rgba(168, 85, 247, 0.2), 0 1px 4px rgba(0, 0, 0, 0.1);
+    color: white;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.avatar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.25) 0%, transparent 60%);
+    border-radius: inherit;
+}
+
+.avatar:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a855f7 100%);
+    box-shadow: 0 6px 24px rgba(139, 92, 246, 0.35), 0 4px 12px rgba(168, 85, 247, 0.25), 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.rightUser .avatar {
+    @apply ml-3;
+}
+.leftUser .avatar {
+    @apply mr-3;
+}
+
+.applyButton {
+    @apply flex items-center justify-center bg-blue-600 w-[25rem] h-[3.5rem] rounded-full cursor-pointer text-white text-base font-semibold hover:bg-blue-700 transition;
+}
+
+.primary-button {
+    @apply flex items-center justify-center bg-blue-600 w-[8rem] h-[3.5rem] rounded-full cursor-pointer text-white text-base font-semibold hover:bg-blue-700 transition;
+}
+
+.secondary-button {
+    @apply flex items-center justify-center bg-transparent w-[8rem] h-[3.5rem] rounded-full cursor-pointer text-blue-600 text-base font-semibold border-2 border-blue-600 hover:bg-blue-600 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-blue-300;
+}
+
+.hackInfo {
+    @apply mt-6 text-2xl font-medium;
+}
+.descriptionHack {
+    @apply mt-8 text-xl font-medium;
+}
+
+.logoAndText {
+    @apply flex flex-row justify-center items-center mt-8;
+}
+.logoAndText > h1 {
+    @apply font-bold text-6xl ml-8;
+}
+.logoHTB {
+    @apply w-[6em] h-[6em];
+}
