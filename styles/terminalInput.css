@@ -1,0 +1,93 @@
+.terminal-block-input {
+    @apply w-full max-w-4xl flex flex-col items-center;
+}
+
+.terminal-center-input {
+    @apply w-full flex flex-col items-center;
+}
+.terminal-center-input > button {
+    @apply mt-10;
+}
+
+.terminal-input {
+    @apply w-full flex flex-col rounded-2xl overflow-hidden font-mono text-[18px]
+    bg-[#1e1e1e] ring-1 ring-white/10
+    shadow-[0_6px_18px_rgba(0,0,0,0.24)] mt-10;
+}
+
+.terminal-top-input {
+    @apply relative flex items-center w-full h-7 px-3 rounded-t-2xl bg-[#2b2b2b]/95;
+}
+
+.trafficLights-input {
+    @apply flex items-center gap-2;
+}
+.trafficLights-input .dot-input {
+    @apply w-3 h-3 rounded-full ring-1 ring-black/30;
+}
+.dot-red-input {
+    background: #ff5f57;
+}
+.dot-yellow-input {
+    background: #febc2e;
+}
+.dot-green-input {
+    background: #28c840;
+}
+
+.terminal-title-input {
+    @apply absolute left-1/2 -translate-x-1/2 text-xs text-gray-300;
+}
+
+.terminal-content-input {
+    @apply flex flex-col px-6 py-6 gap-6 text-gray-200;
+    background: radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, 0.05), transparent 60%);
+}
+.prompt-input {
+    @apply text-blue-400 font-semibold;
+}
+.cmd-line-input {
+    @apply flex flex-col items-start mt-2;
+}
+
+.labelInput {
+    @apply mb-4;
+}
+.inputText {
+    @apply relative rounded-[7px] border border-white/20 bg-[#232323] focus:outline-none
+    h-10 px-3 py-2 text-base w-full text-gray-100;
+}
+
+/* fake terminal cursor */
+.inputText::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 1.2em;
+    background: #e5e7eb; /* Tailwind gray-200 */
+    margin-left: 2px;
+    animation: blink 1s step-start infinite;
+    pointer-events: none;
+}
+
+/* only show cursor when focused */
+.inputText:focus::after {
+    display: block;
+}
+.inputText:not(:focus)::after {
+    display: none;
+}
+
+@keyframes blink {
+    0%,
+    50%,
+    100% {
+        opacity: 1;
+    }
+    25%,
+    75% {
+        opacity: 0;
+    }
+}
