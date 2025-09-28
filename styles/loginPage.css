@@ -65,5 +65,5 @@
     }
 }
 .register {
-    @apply w-full bg-blue-500 p-3 rounded-xl text-xl;
+    @apply w-full bg-blue-500 p-3 rounded-xl text-xl cursor-pointer text-white font-semibold;
 }
