@@ -1,3 +1,5 @@
+import React from "react";
+
 type FieldProps = {
     text: string;
     required?: boolean;
@@ -8,16 +10,20 @@ type FieldProps = {
 
 export function Field({ text, required = false, type = "text", id, className = "" }: FieldProps) {
     return (
-        <div className={`flex flex-col items-start gap-2 font-mono text-[18px] ${className}`}>
+        <div className={`field ${className}`}>
             {/* Label row */}
-            <label htmlFor={id} className="flex items-center gap-2">
-                <span className="text-blue-500">{">"}</span>
-                <span className="font-bold text-gray-100">{text}:</span>
-                {required && <span className="text-red-500">*</span>}
+            <label htmlFor={id} className="field-label">
+                <span className="arrow">{">"}</span>
+                <span className="labelText">{text}:</span>
+                {required && (
+                    <span className="required" aria-hidden>
+                        *
+                    </span>
+                )}
             </label>
 
             {/* Input */}
-            <input className="inputText" type={type} id={id} />
+            <input className="inputText" type={type} id={id} aria-required={required} aria-label={text} />
         </div>
     );
 }
@@ -28,11 +34,11 @@ type TerminalProps = {
 
 export default function Terminal({ children }: TerminalProps) {
     return (
-        <div className="terminal-block-input">
+        <div className="terminal-block-input" role="region" aria-label="Terminal">
             <div className="terminal-center-input">
-                <div className="terminal-input">
+                <div className="terminal-input" aria-hidden={false}>
                     <div className="terminal-top-input">
-                        <div className="trafficLights-input" aria-hidden>
+                        <div className="trafficLights-input" aria-hidden="true">
                             <span className="dot-input dot-red-input" />
                             <span className="dot-input dot-yellow-input" />
                             <span className="dot-input dot-green-input" />
@@ -41,8 +47,8 @@ export default function Terminal({ children }: TerminalProps) {
                         <span className="terminal-title-input">HackTheBoot — bash</span>
                     </div>
 
-                    {/* content (flex column now) */}
-                    <div className="terminal-content-input flex flex-col gap-6">{children}</div>
+                    {/* content (children provided by page) */}
+                    <div className="terminal-content-input">{children}</div>
                 </div>
             </div>
         </div>

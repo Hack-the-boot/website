@@ -1,3 +1,8 @@
+/* =========================
+   loginPage.css
+   All styling kept here (desktop-first with Tailwind responsive utilities)
+   ========================= */
+
 .loginPage {
     background: #151515;
     font-family: "Montserrat", sans-serif;
@@ -10,37 +15,80 @@
     background-size: 150px 150px;
 }
 
+/* logo + title */
+.logoAndText {
+    @apply flex flex-col items-center mt-8;
+}
+
+/* Responsive logo sizing (controlled by CSS class) */
+.logoHTB {
+    /* desktop default ~96px */
+    width: 6rem;
+    height: 6rem;
+    object-fit: contain;
+    @apply md:w-5 md:h-5;
+    @apply sm:w-14 sm:h-14; /* 3.5rem */
+}
+
+/* main page title (responsive) */
+.mainTitle {
+    @apply text-gray-100 font-bold mt-4;
+    /* responsive sizes */
+    @apply text-lg; /* mobile base */
+    @apply md:text-2xl; /* tablet */
+    @apply lg:text-3xl; /* desktop */
+    @apply xl:text-4xl; /* large desktop */
+}
+
+/* description */
 .desc {
     @apply text-xl mt-5 font-medium text-gray-200;
+    @apply md:text-lg sm:text-base;
 }
 
+/* name fields container */
 .fullNameContainer {
     @apply flex flex-row items-center justify-between gap-6;
+    @apply md:gap-4 sm:flex-col sm:gap-3;
 }
-
 .name {
-    @apply w-1/2;
+    @apply w-1/2 sm:w-full;
 }
 .surname {
-    @apply w-1/2;
+    @apply w-1/2 sm:w-full;
 }
 
+/* selection/role text */
 .selectionRole {
-    @apply flex flex-col items-start gap-2 font-mono text-[18px];
+    @apply flex flex-col items-start gap-2 font-mono;
+    @apply text-[18px] md:text-base sm:text-sm;
 }
 
+/* small role label styling (moved out of TSX utilities) */
+.roleLabel {
+    @apply flex items-center gap-2;
+}
+.roleArrow {
+    @apply text-blue-500;
+} /* the ">" */
+.roleText {
+    @apply font-bold text-gray-100;
+}
+.roleRequired {
+    @apply text-red-500;
+}
+
+/* checkbox components */
 @layer components {
-    /* Hide native checkbox */
     .check-input {
         @apply absolute opacity-0 cursor-pointer h-0 w-0;
     }
 
-    /* Fake checkbox box */
     .check {
         @apply relative w-5 h-5 rounded border border-white/20 bg-[#232323] cursor-pointer;
+        @apply sm:w-4 sm:h-4;
     }
 
-    /* Checkmark hidden by default */
     .check::after {
         content: "";
         position: absolute;
@@ -54,16 +102,50 @@
         transform: rotate(45deg);
     }
 
-    /* Checked box */
     .check-input:checked ~ .check {
         @apply bg-green-500 border-green-500;
     }
 
-    /* Show checkmark */
     .check-input:checked ~ .check::after {
         display: block;
     }
 }
+
+/* terms link */
+.termsLink {
+    color: #2563eb;
+    font-weight: 700;
+    text-decoration: none;
+}
+.termsLink:hover {
+    text-decoration: underline;
+}
+
+/* generic row label wrapper (for spacing) */
+.rowLabel {
+    @apply gap-3;
+}
+
+/* Register button */
 .register {
-    @apply w-full bg-blue-500 p-3 rounded-xl text-xl cursor-pointer text-white font-semibold;
+    @apply w-full bg-blue-500 p-3 rounded-xl text-xl font-semibold text-white cursor-pointer;
+    @apply md:text-lg md:p-2 sm:text-base sm:p-2;
+}
+
+/* Input select / inputText styles (keep consistent with your terminal CSS) */
+.inputText {
+    @apply relative rounded-[7px] border border-white/20 bg-[#232323] focus:outline-none w-full text-gray-100;
+    height: 2.5rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    @apply md:h-9 md:text-sm;
+    @apply sm:h-8 sm:text-xs sm:px-2 sm:py-1;
+}
+
+/* small responsive tweak for background grid on very small screens */
+@media (max-width: 420px) {
+    .pageLogin {
+        background-size: 100px 100px;
+        padding: 0.5rem;
+    }
 }

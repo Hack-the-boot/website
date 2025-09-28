@@ -16,16 +16,15 @@ export default function LoginPage() {
 
             <div className="loginPage">
                 <div className="pageLogin">
-                    <div className="logoAndText mt-12 flex flex-col items-center scale-70">
-                        <Image src="/img/Logo_Transparent.png" alt="Logo" width={300} height={300} className="logoHTB" />
-                        <h1 className="text-gray-100 text-3xl font-bold mt-4">Hack The Boot</h1>
+                    <div className="logoAndText mt-12">
+                        {/* Use Next/Image responsively via CSS class (logoHTB) and sizes attribute */}
+                        <Image src="/img/Logo_Transparent.png" alt="Logo" width={0} height={0} sizes="(max-width: 768px) 56px, (max-width: 1280px) 80px, 96px" className="logoHTB" />
+                        <h1 className="mainTitle">Hack The Boot</h1>
                     </div>
 
                     <p className="desc">Create your new account and get ready to hack!</p>
 
                     <Terminal>
-                        {/* <p className="text-gray-400">Please enter your details</p> */}
-
                         <div className="fullNameContainer w-full">
                             <div className="name">
                                 <Field text="Name" required id="name" />
@@ -36,6 +35,7 @@ export default function LoginPage() {
                         </div>
 
                         <Field text="Email" required id="email" />
+
                         <div className="fullNameContainer w-full">
                             <div className="name">
                                 <Field text="Password" required type="password" id="password" />
@@ -46,13 +46,13 @@ export default function LoginPage() {
                         </div>
 
                         <div className="selectionRole w-full">
-                            <label className="flex items-center gap-2">
-                                <span className="text-blue-500">{">"}</span>
-                                <span className="font-bold text-gray-100">Select role:</span>
-                                <span className="text-red-500">*</span>
+                            <label className="roleLabel">
+                                <span className="roleArrow">&gt;</span>
+                                <span className="roleText">Select role:</span>
+                                <span className="roleRequired">*</span>
                             </label>
-                            <select className="inputText" id="role" name="role">
-                                <option value="" disabled selected>
+                            <select className="inputText" id="role" name="role" defaultValue="">
+                                <option value="" disabled>
                                     Choose a role
                                 </option>
                                 <option value="Hacker">Hacker</option>
@@ -61,22 +61,23 @@ export default function LoginPage() {
                             </select>
                         </div>
 
-                        <label className="relative flex items-center gap-3 cursor-pointer text-gray-200">
+                        <label className="relative flex items-center gap-3 cursor-pointer text-gray-200 rowLabel">
                             <input type="checkbox" className="check-input" id="terms" />
-                            <span className="check"></span>
-                            <span>
+                            <span className="check" />
+                            <span className="termsText">
                                 I agree to{" "}
-                                <Link href="/terms" className="text-blue-600 hover:underline font-bold">
+                                <Link href="/terms" className="termsLink">
                                     Terms and conditions
                                 </Link>
                             </span>
                         </label>
 
-                        <label className="relative flex items-center gap-3 cursor-pointer text-gray-200">
+                        <label className="relative flex items-center gap-3 cursor-pointer text-gray-200 rowLabel">
                             <input type="checkbox" className="check-input" id="updates" />
-                            <span className="check"></span>
+                            <span className="check" />
                             <span>I want to receive future updates on Hack The Boot</span>
                         </label>
+
                         <button className="register">Register</button>
                     </Terminal>
                 </div>

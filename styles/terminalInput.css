@@ -1,3 +1,8 @@
+/* terminal-input.css
+   All styling for Terminal + Field kept here.
+   Responsive with Tailwind @apply variants assumed in your build.
+*/
+
 .terminal-block-input {
     @apply w-full max-w-4xl flex flex-col items-center;
 }
@@ -5,6 +10,7 @@
 .terminal-center-input {
     @apply w-full flex flex-col items-center;
 }
+/* <-- small tweak: allow CSS to cap width on mobile via media queries below */
 .terminal-center-input > button {
     @apply mt-10;
 }
@@ -15,10 +21,12 @@
     shadow-[0_6px_18px_rgba(0,0,0,0.24)] mt-10;
 }
 
+/* top bar */
 .terminal-top-input {
     @apply relative flex items-center w-full h-7 px-3 rounded-t-2xl bg-[#2b2b2b]/95;
 }
 
+/* traffic lights */
 .trafficLights-input {
     @apply flex items-center gap-2;
 }
@@ -35,14 +43,18 @@
     background: #28c840;
 }
 
+/* title in top bar */
 .terminal-title-input {
     @apply absolute left-1/2 -translate-x-1/2 text-xs text-gray-300;
 }
 
+/* content area */
 .terminal-content-input {
     @apply flex flex-col px-6 py-6 gap-6 text-gray-200;
     background: radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, 0.05), transparent 60%);
 }
+
+/* prompt/command styling */
 .prompt-input {
     @apply text-blue-400 font-semibold;
 }
@@ -50,12 +62,68 @@
     @apply flex flex-col items-start mt-2;
 }
 
+/* Field wrapper + label + input styling */
+.field {
+    @apply flex flex-col items-start gap-2 font-mono;
+    /* base font-size for fields (desktop) — small screens overridden below */
+    font-size: 18px;
+}
+
+/* small responsive adjustments */
+@media (max-width: 1280px) {
+    .field {
+        font-size: 16px;
+    }
+}
+@media (max-width: 768px) {
+    .field {
+        font-size: 14px;
+    }
+}
+
+/* Label row inside a Field (the arrow + label + required star) */
+.field-label {
+    @apply flex items-center gap-2 text-gray-100;
+    font-weight: 700;
+}
+.field-label .arrow {
+    @apply text-blue-500;
+}
+.field-label .labelText {
+    @apply font-bold text-gray-100;
+}
+.field-label .required {
+    @apply text-red-500;
+}
+
+/* Provide an alternate smaller class for labels if you need it */
+.field-label.small {
+    @apply text-sm md:text-base;
+}
+
+/* existing .labelInput spacing utility (keeps compatibility) */
 .labelInput {
     @apply mb-4;
 }
+
+/* input element (keeps same visuals from your original CSS) */
 .inputText {
     @apply relative rounded-[7px] border border-white/20 bg-[#232323] focus:outline-none
     h-10 px-3 py-2 text-base w-full text-gray-100;
+    /* responsive heights/text */
+}
+@media (max-width: 1280px) {
+    .inputText {
+        height: 2.25rem;
+        font-size: 0.95rem;
+    }
+}
+@media (max-width: 768px) {
+    .inputText {
+        height: 2rem;
+        font-size: 0.9rem;
+        padding: 0.375rem 0.5rem;
+    }
 }
 
 /* fake terminal cursor */
@@ -71,8 +139,6 @@
     animation: blink 1s step-start infinite;
     pointer-events: none;
 }
-
-/* only show cursor when focused */
 .inputText:focus::after {
     display: block;
 }
@@ -80,6 +146,7 @@
     display: none;
 }
 
+/* typing blink animation (shared) */
 @keyframes blink {
     0%,
     50%,
@@ -89,5 +156,96 @@
     25%,
     75% {
         opacity: 0;
+    }
+}
+
+/* accessibility focus outlines for keyboard users */
+.inputText:focus {
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    outline: none;
+}
+
+/* Small responsive tweaks for terminal components */
+@media (max-width: 1280px) {
+    .terminal-input {
+        @apply text-[16px];
+    }
+    .terminal-content-input {
+        @apply px-4 py-4 gap-4;
+    }
+    .terminal-top-input {
+        @apply h-6 px-2;
+    }
+    .trafficLights-input .dot-input {
+        @apply w-2.5 h-2.5;
+    }
+
+    /* make the terminal container narrower on mid-size phones */
+    .terminal-center-input {
+        width: calc(100% - 2rem); /* leave some side padding */
+        max-width: 22rem; /* ~352px */
+    }
+    .terminal-input {
+        max-width: 22rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* tighter caps for tablets / small laptops if you want */
+@media (max-width: 1024px) {
+    .terminal-input {
+        @apply text-[15px];
+    }
+    .terminal-top-input {
+        @apply h-6 px-2;
+    }
+    .terminal-content-input {
+        @apply px-3 py-3 gap-3;
+    }
+}
+
+/* Mobile — make terminal significantly narrower and centered */
+@media (max-width: 768px) {
+    .terminal-input {
+        @apply text-[14px] mt-6;
+        max-width: 20rem; /* ~320px - good fit for small phones */
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%; /* allow inner content to fill the capped container */
+    }
+    .terminal-center-input {
+        width: calc(100% - 1.5rem);
+        max-width: 20rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    .terminal-top-input {
+        @apply h-5 px-2;
+    }
+    .trafficLights-input {
+        @apply gap-1;
+    }
+    .trafficLights-input .dot-input {
+        @apply w-2 h-2;
+    }
+    .terminal-title-input {
+        @apply text-[10px];
+    }
+    .terminal-content-input {
+        @apply px-2 py-2 gap-2;
+    }
+}
+
+/* Very small phones — extra-narrow cap so terminal doesn't feel huge */
+@media (max-width: 420px) {
+    .terminal-input {
+        max-width: 18rem; /* ~288px */
+    }
+    .terminal-center-input {
+        max-width: 18rem;
+        width: calc(100% - 1rem);
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
     }
 }
