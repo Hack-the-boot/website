@@ -24,7 +24,7 @@ export default function Home() {
                         We are waiting for you. 🫵
                     </p>
 
-                    {/* Terminal + Button (clean, single inner wrapper) */}
+                    
                     <div className="terminal-block">
                         <div className="terminal-center">
                             <div className="terminal">
