@@ -1,12 +1,21 @@
+"use client";
+
+import { useState } from "react";
 type FieldProps = {
     text: string;
     required?: boolean;
     type?: string;
     id?: string;
     className?: string;
+    children?: React.ReactNode;
 };
 
-export function Field({ text, required = false, type = "text", id, className = "" }: FieldProps) {
+export function Field({ text, required = false, type = "text", id, className = "", children }: FieldProps) {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const isPassword = type === "password";
+    const inputType = isPassword && showPassword ? "text" : type;
+
     return (
         <div className={`flex flex-col items-start gap-2 font-mono text-[18px] ${className}`}>
             {/* Label row */}
@@ -16,8 +25,24 @@ export function Field({ text, required = false, type = "text", id, className = "
                 {required && <span className="text-red-500">*</span>}
             </label>
 
-            {/* Input */}
-            <input className="inputText" type={type} id={id} />
+            {/* Input wrapper */}
+            <div className="relative w-full flex items-center">
+                <input
+                    className="inputText pr-10" // pr-10 = space for button
+                    type={inputType}
+                    id={id}
+                />
+
+                {/* Show/hide password toggle */}
+                {isPassword && (
+                    <button type="button" aria-label={showPassword ? "Hide password" : "Show password"} className="absolute right-3 text-gray-400 hover:text-gray-200" onClick={() => setShowPassword((prev) => !prev)}>
+                        {showPassword ? "🙈" : "👁️"}
+                    </button>
+                )}
+
+                {/* Any extra children can also be injected */}
+                {children}
+            </div>
         </div>
     );
 }
