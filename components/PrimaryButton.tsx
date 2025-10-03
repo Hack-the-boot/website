@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-
+import Link from "next/link";
 type PrimaryButtonProps = {
     children: ReactNode;
     onClick?: () => void; // optional click handler
@@ -7,9 +7,9 @@ type PrimaryButtonProps = {
 
 const PrimaryButton = ({ children, onClick }: PrimaryButtonProps) => {
     return (
-        <button className="primary-button" onClick={onClick}>
-            {children}
-        </button>
+        <Link href="/register">
+            <button className="primary-button">Register</button>
+        </Link>
     );
 };
 
