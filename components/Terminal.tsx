@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+
 type FieldProps = {
     text: string;
     required?: boolean;
@@ -17,32 +18,36 @@ export function Field({ text, required = false, type = "text", id, className = "
     const inputType = isPassword && showPassword ? "text" : type;
 
     return (
-        <div className={`flex flex-col items-start gap-2 font-mono text-[18px] ${className}`}>
-            {/* Label row */}
-            <label htmlFor={id} className="flex items-center gap-2">
-                <span className="text-blue-500">{">"}</span>
-                <span className="font-bold text-gray-100">{text}:</span>
-                {required && <span className="text-red-500">*</span>}
+        <div className={`relative w-full font-mono text-[18px] ${className}`}>
+            {/* Input */}
+            <input
+                id={id}
+                type={inputType}
+                placeholder=" " // invisible placeholder to trigger peer
+                required={required}
+                className="peer inputText pr-10 w-full placeholder-transparent focus:outline-none"
+            />
+
+            {/* Floating label */}
+            <label
+                htmlFor={id}
+                className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 transition-all
+                           peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-gray-500
+                           peer-placeholder-shown:text-base
+                           peer-focus:top-2 peer-focus:text-sm peer-focus:text-blue-400"
+            >
+                {text} {required && <span className="text-red-500">*</span>}
             </label>
 
-            {/* Input wrapper */}
-            <div className="relative w-full flex items-center">
-                <input
-                    className="inputText pr-10" // pr-10 = space for button
-                    type={inputType}
-                    id={id}
-                />
+            {/* Show/hide password toggle */}
+            {isPassword && (
+                <button type="button" aria-label={showPassword ? "Hide password" : "Show password"} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-200" onClick={() => setShowPassword((prev) => !prev)}>
+                    {showPassword ? "🙈" : "👁️"}
+                </button>
+            )}
 
-                {/* Show/hide password toggle */}
-                {isPassword && (
-                    <button type="button" aria-label={showPassword ? "Hide password" : "Show password"} className="absolute right-3 text-gray-400 hover:text-gray-200" onClick={() => setShowPassword((prev) => !prev)}>
-                        {showPassword ? "🙈" : "👁️"}
-                    </button>
-                )}
-
-                {/* Any extra children can also be injected */}
-                {children}
-            </div>
+            {/* Children slot */}
+            {children}
         </div>
     );
 }
