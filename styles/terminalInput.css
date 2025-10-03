@@ -1,5 +1,5 @@
 .terminal-block-input {
-    @apply w-full max-w-4xl flex flex-col items-center;
+    @apply w-full max-w-xl flex flex-col items-center;
 }
 
 .terminal-center-input {
