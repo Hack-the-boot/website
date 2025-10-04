@@ -65,7 +65,7 @@
 }
 
 .speakerContainer {
-    @apply w-full mt-20 flex flex-wrap justify-center gap-10 lg:flex-nowrap lg:justify-between items-stretch;
+    @apply w-[95%] mt-20 flex flex-wrap gap-10 lg:flex-nowrap justify-between items-stretch;
 }
 .social-links {
     @apply flex flex-row gap-4 mt-auto mb-8 justify-center items-center;
