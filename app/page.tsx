@@ -6,6 +6,7 @@ import TextAndCodeBlock from "@/components/uilayouts/TextAndCodeBlock";
 import CardInfo from "@/components/uilayouts/CardInfo";
 import SpeakerCard from "@/components/uilayouts/SpeakerCard";
 import CardTimeLine from "@/components/uilayouts/CardTimeLine";
+import TwitterFeed from "@/components/TwitterFeed";
 
 export default function Home() {
     return (
@@ -71,17 +72,7 @@ export default function Home() {
                     </div>
                 </div>
                 <div className="rightSide">
-                    <div className="chatWindow">
-                        <LeftUser avatar="L">
-                            Hey, have you guys heard about <b>Hack The Boot?</b>
-                        </LeftUser>
-                        <RightUser avatar="M">Nope, what's that?</RightUser>
-                        <LeftUser avatar="G">It's this new international hackathon happening in Milan next spring.</LeftUser>
-                        <RightUser avatar="M">Oh wow, that sounds huge.</RightUser>
-                        {/* <LeftUser avatar="L">Yeah, everyone's been talking about it. Priority applications open in January.</LeftUser> */}
-                        <LeftUser avatar="G">I'm definitely applying. I don't want to miss this chance.</LeftUser>
-                        <RightUser avatar="M">Same here. Let's team up for it! 🚀</RightUser>
-                    </div>
+                    <TwitterFeed />
                 </div>
             </div>
 
