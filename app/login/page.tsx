@@ -19,24 +19,25 @@ export default function LoginPage() {
 
             <div className="loginPage">
                 <div className="pageLogin">
-                    <div className="logoAndTextRegister">
+                    <Link href="/" className="logoAndTextRegister">
                         <Image src="/img/Logo_Transparent.png" alt="Logo" width={300} height={300} className="logoHTB" />
                         <h1>Hack The Boot</h1>
-                    </div>
+                    </Link>
                     <Terminal>
                         <Field text="Email" required id="email" />
 
                         <Field text="Password" required type="password" id="password" />
 
-                        <p className="agree">
-                            By registering, you agree to our{" "}
-                            <Link href="/terms" className="text-blue-600 hover:underline font-bold">
-                                Terms and Conditions
-                            </Link>
-                            .
-                        </p>
-
                         <button className="register">Login</button>
+
+                        <div className="flex flex-row justify-between w-full text-sm mt-2">
+                            <Link href="/forgot-password" className="hover:underline font-mono text-[12px]">
+                                Forgot your password?
+                            </Link>
+                            <Link href="/register" className="hover:underline font-mono text-[12px]">
+                                Don't have an account? <span className="font-bold text-blue-600">Register</span>
+                            </Link>
+                        </div>
 
                         <div className="orLoginWith flex items-center gap-3">
                             <span className="line" />
@@ -50,10 +51,6 @@ export default function LoginPage() {
                             <ExternalLogin provider="github" />
                             <ExternalLogin provider="linkedin" />
                         </div>
-
-                        <Link href="/register" className="hover:underline font-mono text-[15px]">
-                            Don't have an account? <span className="font-bold text-blue-600">Register</span>
-                        </Link>
                     </Terminal>
                 </div>
             </div>
