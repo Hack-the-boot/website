@@ -70,3 +70,39 @@
 .social-links {
     @apply flex flex-row gap-4 mt-auto mb-8 justify-center items-center;
 }
+
+.timelineContainer {
+    @apply w-full flex flex-col gap-12 relative max-w-5xl mx-auto;
+}
+
+/* Vertical connecting line */
+.timelineContainer::before {
+    content: "";
+    @apply absolute left-1/2 top-0 bottom-0 w-2 rounded-full bg-gray-700/30 -translate-x-1/2 z-0;
+}
+
+/* Timeline row with custom grid columns - cards closer to center */
+.timelineContainer .grid {
+    @apply grid-cols-[1fr_auto_1fr] gap-8;
+}
+
+/* Make cards max width so they don't stretch too far */
+.timelineContainer .grid > div:first-child,
+.timelineContainer .grid > div:last-child {
+    @apply max-w-md;
+}
+
+/* Left side cards - align to the right */
+.timelineContainer .grid > div:first-child {
+    @apply justify-self-end;
+}
+
+/* Right side cards - align to the left */
+.timelineContainer .grid > div:last-child {
+    @apply justify-self-start;
+}
+
+/* Timeline dot styling */
+.timelineContainer .w-12.h-12 {
+    @apply relative z-10;
+}
