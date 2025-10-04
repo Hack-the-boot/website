@@ -11,7 +11,7 @@
 }
 
 .rightSide {
-    @apply w-[40%] flex justify-center items-start;
+    @apply w-[40%] flex justify-center items-start mt-10 ml-10;
 }
 
 .nav-bar-no-logo {
