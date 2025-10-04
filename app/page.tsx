@@ -4,6 +4,7 @@ import LeftUser from "@/components/LeftUser";
 import RightUser from "@/components/RightUser";
 import TextAndCodeBlock from "@/components/uilayouts/TextAndCodeBlock";
 import CardInfo from "@/components/uilayouts/CardInfo";
+import SpeakerCard from "@/components/uilayouts/SpeakerCard";
 export default function Home() {
     return (
         <div className="page">
@@ -94,6 +95,57 @@ export default function Home() {
                 <CardInfo title="300+ Hackers" img="/img/Hackers Icon World.png" subtitle="From all over the world" items={["Students from top universities", "Industry professionals", "International participants", "Diverse skill levels welcome"]} />
                 <CardInfo title="Mentorships" img="/img/Mentorships.png" subtitle="From academia and industry" items={["One-on-one guidance", "Technical workshops", "Career advice sessions", "Code reviews and feedback"]}></CardInfo>
                 <CardInfo title="Prizes" img="/img/Prizes.png" subtitle="Cash & Tech Gadgets" items={["$5,000 grand prize", "Latest tech gadgets", "Internship opportunities", "Exclusive swag and merch"]}></CardInfo>
+            </div>
+
+            <div id="speakers" className="titleSection">
+                <TextAndCodeBlock title="Speakers & Judges" code="HackTheBoot.getSpeakers()"></TextAndCodeBlock>
+                <div className="flex flex-col gap-4 mt-4">
+                    <p className="eventDescription">
+                        Learn from industry leaders who are shaping the future of technology
+                        <br />
+                        and innovation. Our speakers and judges come from top tech companies and renowned universities.
+                    </p>
+                </div>
+                <div className="speakerContainer">
+                    <SpeakerCard
+                        img="/img/speaker1.png"
+                        name="John Doe"
+                        roleAndCompany="Senior ML Engineer @ OpenAI"
+                        skills={["Fintech", "Machine Learning", "Cybersecurity"]}
+                        socialLinks={[
+                            { platform: "LinkedIn", url: "https://linkedin.com/in/speaker1" },
+                            { platform: "X", url: "https://x.com/speaker1" },
+                            { platform: "Instagram", url: "https://instagram.com/speaker1" },
+                        ]}
+                        description="John has over a decade of experience building large-scale machine learning systems. At HackTheBoot, he’ll share insights on applying AI in fintech and how to protect critical models from evolving cybersecurity threats."
+                    />
+
+                    <SpeakerCard
+                        img="/img/speaker2.png"
+                        name="Mark Smith"
+                        roleAndCompany="AI Researcher @ DeepMind"
+                        skills={["NLP", "Neural Networks", "Reinforcement Learning"]}
+                        socialLinks={[
+                            { platform: "LinkedIn", url: "https://linkedin.com/in/speaker2" },
+                            { platform: "X", url: "https://x.com/speaker2" },
+                            { platform: "Instagram", url: "https://instagram.com/speaker2" },
+                        ]}
+                        description="Mark focuses on cutting-edge AI research in natural language processing and reinforcement learning. He’ll dive into how neural architectures are evolving and what the next generation of intelligent systems could look like."
+                    />
+
+                    <SpeakerCard
+                        img="/img/speaker3.png"
+                        name="Alice Johnson"
+                        roleAndCompany="Security Architect @ Microsoft"
+                        skills={["Cloud Security", "DevSecOps", "Zero Trust Architecture"]}
+                        socialLinks={[
+                            { platform: "LinkedIn", url: "https://linkedin.com/in/speaker3" },
+                            { platform: "X", url: "https://x.com/speaker3" },
+                            { platform: "Instagram", url: "https://instagram.com/speaker3" },
+                        ]}
+                        description="Alice designs enterprise-scale security systems and leads Microsoft’s efforts in cloud resilience. Her talk will highlight zero trust strategies, DevSecOps practices, and how to secure AI-driven infrastructures."
+                    />
+                </div>
             </div>
         </div>
     );
