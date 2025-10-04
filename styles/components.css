@@ -230,3 +230,115 @@
 .cardTimeDaysRemaining {
     @apply text-sm text-blue-600/80 mt-1;
 }
+
+/* -----------------------TWITTER-------------------- */
+/* Twitter Feed Styles */
+.twitterFeed {
+    @apply w-full max-w-[350px] lg:max-w-[450px] xl:max-w-[500px] bg-gray-900/50 backdrop-blur-sm rounded-2xl border border-gray-800 overflow-hidden;
+}
+
+.feedHeader {
+    @apply px-4 lg:px-6 py-3 lg:py-4 border-b border-gray-800 flex items-center gap-3;
+}
+
+.feedIcon {
+    @apply w-6 h-6 lg:w-8 lg:h-8 text-blue-500;
+}
+
+.feedTitle {
+    @apply text-lg lg:text-xl font-semibold text-white;
+}
+
+.feedContent {
+    @apply max-h-[500px] lg:max-h-[600px] overflow-y-auto;
+}
+
+/* Custom scrollbar */
+.feedContent::-webkit-scrollbar {
+    @apply w-2;
+}
+
+.feedContent::-webkit-scrollbar-track {
+    @apply bg-gray-900/50;
+}
+
+.feedContent::-webkit-scrollbar-thumb {
+    @apply bg-gray-700 rounded-full;
+}
+
+.feedContent::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-600;
+}
+
+.tweetCard {
+    @apply px-4 lg:px-6 py-3 lg:py-4 border-b border-gray-800/50 hover:bg-gray-800/30 transition-colors duration-200;
+}
+
+.tweetHeader {
+    @apply flex items-start gap-2 lg:gap-3;
+}
+
+.tweetAvatar {
+    @apply w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gradient-to-br flex items-center justify-center text-white font-bold text-base lg:text-lg flex-shrink-0;
+}
+
+.tweetContent {
+    @apply flex-1 min-w-0;
+}
+
+.tweetUserInfo {
+    @apply flex items-center gap-2 flex-wrap;
+}
+
+.tweetName {
+    @apply font-semibold text-white text-sm lg:text-base;
+}
+
+.tweetHandle {
+    @apply text-gray-500 text-xs lg:text-sm;
+}
+
+.tweetTime {
+    @apply text-gray-600 text-xs lg:text-sm;
+}
+
+.tweetText {
+    @apply mt-2 text-gray-300 text-sm lg:text-base leading-relaxed;
+}
+
+.tweetActions {
+    @apply flex items-center gap-4 lg:gap-6 mt-2 lg:mt-3 text-gray-500;
+}
+
+.tweetAction {
+    @apply flex items-center gap-1.5 lg:gap-2 hover:text-blue-500 transition-colors cursor-pointer text-xs lg:text-sm;
+}
+
+.tweetActionIcon {
+    @apply w-4 h-4 lg:w-5 lg:h-5;
+}
+
+/* Gradient variations for avatars */
+.gradient-blue {
+    @apply from-blue-500 to-blue-700;
+}
+
+.gradient-purple {
+    @apply from-purple-500 to-purple-700;
+}
+
+.gradient-green {
+    @apply from-green-500 to-green-700;
+}
+
+.gradient-orange {
+    @apply from-orange-500 to-orange-700;
+}
+
+.gradient-pink {
+    @apply from-pink-500 to-pink-700;
+}
+
+.gradient-cyan {
+    @apply from-cyan-500 to-cyan-700;
+}
