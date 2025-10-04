@@ -1,5 +1,5 @@
 .page {
-    @apply flex flex-col items-start w-full min-h-screen pl-20;
+    @apply flex flex-col items-start w-full max-w-[1920px] min-h-screen pl-20;
 }
 
 .mainPageContainer {
@@ -62,4 +62,11 @@
 }
 .card-info li {
     @apply mt-2 list-disc;
+}
+
+.speakerContainer {
+    @apply w-full mt-20 flex flex-wrap justify-center gap-10 lg:flex-nowrap lg:justify-between items-stretch;
+}
+.social-links {
+    @apply flex flex-row gap-4 mt-auto mb-8 justify-center items-center;
 }
