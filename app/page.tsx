@@ -1,7 +1,5 @@
 import Image from "next/image";
 import NavBar from "@/components/NavBar";
-import LeftUser from "@/components/LeftUser";
-import RightUser from "@/components/RightUser";
 import TextAndCodeBlock from "@/components/uilayouts/TextAndCodeBlock";
 import CardInfo from "@/components/uilayouts/CardInfo";
 import SpeakerCard from "@/components/uilayouts/SpeakerCard";
@@ -15,7 +13,7 @@ export default function Home() {
             <div className="mainPageContainer">
                 <div className="leftSide">
                     <div className="logoAndText">
-                        <Image src="/img/Logo_Transparent.png" alt="Logo" width={300} height={300} className="logoHTB" />
+                        <Image src="/img/Logo_Transparent.png" alt="Logo" width={300} height={300} className="logoHTB" priority />
                         <h1>Hack The Boot</h1>
                     </div>
 
@@ -24,28 +22,28 @@ export default function Home() {
                     </p>
 
                     <p className="descriptionHack">
-                        The <b>brand new</b> Hackathon, powered by <b>students</b>, hosted in <b>Italy.</b> <br />
-                        Are you ready to take part in it and win the prizes? <br /> <br />
+                        The <b>brand new</b> Hackathon, powered by <b>students</b>, hosted in <b>Italy.</b>
+                        <br className="hidden sm:block" />
+                        Are you ready to take part in it and win the prizes?
+                        <br className="hidden sm:block" />
+                        <br className="hidden sm:block" />
                         We are waiting for you. 🫵
                     </p>
 
                     <div className="terminal-block">
                         <div className="terminal-center">
                             <div className="terminal">
-                                {/* top bar */}
                                 <div className="terminal-top">
-                                    <div className="trafficLights" aria-hidden>
+                                    <div className="trafficLights" aria-hidden="true">
                                         <span className="dot dot-red" />
                                         <span className="dot dot-yellow" />
                                         <span className="dot dot-green" />
                                     </div>
-
                                     <span className="terminal-title">HackTheBoot — bash</span>
                                 </div>
 
-                                {/* content */}
                                 <div className="terminal-content">
-                                    <p className="text-gray-400/60">Copyright © HackTheBoot Corporation.</p>
+                                    <p className="text-gray-400/60 text-xs sm:text-sm">Copyright © HackTheBoot Corporation.</p>
 
                                     <p className="cmd-line">
                                         <span className="prompt">$</span> <b>Date:</b> Spring 2026
@@ -63,42 +61,48 @@ export default function Home() {
                                         <span className="prompt">$</span> <b>Regular Applications:</b> March
                                     </p>
                                 </div>
-                                <div className="flex justify-center">
-                                    {/* primary action centered below the terminal */}
+
+                                <div className="flex justify-center px-4 sm:px-0">
                                     <button className="applyButton">Apply</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div className="rightSide">
                     <TwitterFeed />
                 </div>
             </div>
 
             <div id="event" className="titleSection">
-                <TextAndCodeBlock title="The Event" code="HackTheBoot.getEventDesc()"></TextAndCodeBlock>
+                <TextAndCodeBlock title="The Event" code="HackTheBoot.getEventDesc()" />
             </div>
+
             <p className="eventDescription">
-                For 24 hours straight, you'll <span className="text-blue-600 font-bold">team up</span>, <span className="text-blue-600   font-bold">code</span>, <span className="text-blue-600 font-bold">design</span>, and brainstorm your way through <br />
-                challenges. You'll meet brilliant minds from all over the world and build something <br />
+                For 24 hours straight, you'll <span className="text-blue-600 font-bold">team up</span>, <span className="text-blue-600 font-bold">code</span>, <span className="text-blue-600 font-bold">design</span>, and brainstorm your way through
+                <br className="hidden lg:block" />
+                challenges. You'll meet brilliant minds from all over the world and build something
+                <br className="hidden lg:block" />
                 amazing together.
             </p>
+
             <div className="containerCardsInfo">
                 <CardInfo title="300+ Hackers" img="/img/Hackers Icon World.png" subtitle="From all over the world" items={["Students from top universities", "Industry professionals", "International participants", "Diverse skill levels welcome"]} />
-                <CardInfo title="Mentorships" img="/img/Mentorships.png" subtitle="From academia and industry" items={["One-on-one guidance", "Technical workshops", "Career advice sessions", "Code reviews and feedback"]}></CardInfo>
-                <CardInfo title="Prizes" img="/img/Prizes.png" subtitle="Cash & Tech Gadgets" items={["$5,000 grand prize", "Latest tech gadgets", "Internship opportunities", "Exclusive swag and merch"]}></CardInfo>
+                <CardInfo title="Mentorships" img="/img/Mentorships.png" subtitle="From academia and industry" items={["One-on-one guidance", "Technical workshops", "Career advice sessions", "Code reviews and feedback"]} />
+                <CardInfo title="Prizes" img="/img/Prizes.png" subtitle="Cash & Tech Gadgets" items={["$5,000 grand prize", "Latest tech gadgets", "Internship opportunities", "Exclusive swag and merch"]} />
             </div>
 
             <div id="speakers" className="titleSection">
-                <TextAndCodeBlock title="Speakers & Judges" code="HackTheBoot.getSpeakers()"></TextAndCodeBlock>
+                <TextAndCodeBlock title="Speakers & Judges" code="HackTheBoot.getSpeakers()" />
                 <div className="flex flex-col gap-4 mt-4">
                     <p className="eventDescription">
                         Learn from industry leaders who are shaping the future of technology
-                        <br />
+                        <br className="hidden lg:block" />
                         and innovation. Our speakers and judges come from top tech companies and renowned universities.
                     </p>
                 </div>
+
                 <div className="speakerContainer">
                     <SpeakerCard
                         img="/img/speaker1.png"
@@ -110,7 +114,7 @@ export default function Home() {
                             { platform: "X", url: "https://x.com/speaker1" },
                             { platform: "Instagram", url: "https://instagram.com/speaker1" },
                         ]}
-                        description="John has over a decade of experience building large-scale machine learning systems. At HackTheBoot, he’ll share insights on applying AI in fintech and how to protect critical models from evolving cybersecurity threats."
+                        description="John has over a decade of experience building large-scale machine learning systems. At HackTheBoot, he'll share insights on applying AI in fintech and how to protect critical models from evolving cybersecurity threats."
                     />
 
                     <SpeakerCard
@@ -123,7 +127,7 @@ export default function Home() {
                             { platform: "X", url: "https://x.com/speaker2" },
                             { platform: "Instagram", url: "https://instagram.com/speaker2" },
                         ]}
-                        description="Mark focuses on cutting-edge AI research in natural language processing and reinforcement learning. He’ll dive into how neural architectures are evolving and what the next generation of intelligent systems could look like."
+                        description="Mark focuses on cutting-edge AI research in natural language processing and reinforcement learning. He'll dive into how neural architectures are evolving and what the next generation of intelligent systems could look like."
                     />
 
                     <SpeakerCard
@@ -136,51 +140,36 @@ export default function Home() {
                             { platform: "X", url: "https://x.com/speaker3" },
                             { platform: "Instagram", url: "https://instagram.com/speaker3" },
                         ]}
-                        description="Alice designs enterprise-scale security systems and leads Microsoft’s efforts in cloud resilience. Her talk will highlight zero trust strategies, DevSecOps practices, and how to secure AI-driven infrastructures."
+                        description="Alice designs enterprise-scale security systems and leads Microsoft's efforts in cloud resilience. Her talk will highlight zero trust strategies, DevSecOps practices, and how to secure AI-driven infrastructures."
                     />
                 </div>
             </div>
+
             <div className="titleSection">
-                <TextAndCodeBlock title="Event Timeline" code="HackTheBoot.getEventTimeline()"></TextAndCodeBlock>
-                <div className="timelineContainer !pt-20">
+                <TextAndCodeBlock title="Event Timeline" code="HackTheBoot.getEventTimeline()" />
+                <div className="timelineContainer sm:pt-16 md:pt-20">
                     {/* Row 1 (card left) */}
-                    <div className="grid grid-cols-3 items-center">
+                    <div className="grid items-center w-full">
                         <div className="flex justify-end">
                             <CardTimeLine date="January 10th, 2026" title="Priority Application Open" subtitle="Early bird registration for committed participants" daysRemaining={30} alignment="end" />
                         </div>
-                        <div className="flex justify-center ">
-                            <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center">
-                                {/* Timeline Dot Icon */}
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-blue-500">
-                                    <path
-                                        d="M6 2a2 2 0 0 0-2 2v16a2 2 0 
-                                        0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm7 
-                                        1.5L18.5 9H13V3.5zM10.97 15.03l-2.47-2.47a.75.75 
-                                        0 0 0-1.06 1.06l3 3a.75.75 
-                                        0 0 0 1.06 0l6-6a.75.75 
-                                        0 0 0-1.06-1.06l-5.47 5.47z"
-                                    />
+                        <div className="flex justify-center">
+                            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-800 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500">
+                                    <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm7 1.5L18.5 9H13V3.5zM10.97 15.03l-2.47-2.47a.75.75 0 0 0-1.06 1.06l3 3a.75.75 0 0 0 1.06 0l6-6a.75.75 0 0 0-1.06-1.06l-5.47 5.47z" />
                                 </svg>
                             </div>
                         </div>
-                        <div></div> {/* empty right side */}
+                        <div></div>
                     </div>
 
                     {/* Row 2 (card right) */}
-                    <div className="grid grid-cols-3 items-center">
-                        <div></div> {/* empty left side */}
+                    <div className="grid items-center w-full">
+                        <div></div>
                         <div className="flex justify-center">
-                            <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center">
-                                {/* Timeline Dot Icon */}
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-blue-500">
-                                    <path
-                                        d="M6 2a2 2 0 0 0-2 2v16a2 2 0 
-                                        0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm7 
-                                        1.5L18.5 9H13V3.5zM10.97 15.03l-2.47-2.47a.75.75 
-                                        0 0 0-1.06 1.06l3 3a.75.75 
-                                        0 0 0 1.06 0l6-6a.75.75 
-                                        0 0 0-1.06-1.06l-5.47 5.47z"
-                                    />
+                            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-800 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500">
+                                    <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm7 1.5L18.5 9H13V3.5zM10.97 15.03l-2.47-2.47a.75.75 0 0 0-1.06 1.06l3 3a.75.75 0 0 0 1.06 0l6-6a.75.75 0 0 0-1.06-1.06l-5.47 5.47z" />
                                 </svg>
                             </div>
                         </div>
@@ -190,22 +179,14 @@ export default function Home() {
                     </div>
 
                     {/* Row 3 (card left again) */}
-                    <div className="grid grid-cols-3 items-center">
+                    <div className="grid items-center w-full">
                         <div className="flex justify-end">
                             <CardTimeLine date="April 23-24th, 2026" title="Hack The Boot!" subtitle="24 hours of collaboration & coding" daysRemaining={90} alignment="end" />
                         </div>
                         <div className="flex justify-center">
-                            <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center">
-                                {/* Timeline Dot Icon */}
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-blue-500">
-                                    <path
-                                        d="M6 2a2 2 0 0 0-2 2v16a2 2 0 
-                                        0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm7 
-                                        1.5L18.5 9H13V3.5zM10.97 15.03l-2.47-2.47a.75.75 
-                                        0 0 0-1.06 1.06l3 3a.75.75 
-                                        0 0 0 1.06 0l6-6a.75.75 
-                                        0 0 0-1.06-1.06l-5.47 5.47z"
-                                    />
+                            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-800 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500">
+                                    <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm7 1.5L18.5 9H13V3.5zM10.97 15.03l-2.47-2.47a.75.75 0 0 0-1.06 1.06l3 3a.75.75 0 0 0 1.06 0l6-6a.75.75 0 0 0-1.06-1.06l-5.47 5.47z" />
                                 </svg>
                             </div>
                         </div>
