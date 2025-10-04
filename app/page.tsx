@@ -5,6 +5,8 @@ import RightUser from "@/components/RightUser";
 import TextAndCodeBlock from "@/components/uilayouts/TextAndCodeBlock";
 import CardInfo from "@/components/uilayouts/CardInfo";
 import SpeakerCard from "@/components/uilayouts/SpeakerCard";
+import CardTimeLine from "@/components/uilayouts/CardTimeLine";
+
 export default function Home() {
     return (
         <div className="page">
@@ -145,6 +147,79 @@ export default function Home() {
                         ]}
                         description="Alice designs enterprise-scale security systems and leads Microsoft’s efforts in cloud resilience. Her talk will highlight zero trust strategies, DevSecOps practices, and how to secure AI-driven infrastructures."
                     />
+                </div>
+            </div>
+            <div className="titleSection">
+                <TextAndCodeBlock title="Event Timeline" code="HackTheBoot.getEventTimeline()"></TextAndCodeBlock>
+                <div className="timelineContainer !pt-20">
+                    {/* Row 1 (card left) */}
+                    <div className="grid grid-cols-3 items-center">
+                        <div className="flex justify-end">
+                            <CardTimeLine date="2023-09-01" title="Priority Application Open" subtitle="Early bird registration for committed participants" daysRemaining={30} alignment="end" />
+                        </div>
+                        <div className="flex justify-center ">
+                            <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center">
+                                {/* Timeline Dot Icon */}
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-blue-500">
+                                    <path
+                                        d="M6 2a2 2 0 0 0-2 2v16a2 2 0 
+                                        0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm7 
+                                        1.5L18.5 9H13V3.5zM10.97 15.03l-2.47-2.47a.75.75 
+                                        0 0 0-1.06 1.06l3 3a.75.75 
+                                        0 0 0 1.06 0l6-6a.75.75 
+                                        0 0 0-1.06-1.06l-5.47 5.47z"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                        <div></div> {/* empty right side */}
+                    </div>
+
+                    {/* Row 2 (card right) */}
+                    <div className="grid grid-cols-3 items-center">
+                        <div></div> {/* empty left side */}
+                        <div className="flex justify-center">
+                            <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center">
+                                {/* Timeline Dot Icon */}
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-blue-500">
+                                    <path
+                                        d="M6 2a2 2 0 0 0-2 2v16a2 2 0 
+                                        0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm7 
+                                        1.5L18.5 9H13V3.5zM10.97 15.03l-2.47-2.47a.75.75 
+                                        0 0 0-1.06 1.06l3 3a.75.75 
+                                        0 0 0 1.06 0l6-6a.75.75 
+                                        0 0 0-1.06-1.06l-5.47 5.47z"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                        <div className="flex justify-start">
+                            <CardTimeLine date="2023-09-01" title="General Applications Open" subtitle="Open registration for all participants" daysRemaining={60} alignment="start" />
+                        </div>
+                    </div>
+
+                    {/* Row 3 (card left again) */}
+                    <div className="grid grid-cols-3 items-center">
+                        <div className="flex justify-end">
+                            <CardTimeLine date="2023-09-01" title="Hack The Boot!" subtitle="24 hours of collaboration & coding" daysRemaining={90} alignment="end" />
+                        </div>
+                        <div className="flex justify-center">
+                            <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center">
+                                {/* Timeline Dot Icon */}
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-blue-500">
+                                    <path
+                                        d="M6 2a2 2 0 0 0-2 2v16a2 2 0 
+                                        0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm7 
+                                        1.5L18.5 9H13V3.5zM10.97 15.03l-2.47-2.47a.75.75 
+                                        0 0 0-1.06 1.06l3 3a.75.75 
+                                        0 0 0 1.06 0l6-6a.75.75 
+                                        0 0 0-1.06-1.06l-5.47 5.47z"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+                        <div></div>
+                    </div>
                 </div>
             </div>
         </div>
