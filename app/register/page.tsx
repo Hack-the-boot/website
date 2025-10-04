@@ -19,10 +19,10 @@ export default function LoginPage() {
 
             <div className="loginPage">
                 <div className="pageLogin">
-                    <div className="logoAndTextRegister">
+                    <Link href="/" className="logoAndTextRegister">
                         <Image src="/img/Logo_Transparent.png" alt="Logo" width={300} height={300} className="logoHTB" />
                         <h1>Hack The Boot</h1>
-                    </div>
+                    </Link>
                     <Terminal>
                         <div className="fullNameContainer w-full">
                             <div className="name">
@@ -46,37 +46,25 @@ export default function LoginPage() {
 
                         {/* Role selection with floating label */}
                         <div className="relative w-full font-mono text-[18px]">
-                            <select id="role" name="role" defaultValue="" required className="peer inputText w-full appearance-none focus:outline-none bg-transparent">
-                                <option value="" disabled hidden></option>
+                            <select id="role" name="role" required defaultValue="" className="inputText w-full focus:outline-none text-gray-100">
+                                <option value="" disabled className="text-gray-400">
+                                    Select role *
+                                </option>
                                 <option value="Hacker">Hacker</option>
                                 <option value="Mentor">Mentor</option>
                                 <option value="Judge">Judge</option>
                             </select>
-
-                            {/* Floating label */}
-                            <label
-                                htmlFor="role"
-                                className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 transition-all
-                                peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-gray-500
-                                peer-placeholder-shown:text-base
-                                peer-focus:top-2 peer-focus:text-sm peer-focus:text-blue-400"
-                            >
-                                Select role <span className="text-red-500">*</span>
-                            </label>
-
-                            {/* Dropdown arrow */}
-                            <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">▼</span>
                         </div>
 
                         <p className="agree">
-                            By registering, you agree to our{" "}
+                            By signing up, you agree to our{" "}
                             <Link href="/terms" className="text-blue-600 hover:underline font-bold">
                                 Terms and Conditions
                             </Link>
                             .
                         </p>
-                        <button className="register">Register</button>
-                        <Link href="/login" className="hover:underline font-mono text-[15px]">
+                        <button className="register">Sign up</button>
+                        <Link href="/login" className="hover:underline font-mono text-[12px]">
                             Already have an account? <span className="font-bold text-blue-600">Login</span>
                         </Link>
                     </Terminal>
