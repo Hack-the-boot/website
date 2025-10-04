@@ -1,186 +1,259 @@
-/* Chat window */
-.chatWindow {
-    @apply flex flex-col justify-center w-[85%] mt-7;
+/* ============================================
+   LAYOUT STYLES
+   ============================================ */
+
+/* Main Page Structure */
+.page {
+    @apply flex flex-col items-start w-full max-w-[1920px] min-h-screen
+         px-4 sm:px-8 md:px-12 lg:pl-20
+         py-4 sm:py-6;
 }
 
-.leftUser {
-    @apply flex flex-row items-end justify-start;
-    margin-bottom: 3rem;
-    animation: slideInLeft 0.3s ease-out;
-}
-.rightUser {
-    @apply flex flex-row items-end justify-end;
-    margin-bottom: 3rem;
-    animation: slideInRight 0.3s ease-out;
+/* .mainPageContainer {
+    @apply flex flex-col lg:flex-row items-start
+         w-full gap-8 lg:gap-0;
+} */
+
+.leftSide {
+    @apply flex flex-col items-center sm:items-start
+         w-full lg:w-[55%] xl:w-[50%];
 }
 
-.userText {
-    @apply max-w-[75%] px-5 py-3 text-lg leading-relaxed;
-    position: relative;
-    word-wrap: break-word;
-    backdrop-filter: blur(10px);
-    transition: all 0.2s ease-in-out;
+.rightSide {
+    @apply w-full lg:w-[45%] xl:w-[40%]
+         flex justify-center items-start
+         mt-8 lg:mt-10
+         lg:ml-6 xl:ml-10;
 }
 
-.userText:hover {
-    transform: translateY(-1px);
-    filter: brightness(1.05);
+/* Navigation */
+.nav-bar-no-logo {
+    @apply flex flex-col sm:flex-row
+         items-start sm:items-center
+         justify-between
+         pt-4 sm:pt-6 md:pt-8
+         font-semibold w-full
+         pr-0 sm:pr-4 md:pr-8
+         text-sm sm:text-base
+         gap-4 sm:gap-0;
 }
 
-/* Incoming bubble */
-.leftUser .userText {
-    background: linear-gradient(135deg, rgba(51, 65, 85, 0.95) 0%, rgba(30, 41, 59, 0.98) 100%);
-    color: #e2e8f0;
-    border-radius: 20px 20px 20px 4px;
-    border: 1px solid rgba(148, 163, 184, 0.2);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.2), 0 1px 4px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(148, 163, 184, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(12px) saturate(120%);
+.nav-links {
+    @apply flex flex-row flex-wrap gap-4 sm:gap-6 md:gap-8 lg:gap-25;
 }
 
-.leftUser .userText::before {
+.nav-links > a {
+    @apply relative inline-block text-sm sm:text-base;
+}
+
+.nav-links > a::after {
     content: "";
     position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(148, 163, 184, 0.08) 0%, transparent 50%);
-    border-radius: inherit;
-    pointer-events: none;
+    left: 0;
+    bottom: 0;
+    top: 1.25rem;
+    height: 2px;
+    width: 0;
+    background-color: rgb(37 99 235);
+    border-radius: 9999px;
+    transition: all 250ms;
 }
 
-.leftUser .userText:hover {
-    background: linear-gradient(135deg, rgba(71, 85, 105, 0.98) 0%, rgba(51, 65, 85, 1) 100%);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 6px 20px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(148, 163, 184, 0.2);
-    color: #f1f5f9;
+@media (min-width: 640px) {
+    .nav-links > a::after {
+        top: 1.5rem;
+        height: 3px;
+    }
 }
 
-/* Outgoing bubble */
-.rightUser .userText {
-    background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 30%, #2563eb 70%, #1d4ed8 100%);
-    color: white;
-    border-radius: 20px 20px 4px 20px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 12px 40px rgba(79, 70, 229, 0.25), 0 4px 16px rgba(59, 130, 246, 0.2), 0 1px 4px rgba(29, 78, 216, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(8px);
+.nav-links > a:hover::after {
+    width: 100%;
 }
 
-.rightUser .userText::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
-    border-radius: inherit;
-    pointer-events: none;
+.nav-actions {
+    @apply flex flex-row items-center
+         gap-4 sm:gap-6
+         pl-0 sm:pl-12 md:pl-24;
 }
 
-.rightUser .userText:hover {
-    background: linear-gradient(135deg, #5b21b6 0%, #4f46e5 30%, #3b82f6 70%, #2563eb 100%);
-    box-shadow: 0 16px 48px rgba(79, 70, 229, 0.35), 0 6px 20px rgba(59, 130, 246, 0.25), 0 2px 8px rgba(29, 78, 216, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-.avatar {
-    @apply w-12 h-12 rounded-full flex items-center justify-center;
-    background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%);
-    border: 2px solid rgba(139, 92, 246, 0.3);
-    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.25), 0 2px 8px rgba(168, 85, 247, 0.2), 0 1px 4px rgba(0, 0, 0, 0.1);
-    color: white;
-    font-weight: 600;
-    font-size: 0.875rem;
-    transition: all 0.2s ease-in-out;
-    position: relative;
-    overflow: hidden;
-}
-
-.avatar::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(45deg, rgba(255, 255, 255, 0.25) 0%, transparent 60%);
-    border-radius: inherit;
-}
-
-.avatar:hover {
-    transform: scale(1.05);
-    background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 50%, #a855f7 100%);
-    box-shadow: 0 6px 24px rgba(139, 92, 246, 0.35), 0 4px 12px rgba(168, 85, 247, 0.25), 0 2px 6px rgba(0, 0, 0, 0.15);
-}
-
-.rightUser .avatar {
-    @apply ml-3;
-}
-.leftUser .avatar {
-    @apply mr-3;
-}
-
-.applyButton {
-    @apply flex items-center
-    justify-center
-    bg-blue-600 
-    w-[25rem] h-[3.5rem]
-    rounded-full
-    cursor-pointer
-    mt-2
-    mb-5
-    text-white text-base font-semibold hover:bg-blue-700 transition;
-}
-
-.primary-button {
-    @apply flex items-center justify-center bg-blue-600 w-[8rem] h-[3.5rem] rounded-full cursor-pointer text-white text-base font-semibold hover:bg-blue-700 transition;
-}
-
-.secondary-button {
-    @apply flex items-center justify-center bg-transparent w-[8rem] h-[3.5rem] rounded-full cursor-pointer text-blue-600 text-base font-semibold border-2 border-blue-600 hover:bg-blue-600 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-blue-300;
-}
-
-.hackInfo {
-    @apply mt-6 text-2xl font-medium;
-}
-.descriptionHack {
-    @apply mt-8 text-xl font-medium;
-}
-
+/* Logo and Header */
 .logoAndText {
-    @apply flex flex-row justify-center items-center mt-8;
+    @apply flex flex-col sm:flex-row
+         justify-center items-center
+         mt-4 sm:mt-6 md:mt-8
+         gap-4 sm:gap-6 md:gap-8;
 }
+
 .logoAndText > h1 {
-    @apply font-bold text-6xl ml-8;
+    @apply font-bold
+         text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+         text-center sm:text-left
+         ml-0 sm:ml-4 md:ml-6 lg:ml-8;
 }
+
 .logoHTB {
-    @apply w-[6em] h-[6em];
+    @apply w-[4em] h-[4em]
+         sm:w-[5em] sm:h-[5em]
+         md:w-[6em] md:h-[6em];
+}
+
+/* Content Sections */
+.hackInfo {
+    @apply mt-4 sm:mt-5 md:mt-6
+         text-lg sm:text-xl md:text-2xl
+         font-medium text-center sm:text-left;
+}
+
+.descriptionHack {
+    @apply mt-6 sm:mt-7 md:mt-8
+         text-base sm:text-lg md:text-xl
+         font-medium text-center sm:text-left;
+}
+
+.titleSection {
+    @apply mt-12 sm:mt-16 md:mt-20 w-full;
 }
 
 .titleSection h3 {
-    @apply text-5xl font-semibold mt-10 mb-4;
-}
-.titleSection {
-    @apply mt-20 w-full;
-}
-.code-block {
-    @apply flex flex-row items-center justify-center
-   w-[auto] h-[50px] shrink-0 
-   rounded-[15px] border border-white/20 bg-gray-900
-   font-mono text-[20px] text-blue-500 font-semibold pl-[15px] pr-[15px];
-}
-.text-and-code-block {
-    @apply flex flex-col items-start gap-10;
+    @apply text-3xl sm:text-4xl md:text-5xl
+         font-semibold mt-8 sm:mt-9 md:mt-10 mb-4;
 }
 
 .eventDescription {
-    @apply text-[22px] w-full mt-15 leading-relaxed font-medium;
+    @apply text-base sm:text-lg md:text-xl lg:text-[22px]
+         w-full mt-8 sm:mt-12 md:mt-15
+         leading-relaxed font-medium
+         text-center lg:text-left;
 }
 
+/* Card Containers */
+.containerCardsInfo {
+    @apply mt-20 sm:mt-20 md:mt-30
+         w-full
+         flex flex-col sm:flex-row flex-wrap
+         justify-center sm:justify-between
+         gap-22 sm:gap-8 md:gap-10
+         items-center sm:items-stretch;
+}
+
+.speakerContainer {
+    @apply w-full
+         mt-12 sm:mt-16 md:mt-20
+         flex flex-col lg:flex-row flex-wrap
+         gap-6 sm:gap-8 md:gap-10
+         lg:flex-nowrap
+         justify-center lg:justify-between
+         items-stretch;
+}
+
+/* ============================================
+   TIMELINE STYLES
+   ============================================ */
+
+.timelineContainer {
+    @apply w-full flex flex-col gap-8 sm:gap-10 md:gap-12
+         relative max-w-5xl mx-auto px-4 sm:px-6 mt-5;
+}
+
+/* Vertical connecting line (desktop and up) */
+.timelineContainer::before {
+    content: "";
+    @apply absolute left-1/2 top-0 bottom-0 w-1 sm:w-2
+         rounded-full bg-gray-700/30 -translate-x-1/2 z-0;
+}
+
+/* Grid for desktop: left / center / right */
+.timelineContainer .grid {
+    @apply grid-cols-[1fr_auto_1fr] sm:gap-6 md:gap-8;
+}
+
+.timelineContainer .grid > div:first-child {
+    @apply justify-self-end;
+}
+.timelineContainer .grid > div:last-child {
+    @apply justify-self-start;
+}
+
+/* Dots */
+.timelineContainer .w-12.h-12 {
+    @apply relative z-10 w-10 h-10 sm:w-12 sm:h-12;
+}
+
+/* Mobile: single column centered stack */
+@media (max-width: 640px) {
+    .timelineContainer {
+        @apply flex flex-col items-center gap-8 px-4;
+    }
+
+    .timelineContainer::before {
+        @apply hidden;
+    }
+
+    .timelineContainer .grid {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        /* gap: 1.5rem; */
+    }
+
+    .timelineContainer .grid > div {
+        @apply w-full flex justify-center;
+    }
+
+    /* ensure card cells center their content */
+    .timelineContainer .grid > div:first-child,
+    .timelineContainer .grid > div:last-child {
+        @apply justify-center;
+    }
+}
+
+/* ============================================
+   COMPONENT STYLES
+   ============================================ */
+
+/* Card Info Component */
 .card-info {
-    @apply relative flex flex-col items-center w-[23em] h-[22em] rounded-[25px] 
-   border-4 border-[#2655FF] bg-[rgba(51,54,56,0.27)];
+    @apply relative flex flex-col items-center
+         w-full sm:w-[20em] md:w-[22em] lg:w-[23em]
+         h-[200px] min-h-[17em] md:min-h-[22em]
+         rounded-[20px] md:rounded-[25px]
+         border-2 md:border-4 border-[#2655FF]
+         bg-[rgba(51,54,56,0.27)]
+         transition-all duration-300;
 }
+
 .card-info:hover {
-    @apply bg-[rgba(51,54,56,0.40)] border-[#1E40AF] transition;
+    @apply bg-[rgba(51,54,56,0.40)] border-[#1E40AF];
 }
+
+.card-info h2 {
+    @apply text-lg sm:text-xl md:text-[24px] font-semibold
+         mt-12 sm:mt-14 md:mt-[70px] px-4;
+}
+
+.card-info h3 {
+    @apply text-sm sm:text-base md:text-[16px] font-medium mt-2 px-4;
+}
+
+.card-info ul {
+    @apply text-sm sm:text-base md:text-[16px]
+         text-[#908F8F] font-light mt-4 md:mt-5 px-6;
+}
+
+.card-info li {
+    @apply mt-2 list-disc;
+}
+
+/* Speaker Card Component */
 .speaker-card {
     @apply flex flex-col justify-between items-center
-         w-full md:max-w-[27rem]
-         rounded-[30px] border-2 border-white/20 
+         w-full max-w-[90%] sm:max-w-[25rem] md:max-w-[27rem]
+         rounded-[20px] md:rounded-[30px]
+         border-2 border-white/20
          bg-[rgba(51,54,56,0.5)] cursor-pointer
          transition-all duration-300 ease-in-out
-         md:w-[45rem] h-full min-h-[620px]; /* ensures uniform height */
+         h-full min-h-[550px] sm:min-h-[600px] md:min-h-[620px]
+         mx-auto;
 }
 
 .speaker-card:hover {
@@ -188,74 +261,181 @@
 }
 
 .speaker-card img {
-    @apply rounded-full w-36 h-36 md:w-40 md:h-40 border-4 
-         [border-color:rgba(255,255,255,0.16)] mt-10 md:mt-14;
+    @apply rounded-full
+         w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40
+         border-4 [border-color:rgba(255,255,255,0.16)]
+         mt-8 sm:mt-10 md:mt-14;
 }
 
 .speaker-card h3 {
-    @apply text-xl md:text-4xl font-bold mt-6 text-white;
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl
+         font-bold mt-4 md:mt-6 text-white px-4 text-center;
 }
 
 .roleAndCompany {
-    @apply text-base md:text-lg font-bold mt-3 text-blue-500;
+    @apply text-sm sm:text-base md:text-lg
+         font-bold mt-2 md:mt-3 text-blue-500 px-4 text-center;
 }
 
 .skillContainer {
-    @apply flex flex-wrap w-full md:w-[75%] items-center justify-center gap-4 md:gap-6 mt-6 flex-shrink-0;
+    @apply flex flex-wrap w-full md:w-[75%]
+         items-center justify-center
+         gap-3 sm:gap-4 md:gap-6
+         mt-4 md:mt-6 flex-shrink-0 px-4;
 }
 
 .skillPill {
-    @apply flex px-5 py-[7px] justify-center items-center
-         rounded-[13px] border border-white/20 bg-[rgba(51,54,56,0.27)]
-         text-sm md:text-[12px] font-medium text-white;
+    @apply flex px-3 sm:px-4 md:px-5
+         py-[5px] sm:py-[6px] md:py-[7px]
+         justify-center items-center
+         rounded-[10px] sm:rounded-[12px] md:rounded-[13px]
+         border border-white/20 bg-[rgba(51,54,56,0.27)]
+         text-xs sm:text-sm md:text-[12px]
+         font-medium text-white;
 }
 
 .speakerDescription {
-    @apply text-center leading-relaxed text-[15px] md:text-[14px] 
-         text-[#C1C1C1] font-light mt-6 mb-8 md:mt-8 px-6 md:px-10 flex-grow;
+    @apply text-center leading-relaxed
+         text-sm sm:text-[14px] md:text-[15px]
+         text-[#C1C1C1] font-light
+         mt-4 sm:mt-6 md:mt-8
+         mb-6 sm:mb-7 md:mb-8
+         px-4 sm:px-6 md:px-10
+         flex-grow;
 }
 
+.social-links {
+    @apply flex flex-row gap-3 sm:gap-4
+         mt-auto mb-6 sm:mb-7 md:mb-8
+         justify-center items-center;
+}
+
+/* Timeline Card Component */
 .cardTimeLine {
-    @apply bg-[rgba(51,54,56,0.27)] border-2 border-white/20  rounded-[25px] px-10  py-6 w-[35em] h-auto;
-}
-.timelineDate {
-    @apply rounded-full bg-blue-600 text-white text-sm font-medium px-4 py-2;
-}
-.cardTimeTitle {
-    @apply text-xl font-semibold mt-4;
-}
-.cardTimeSubtitle {
-    @apply text-base text-gray-300 mt-2;
-}
-.cardTimeDaysRemaining {
-    @apply text-sm text-blue-600/80 mt-1;
+    @apply bg-[rgba(51,54,56,0.27)]
+         border-2 border-white/20
+         rounded-[20px] md:rounded-[25px]
+         px-6 sm:px-8 md:px-10
+         py-4 sm:py-5 md:py-6
+         w-full max-w-[90%] sm:max-w-[30em] md:max-w-[35em]
+         h-auto;
 }
 
-/* -----------------------TWITTER-------------------- */
-/* Twitter Feed Styles */
+.timelineDate {
+    @apply rounded-full bg-blue-600 text-white
+         text-xs sm:text-sm font-medium
+         px-3 sm:px-4 py-1.5 sm:py-2
+         inline-block;
+}
+
+.cardTimeTitle {
+    @apply text-base sm:text-lg md:text-xl
+         font-semibold mt-3 md:mt-4;
+}
+
+.cardTimeSubtitle {
+    @apply text-sm sm:text-base
+         text-gray-300 mt-2;
+}
+
+.cardTimeDaysRemaining {
+    @apply text-xs sm:text-sm
+         text-blue-600/80 mt-1;
+}
+
+/* Button Components */
+.applyButton {
+    @apply flex items-center justify-center
+         bg-blue-600
+         w-full sm:w-[20rem] md:w-[25rem]
+         h-[3rem] sm:h-[3.25rem] md:h-[3.5rem]
+         rounded-full cursor-pointer
+         mt-2 mb-4 sm:mb-5
+         text-white text-sm sm:text-base font-semibold
+         hover:bg-blue-700 transition-all duration-200
+         active:scale-95;
+}
+
+.primary-button {
+    @apply flex items-center justify-center
+         bg-blue-600
+         w-[7rem] sm:w-[8rem]
+         h-[3rem] sm:h-[3.5rem]
+         rounded-full cursor-pointer
+         text-white text-sm sm:text-base font-semibold
+         hover:bg-blue-700 transition-all duration-200
+         active:scale-95;
+}
+
+.secondary-button {
+    @apply flex items-center justify-center
+         bg-transparent
+         w-[7rem] sm:w-[8rem]
+         h-[3rem] sm:h-[3.5rem]
+         rounded-full cursor-pointer
+         text-blue-600 text-sm sm:text-base font-semibold
+         border-2 border-blue-600
+         hover:bg-blue-600 hover:text-white
+         transition-all duration-200
+         focus:outline-none focus:ring-2 focus:ring-blue-300
+         active:scale-95;
+}
+
+/* Code Block Component */
+.code-block {
+    @apply flex flex-row items-center justify-center
+         w-auto h-[40px] sm:h-[45px] md:h-[50px]
+         shrink-0 rounded-[12px] sm:rounded-[15px]
+         border border-white/20 bg-gray-900
+         font-mono text-base sm:text-lg md:text-[20px]
+         text-blue-500 font-semibold
+         px-3 sm:px-4 md:px-[15px];
+}
+
+.text-and-code-block {
+    @apply flex flex-col sm:items-start items-center gap-6 sm:gap-8 md:gap-10;
+}
+
+/* ============================================
+   TWITTER FEED STYLES
+   ============================================ */
+
 .twitterFeed {
-    @apply w-full max-w-[350px] lg:max-w-[450px] xl:max-w-[500px] bg-gray-900/50 backdrop-blur-sm rounded-2xl border border-gray-800 overflow-hidden;
+    @apply w-full
+         max-w-[95%] sm:max-w-[350px] md:max-w-[400px] lg:max-w-[450px] xl:max-w-[950px]
+         bg-gray-900/50 backdrop-blur-sm
+         rounded-xl md:rounded-2xl
+         border border-gray-800
+         overflow-hidden
+         mx-auto
+         items-end;
 }
 
 .feedHeader {
-    @apply px-4 lg:px-6 py-3 lg:py-4 border-b border-gray-800 flex items-center gap-3;
+    @apply px-3 sm:px-4 lg:px-6
+         py-2.5 sm:py-3 lg:py-4
+         border-b border-gray-800
+         flex items-center gap-2 sm:gap-3;
 }
 
 .feedIcon {
-    @apply w-6 h-6 lg:w-8 lg:h-8 text-blue-500;
+    @apply w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8
+         text-blue-500;
 }
 
 .feedTitle {
-    @apply text-lg lg:text-xl font-semibold text-white;
+    @apply text-base sm:text-lg lg:text-xl
+         font-semibold text-white;
 }
 
 .feedContent {
-    @apply max-h-[500px] lg:max-h-[600px] overflow-y-auto;
+    @apply max-h-[400px] sm:max-h-[500px] lg:max-h-[600px]
+         overflow-y-auto;
 }
 
 /* Custom scrollbar */
 .feedContent::-webkit-scrollbar {
-    @apply w-2;
+    @apply w-1.5 sm:w-2;
 }
 
 .feedContent::-webkit-scrollbar-track {
@@ -271,7 +451,11 @@
 }
 
 .tweetCard {
-    @apply px-4 lg:px-6 py-3 lg:py-4 border-b border-gray-800/50 hover:bg-gray-800/30 transition-colors duration-200;
+    @apply px-3 sm:px-4 lg:px-6
+         py-2.5 sm:py-3 lg:py-4
+         border-b border-gray-800/50
+         hover:bg-gray-800/30
+         transition-colors duration-200;
 }
 
 .tweetHeader {
@@ -279,7 +463,12 @@
 }
 
 .tweetAvatar {
-    @apply w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gradient-to-br flex items-center justify-center text-white font-bold text-base lg:text-lg flex-shrink-0;
+    @apply w-9 h-9 sm:w-10 sm:h-10 lg:w-12 lg:h-12
+         rounded-full bg-gradient-to-br
+         flex items-center justify-center
+         text-white font-bold
+         text-sm sm:text-base lg:text-lg
+         flex-shrink-0;
 }
 
 .tweetContent {
@@ -287,58 +476,92 @@
 }
 
 .tweetUserInfo {
-    @apply flex items-center gap-2 flex-wrap;
+    @apply flex items-center gap-1.5 sm:gap-2 flex-wrap;
 }
 
 .tweetName {
-    @apply font-semibold text-white text-sm lg:text-base;
+    @apply font-semibold text-white
+         text-xs sm:text-sm lg:text-base;
 }
 
 .tweetHandle {
-    @apply text-gray-500 text-xs lg:text-sm;
+    @apply text-gray-500
+         text-[10px] sm:text-xs lg:text-sm;
 }
 
 .tweetTime {
-    @apply text-gray-600 text-xs lg:text-sm;
+    @apply text-gray-600
+         text-[10px] sm:text-xs lg:text-sm;
 }
 
 .tweetText {
-    @apply mt-2 text-gray-300 text-sm lg:text-base leading-relaxed;
+    @apply mt-1.5 sm:mt-2
+         text-gray-300
+         text-xs sm:text-sm lg:text-base
+         leading-relaxed;
 }
 
 .tweetActions {
-    @apply flex items-center gap-4 lg:gap-6 mt-2 lg:mt-3 text-gray-500;
+    @apply flex items-center
+         gap-3 sm:gap-4 lg:gap-6
+         mt-2 lg:mt-3
+         text-gray-500;
 }
 
 .tweetAction {
-    @apply flex items-center gap-1.5 lg:gap-2 hover:text-blue-500 transition-colors cursor-pointer text-xs lg:text-sm;
+    @apply flex items-center
+         gap-1 sm:gap-1.5 lg:gap-2
+         hover:text-blue-500
+         transition-colors cursor-pointer
+         text-[10px] sm:text-xs lg:text-sm;
 }
 
 .tweetActionIcon {
-    @apply w-4 h-4 lg:w-5 lg:h-5;
+    @apply w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5;
 }
 
 /* Gradient variations for avatars */
 .gradient-blue {
     @apply from-blue-500 to-blue-700;
 }
-
 .gradient-purple {
     @apply from-purple-500 to-purple-700;
 }
-
 .gradient-green {
     @apply from-green-500 to-green-700;
 }
-
 .gradient-orange {
     @apply from-orange-500 to-orange-700;
 }
-
 .gradient-pink {
     @apply from-pink-500 to-pink-700;
 }
-
 .gradient-cyan {
     @apply from-cyan-500 to-cyan-700;
+}
+
+/* Mobile: hide the middle icon cell and make cards stack nicely */
+@media (max-width: 640px) {
+    /* hide the whole middle column (icons/dots) */
+    .timelineContainer .grid > div:nth-child(2) {
+        display: none;
+    }
+
+    /* keep cards centered and spaced */
+    .timelineContainer .grid {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        /* gap: 1.5rem; vertical gap between cards */
+    }
+
+    .timelineContainer .grid > div {
+        @apply w-full flex justify-center;
+        padding: 0; /* ensure clean stacking */
+    }
+
+    /* hide vertical connecting line if present (you already have this, but keep for safety) */
+    .timelineContainer::before {
+        display: none;
+    }
 }
