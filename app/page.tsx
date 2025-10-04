@@ -2,7 +2,8 @@ import Image from "next/image";
 import NavBar from "@/components/NavBar";
 import LeftUser from "@/components/LeftUser";
 import RightUser from "@/components/RightUser";
-
+import TextAndCodeBlock from "@/components/uilayouts/TextAndCodeBlock";
+import CardInfo from "@/components/uilayouts/CardInfo";
 export default function Home() {
     return (
         <div className="page">
@@ -24,7 +25,6 @@ export default function Home() {
                         We are waiting for you. 🫵
                     </p>
 
-                    
                     <div className="terminal-block">
                         <div className="terminal-center">
                             <div className="terminal">
@@ -58,16 +58,12 @@ export default function Home() {
                                     <p className="cmd-line">
                                         <span className="prompt">$</span> <b>Regular Applications:</b> March
                                     </p>
-
-                                    <p className="cmd-line">
-                                        <span className="prompt">$</span> <span className="text-gray-300"></span>
-                                        <span className="cursor" />
-                                    </p>
+                                </div>
+                                <div className="flex justify-center">
+                                    {/* primary action centered below the terminal */}
+                                    <button className="applyButton">Apply</button>
                                 </div>
                             </div>
-
-                            {/* primary action centered below the terminal */}
-                            <button className="applyButton">Apply</button>
                         </div>
                     </div>
                 </div>
@@ -84,6 +80,20 @@ export default function Home() {
                         <RightUser avatar="M">Same here. Let's team up for it! 🚀</RightUser>
                     </div>
                 </div>
+            </div>
+
+            <div id="event" className="titleSection">
+                <TextAndCodeBlock title="The Event" code="HackTheBoot.getEventDesc()"></TextAndCodeBlock>
+            </div>
+            <p className="eventDescription">
+                For 24 hours straight, you'll <span className="text-blue-600 font-bold">team up</span>, <span className="text-blue-600   font-bold">code</span>, <span className="text-blue-600 font-bold">design</span>, and brainstorm your way through <br />
+                challenges. You'll meet brilliant minds from all over the world and build something <br />
+                amazing together.
+            </p>
+            <div className="containerCardsInfo">
+                <CardInfo title="300+ Hackers" img="/img/Hackers Icon World.png" subtitle="From all over the world" items={["Students from top universities", "Industry professionals", "International participants", "Diverse skill levels welcome"]} />
+                <CardInfo title="Mentorships" img="/img/Mentorships.png" subtitle="From academia and industry" items={["One-on-one guidance", "Technical workshops", "Career advice sessions", "Code reviews and feedback"]}></CardInfo>
+                <CardInfo title="Prizes" img="/img/Prizes.png" subtitle="Cash & Tech Gadgets" items={["$5,000 grand prize", "Latest tech gadgets", "Internship opportunities", "Exclusive swag and merch"]}></CardInfo>
             </div>
         </div>
     );
