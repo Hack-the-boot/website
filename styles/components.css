@@ -151,11 +151,11 @@
     @apply text-5xl font-semibold mt-10 mb-4;
 }
 .titleSection {
-    @apply mt-20;
+    @apply mt-20 w-full;
 }
 .code-block {
     @apply flex flex-row items-center justify-center
-   w-[320px] h-[50px] shrink-0 
+   w-[auto] h-[50px] shrink-0 
    rounded-[15px] border border-white/20 bg-gray-900
    font-mono text-[20px] text-blue-500 font-semibold pl-[15px] pr-[15px];
 }
@@ -213,4 +213,20 @@
 .speakerDescription {
     @apply text-center leading-relaxed text-[15px] md:text-[14px] 
          text-[#C1C1C1] font-light mt-6 mb-8 md:mt-8 px-6 md:px-10 flex-grow;
+}
+
+.cardTimeLine {
+    @apply bg-[rgba(51,54,56,0.27)] border-2 border-white/20  rounded-[25px] px-10  py-6 w-[35em] h-auto;
+}
+.timelineDate {
+    @apply rounded-full bg-blue-600 text-white text-sm font-medium px-4 py-2;
+}
+.cardTimeTitle {
+    @apply text-xl font-semibold mt-4;
+}
+.cardTimeSubtitle {
+    @apply text-base text-gray-300 mt-2;
+}
+.cardTimeDaysRemaining {
+    @apply text-sm text-blue-600/80 mt-1;
 }
