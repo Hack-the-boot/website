@@ -1,52 +1,89 @@
+/* ============================================
+   TERMINAL STYLES
+   ============================================ */
+
 .terminal-block {
-    @apply w-full flex flex-col items-start;
+    @apply w-full flex flex-col items-center sm:items-start;
 }
 
 .terminal-center {
-    @apply w-[45em] flex flex-col items-center;
+    @apply w-full sm:w-[90%] md:w-[85%] lg:w-[45em] 
+    flex flex-col items-center 
+    px-4 sm:px-0;
 }
+
 .terminal-center > button {
-    @apply mt-10;
+    @apply mt-6 sm:mt-8 md:mt-10;
 }
 
 .terminal {
-    @apply w-full max-w-[75em] flex flex-col rounded-2xl overflow-hidden font-mono text-[20px]
+    @apply w-full max-w-full lg:max-w-[75em] 
+    flex flex-col rounded-xl md:rounded-2xl 
+    overflow-hidden 
+    font-mono text-sm sm:text-base md:text-lg lg:text-[20px]
     bg-[#1e1e1e] ring-1 ring-white/6
-    shadow-[0_6px_18px_rgba(0,0,0,0.24)] mt-10;
+    shadow-[0_6px_18px_rgba(0,0,0,0.24)] 
+    mt-6 sm:mt-8 md:mt-10;
 }
 
 .terminal-top {
-    @apply relative flex items-center w-full h-7 px-3 rounded-t-2xl bg-[#2b2b2b]/95;
+    @apply relative flex items-center w-full 
+    h-6 sm:h-7 
+    px-2 sm:px-3 
+    rounded-t-xl md:rounded-t-2xl 
+    bg-[#2b2b2b]/95;
 }
 
 .trafficLights {
-    @apply flex items-center gap-2;
+    @apply flex items-center gap-1.5 sm:gap-2;
 }
+
 .trafficLights .dot {
-    @apply w-3 h-3 rounded-full ring-1 ring-black/30;
+    @apply w-2.5 h-2.5 sm:w-3 sm:h-3 
+    rounded-full ring-1 ring-black/30;
 }
+
 .dot-red {
     background: #ff5f57;
 }
+
 .dot-yellow {
     background: #febc2e;
 }
+
 .dot-green {
     background: #28c840;
 }
 
 .terminal-title {
-    @apply absolute left-1/2 -translate-x-1/2 text-xs text-gray-300;
+    @apply absolute left-1/2 -translate-x-1/2 
+    text-[10px] sm:text-xs 
+    text-gray-300;
 }
 
 .terminal-content {
-    @apply px-4 py-3 text-gray-200 leading-relaxed;
+    @apply px-3 sm:px-4 
+    py-2 sm:py-3 
+    text-gray-200 leading-relaxed;
     background: radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, 0.05), transparent 60%);
 }
 
 .prompt {
     @apply text-blue-400 font-semibold;
 }
+
 .cmd-line {
-    @apply mt-2;
+    @apply mt-1.5 sm:mt-2 
+    text-xs sm:text-sm md:text-base lg:text-lg;
+}
+
+.terminal-content > p:first-child {
+    @apply text-[10px] sm:text-xs md:text-sm;
+}
+
+/* Responsive text sizing */
+@media (max-width: 640px) {
+    .cmd-line b {
+        @apply text-xs;
+    }
 }
