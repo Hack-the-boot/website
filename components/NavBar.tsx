@@ -6,7 +6,7 @@ const NavBar = () => {
         <nav className="nav-bar-no-logo sm:nav-bar-no-logo-hamburger">
             {/* left side: nav links */}
             <div className="nav-links">
-                <a href="">Event</a>
+                <a href="#event">Event</a>
                 <a href="">Who We Are</a>
                 <a href="">Sponsors</a>
                 <a href="">FAQs</a>
