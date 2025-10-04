@@ -174,3 +174,43 @@
 .card-info:hover {
     @apply bg-[rgba(51,54,56,0.40)] border-[#1E40AF] transition;
 }
+.speaker-card {
+    @apply flex flex-col justify-between items-center
+         w-full md:max-w-[27rem]
+         rounded-[30px] border-2 border-white/20 
+         bg-[rgba(51,54,56,0.5)] cursor-pointer
+         transition-all duration-300 ease-in-out
+         md:w-[45rem] h-full min-h-[620px]; /* ensures uniform height */
+}
+
+.speaker-card:hover {
+    @apply bg-[rgba(51,54,56,0.65)] border-white/30 scale-[1.02];
+}
+
+.speaker-card img {
+    @apply rounded-full w-36 h-36 md:w-40 md:h-40 border-4 
+         [border-color:rgba(255,255,255,0.16)] mt-10 md:mt-14;
+}
+
+.speaker-card h3 {
+    @apply text-xl md:text-4xl font-bold mt-6 text-white;
+}
+
+.roleAndCompany {
+    @apply text-base md:text-lg font-bold mt-3 text-blue-500;
+}
+
+.skillContainer {
+    @apply flex flex-wrap w-full md:w-[75%] items-center justify-center gap-4 md:gap-6 mt-6 flex-shrink-0;
+}
+
+.skillPill {
+    @apply flex px-5 py-[7px] justify-center items-center
+         rounded-[13px] border border-white/20 bg-[rgba(51,54,56,0.27)]
+         text-sm md:text-[12px] font-medium text-white;
+}
+
+.speakerDescription {
+    @apply text-center leading-relaxed text-[15px] md:text-[14px] 
+         text-[#C1C1C1] font-light mt-6 mb-8 md:mt-8 px-6 md:px-10 flex-grow;
+}
