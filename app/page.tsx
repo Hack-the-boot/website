@@ -155,7 +155,7 @@ export default function Home() {
                     {/* Row 1 (card left) */}
                     <div className="grid grid-cols-3 items-center">
                         <div className="flex justify-end">
-                            <CardTimeLine date="2023-09-01" title="Priority Application Open" subtitle="Early bird registration for committed participants" daysRemaining={30} alignment="end" />
+                            <CardTimeLine date="January 10th, 2026" title="Priority Application Open" subtitle="Early bird registration for committed participants" daysRemaining={30} alignment="end" />
                         </div>
                         <div className="flex justify-center ">
                             <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center">
@@ -194,14 +194,14 @@ export default function Home() {
                             </div>
                         </div>
                         <div className="flex justify-start">
-                            <CardTimeLine date="2023-09-01" title="General Applications Open" subtitle="Open registration for all participants" daysRemaining={60} alignment="start" />
+                            <CardTimeLine date="February 10th, 2026" title="General Applications Open" subtitle="Open registration for all participants" daysRemaining={60} alignment="start" />
                         </div>
                     </div>
 
                     {/* Row 3 (card left again) */}
                     <div className="grid grid-cols-3 items-center">
                         <div className="flex justify-end">
-                            <CardTimeLine date="2023-09-01" title="Hack The Boot!" subtitle="24 hours of collaboration & coding" daysRemaining={90} alignment="end" />
+                            <CardTimeLine date="April 23-24th, 2026" title="Hack The Boot!" subtitle="24 hours of collaboration & coding" daysRemaining={90} alignment="end" />
                         </div>
                         <div className="flex justify-center">
                             <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center">
