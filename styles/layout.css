@@ -4,32 +4,40 @@
 
 /* Main Page Structure */
 .page {
-    @apply flex flex-col items-start w-full max-w-[1920px] min-h-screen 
-         pl-4 sm:pl-8 md:pl-12 lg:pl-20 
-         py-4 sm:py-6;
+    @apply flex flex-col 
+           items-center justify-center /* ✅ centers vertically + horizontally */
+           w-full max-w-[1920px] 
+           min-h-screen 
+           mx-auto
+           px-4 sm:px-8 md:px-12 lg:px-20 
+           py-4 sm:py-6;
+
+    /* ✅ Keep centered even when zooming out */
+    position: relative;
 }
 
 .mainPageContainer {
-    @apply flex flex-col lg:flex-row 
+    @apply flex flex-col lg:flex-col 
            items-center lg:items-center 
            w-full gap-0 lg:gap-8 
            mr-0 pr-0; /* ✅ removes any right padding */
 }
+
 .leftSide {
     @apply flex flex-col items-center sm:items-start 
-  w-full lg:w-[55%] xl:w-[50%];
+           w-full lg:w-[55%] xl:w-[50%];
 }
 
 /* Navigation */
 .nav-bar-no-logo {
     @apply flex flex-col sm:flex-row 
-    items-start sm:items-center 
-    justify-between 
-    pt-4 sm:pt-6 md:pt-8 
-    font-semibold w-full 
-    pr-0 sm:pr-4 md:pr-8 
-    text-sm sm:text-base 
-    gap-4 sm:gap-0;
+           items-start sm:items-center 
+           justify-between 
+           pt-4 sm:pt-6 md:pt-8 
+           font-semibold w-full 
+           pr-0 sm:pr-4 md:pr-8 
+           text-sm sm:text-base 
+           gap-4 sm:gap-0;
 }
 
 .nav-links {
@@ -66,42 +74,42 @@
 
 .nav-actions {
     @apply flex flex-row items-center 
-    gap-4 sm:gap-6 
-    pl-0 sm:pl-12 md:pl-24;
+           gap-4 sm:gap-6 
+           pl-0 sm:pl-12 md:pl-24;
 }
 
 /* Logo and Header */
 .logoAndText {
     @apply flex flex-col sm:flex-row 
-    justify-center items-center 
-    mt-4 sm:mt-6 md:mt-8 
-    gap-4 sm:gap-6 md:gap-8;
+           justify-center items-center 
+           mt-4 sm:mt-6 md:mt-8 
+           gap-4 sm:gap-6 md:gap-8;
 }
 
 .logoAndText > h1 {
     @apply font-bold 
-    text-3xl sm:text-4xl md:text-5xl lg:text-6xl 
-    text-center sm:text-left
-    ml-0 sm:ml-4 md:ml-6 lg:ml-8;
+           text-3xl sm:text-4xl md:text-5xl lg:text-6xl 
+           text-center sm:text-left
+           ml-0 sm:ml-4 md:ml-6 lg:ml-8;
 }
 
 .logoHTB {
     @apply w-[4em] h-[4em] 
-    sm:w-[5em] sm:h-[5em] 
-    md:w-[6em] md:h-[6em];
+           sm:w-[5em] sm:h-[5em] 
+           md:w-[6em] md:h-[6em];
 }
 
 /* Content Sections */
 .hackInfo {
     @apply mt-4 sm:mt-5 md:mt-6 
-    text-lg sm:text-xl md:text-2xl 
-    font-medium text-center sm:text-left;
+           text-lg sm:text-xl md:text-2xl 
+           font-medium text-center sm:text-left;
 }
 
 .descriptionHack {
     @apply mt-6 sm:mt-7 md:mt-8 
-    text-base sm:text-lg md:text-xl 
-    font-medium text-center sm:text-left;
+           text-base sm:text-lg md:text-xl 
+           font-medium text-center sm:text-left;
 }
 
 .titleSection {
@@ -110,51 +118,51 @@
 
 .titleSection h3 {
     @apply text-3xl sm:text-4xl md:text-5xl 
-    font-semibold mt-8 sm:mt-9 md:mt-10 mb-4;
+           font-semibold mt-8 sm:mt-9 md:mt-10 mb-4;
 }
 
 .eventDescription {
     @apply text-base sm:text-lg md:text-xl lg:text-[22px] 
-    w-full mt-8 sm:mt-12 md:mt-15 
-    leading-relaxed font-medium 
-    text-center lg:text-left;
+           w-full mt-8 sm:mt-12 md:mt-15 
+           leading-relaxed font-medium 
+           text-center lg:text-left;
 }
 
 /* Card Containers */
 .containerCardsInfo {
     @apply mt-16 sm:mt-20 md:mt-30 
-    w-full 
-    flex flex-col sm:flex-row 
-    flex-wrap 
-    justify-center sm:justify-between 
-    gap-6 sm:gap-8 md:gap-10 
-    items-center sm:items-stretch;
+           w-full 
+           flex flex-col sm:flex-row 
+           flex-wrap 
+           justify-center sm:justify-between 
+           gap-6 sm:gap-8 md:gap-10 
+           items-center sm:items-stretch;
 }
 
 .speakerContainer {
     @apply w-full 
-    mt-12 sm:mt-16 md:mt-20 
-    flex flex-col lg:flex-row flex-wrap 
-    gap-6 sm:gap-8 md:gap-10 
-    lg:flex-nowrap 
-    justify-center lg:justify-between 
-    items-stretch;
+           mt-12 sm:mt-16 md:mt-20 
+           flex flex-col lg:flex-row flex-wrap 
+           gap-6 sm:gap-8 md:gap-10 
+           lg:flex-nowrap 
+           justify-center lg:justify-between 
+           items-stretch;
 }
 
 /* Timeline Styles */
 .timelineContainer {
     @apply w-full flex flex-col 
-    gap-8 sm:gap-10 md:gap-12 
-    relative max-w-5xl mx-auto 
-    px-4 sm:px-6 mt-15;
+           gap-8 sm:gap-10 md:gap-12 
+           relative max-w-5xl mx-auto 
+           px-4 sm:px-6 mt-15;
 }
 
 /* Vertical connecting line */
 .timelineContainer::before {
     content: "";
     @apply absolute left-1/2 top-0 bottom-0 
-    w-1 sm:w-2 
-    rounded-full bg-gray-700/30 -translate-x-1/2 z-0;
+           w-1 sm:w-2 
+           rounded-full bg-gray-700/30 -translate-x-1/2 z-0;
 }
 
 /* Timeline grid */
@@ -179,7 +187,7 @@
 /* Timeline dots */
 .timelineContainer .w-12.h-12 {
     @apply relative z-10 
-    w-10 h-10 sm:w-12 sm:h-12;
+           w-10 h-10 sm:w-12 sm:h-12;
 }
 
 .timelineContainer .w-12.h-12 svg {
@@ -191,4 +199,58 @@
     .timelineContainer .grid {
         @apply grid-cols-[0.4fr_auto_0.6fr];
     }
+}
+
+/* ============================================
+   ANIMATIONS & EFFECTS
+   ============================================ */
+
+@keyframes moveGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.tech-gradient {
+    @apply font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-5xl 
+           bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-600 
+           bg-clip-text text-transparent text-center 
+           tracking-tight;
+    background-size: 200% 200%;
+    animation: moveGradient 5s linear infinite;
+    text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+}
+
+@keyframes blinkCursor {
+    50% {
+        opacity: 0;
+    }
+}
+
+.typewriter {
+    min-width: 1px;
+}
+
+.cursor {
+    @apply inline-block text-blue-400;
+    animation: blinkCursor 0.8s infinite;
+    font-weight: 300;
+    line-height: 1;
+    vertical-align: middle;
+    margin-left: 0.1em; /* Responsive spacing relative to font size */
+    font-size: 1em; /* Inherits parent font size */
+}
+.bottomContainer {
+    @apply flex flex-col md:flex-row 
+           justify-center md:justify-between 
+           items-center md:items-start 
+           w-full 
+           mt-12 sm:mt-8 md:mt-8 
+           gap-8 md:gap-0;
 }

@@ -21,9 +21,10 @@
 
 .rightSide {
     @apply w-full lg:w-[45%] xl:w-[40%]
-         flex justify-center items-start
+         flex flex-col justify-center items-center
          mt-8 lg:mt-10
-         lg:ml-6 xl:ml-10;
+         lg:ml-6 xl:ml-10
+         gap-10;
 }
 
 /* Navigation */
@@ -107,7 +108,7 @@
 .descriptionHack {
     @apply mt-6 sm:mt-7 md:mt-8
          text-base sm:text-lg md:text-xl
-         font-medium text-center sm:text-left;
+         font-medium text-center sm:text-center;
 }
 
 .titleSection {
@@ -366,6 +367,16 @@
          hover:bg-blue-700 transition-all duration-200
          active:scale-95;
 }
+.primary-button-pre-register {
+    @apply flex items-center justify-center
+         bg-blue-600
+         w-[15rem] sm:w-[15rem]
+         h-[3rem] sm:h-[3.5rem]
+         rounded-full cursor-pointer
+         text-white text-sm sm:text-base font-semibold
+         hover:bg-blue-700 transition-all duration-200
+         active:scale-95;
+}
 
 .secondary-button {
     @apply flex items-center justify-center
@@ -389,7 +400,7 @@
          border border-white/20 bg-gray-900
          font-mono text-base sm:text-lg md:text-[20px]
          text-blue-500 font-semibold
-         px-3 sm:px-4 md:px-[15px];
+         px-3 sm:px-4 md:px-[15rigpx];
 }
 
 .text-and-code-block {

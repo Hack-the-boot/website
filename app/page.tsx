@@ -1,197 +1,155 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import NavBar from "@/components/NavBar";
-import TextAndCodeBlock from "@/components/uilayouts/TextAndCodeBlock";
-import CardInfo from "@/components/uilayouts/CardInfo";
-import SpeakerCard from "@/components/uilayouts/SpeakerCard";
-import CardTimeLine from "@/components/uilayouts/CardTimeLine";
-import TwitterFeed from "@/components/TwitterFeed";
+import Terminal, { Field } from "@/components/Terminal";
 
 export default function Home() {
+    const phrases = ["brand new international students Hackathon", "fastest-growing hackathon in Europe", "place where ideas become startups", "chance to compete with the best", "event you don't want to miss"];
+
+    const [index, setIndex] = useState(0);
+    const [displayText, setDisplayText] = useState("");
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+
+    const terminalRef = useRef<HTMLFormElement>(null);
+    const cardsRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        let typingSpeed = isDeleting ? 50 : 90;
+        const currentPhrase = phrases[index];
+        const handleTyping = () => {
+            if (!isDeleting && displayText.length < currentPhrase.length) {
+                setDisplayText(currentPhrase.slice(0, displayText.length + 1));
+            } else if (isDeleting && displayText.length > 0) {
+                setDisplayText(currentPhrase.slice(0, displayText.length - 1));
+            } else if (!isDeleting && displayText.length === currentPhrase.length) {
+                setTimeout(() => setIsDeleting(true), 4000);
+                return;
+            } else if (isDeleting && displayText.length === 0) {
+                setIsDeleting(false);
+                setIndex((prev) => (prev + 1) % phrases.length);
+                return;
+            }
+        };
+        const timer = setTimeout(handleTyping, typingSpeed);
+        return () => clearTimeout(timer);
+    }, [displayText, isDeleting, index]);
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        setSubmitted(true);
+    };
+
+    useEffect(() => {
+        const syncHeights = () => {
+            if (!terminalRef.current || !cardsRef.current) return;
+
+            const terminalHeight = terminalRef.current.offsetHeight;
+            const cardsHeight = cardsRef.current.scrollHeight;
+            const maxHeight = Math.max(terminalHeight, cardsHeight);
+
+            terminalRef.current.style.height = `${maxHeight}px`;
+            cardsRef.current.style.height = `${maxHeight}px`;
+        };
+
+        syncHeights();
+        window.addEventListener("resize", syncHeights);
+        return () => window.removeEventListener("resize", syncHeights);
+    }, [submitted]);
+
     return (
         <div className="page">
-            <NavBar />
+            {/* ================= HERO SECTION ================= */}
             <div className="mainPageContainer">
-                <div className="leftSide">
-                    <div className="logoAndText">
-                        <Image src="/img/Logo_Transparent.png" alt="Logo" width={300} height={300} className="logoHTB" priority />
-                        <h1>Hack The Boot</h1>
-                    </div>
+                <div className="logoAndText">
+                    <Image src="/img/Logo_Transparent.png" alt="Logo" width={300} height={300} className="logoHTB" priority />
+                    <h1>Hack The Boot</h1>
+                </div>
 
-                    <p className="hackInfo">
-                        Italy&apos;s <span className="font-bold text-blue-600">first</span> international students Hackathon
-                    </p>
+                <p className="hackInfo">
+                    <span className="tech-gradient">
+                        Italy&apos;s <span className="typewriter">{displayText}</span>
+                        <span className="cursor"></span>
+                    </span>
+                </p>
 
-                    <p className="descriptionHack">
-                        The <b>brand new</b> Hackathon, powered by <b>students</b>, hosted in <b>Italy.</b>
-                        <br className="hidden sm:block" />
-                        Are you ready to take part in it and win the prizes?
-                        <br className="hidden sm:block" />
-                        <br className="hidden sm:block" />
-                        We are waiting for you. 🫵
-                    </p>
+                <p className="descriptionHack !text-center !w-full">
+                    A student-powered international hackathon hosted in Italy — compete with a team, learn from mentors, and win prizes.
+                    <br />
+                    <b>Pre-register</b> to get notified when applications open.
+                </p>
+            </div>
 
-                    <div className="terminal-block">
-                        <div className="terminal-center">
-                            <div className="terminal">
-                                <div className="terminal-top">
-                                    <div className="trafficLights" aria-hidden="true">
-                                        <span className="dot dot-red" />
-                                        <span className="dot dot-yellow" />
-                                        <span className="dot dot-green" />
-                                    </div>
-                                    <span className="terminal-title">HackTheBoot — bash</span>
+            {/* ================= BOTTOM WRAPPER ================= */}
+            <div className="!mt-20 sm:!mt-15 !w-full !max-w-6xl !mx-auto !grid !grid-cols-1 sm:!grid-cols-2 !gap-10 !items-start !justify-center">
+                {/* ========== LEFT COLUMN — Terminal Form ========== */}
+                <form ref={terminalRef} onSubmit={handleSubmit} className="!w-full !max-w-xl !mx-auto !transition-all !duration-300">
+                    <Terminal>
+                        {!submitted ? (
+                            <>
+                                <p className="!text-green-400 !font-mono !text-sm sm:!text-base">
+                                    $ Welcome to <span className="!text-cyan-400">HackTheBoot</span> pre-registration
+                                </p>
+                                <p className="!text-gray-400 !text-sm sm:!text-base !font-mono"># Please enter your info below:</p>
+
+                                <div className="!flex !flex-col !gap-5 !mt-2">
+                                    <Field text="Full Name" required id="fullName" />
+                                    <Field text="Email" type="email" required id="email" />
                                 </div>
 
-                                <div className="terminal-content">
-                                    <p className="text-gray-400/60 text-xs sm:text-sm">Copyright © HackTheBoot Corporation.</p>
+                                <button
+                                    type="submit"
+                                    className="!mt-2 !w-full !rounded-xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 !py-3.5 
+                                               !text-white !font-semibold !font-mono !text-sm !tracking-wide !shadow-md 
+                                               hover:!from-blue-600 hover:!to-cyan-600 !transition-all !duration-300 
+                                               !transform hover:!scale-[1.02]"
+                                >
+                                    $ Submit
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <p className="!text-green-400 !font-mono !text-sm sm:!text-base">$ Thank you for pre-registering!</p>
+                                <p className="!text-gray-400 !font-mono !text-sm sm:!text-base"># We&apos;ll notify you when applications open.</p>
+                            </>
+                        )}
+                    </Terminal>
+                </form>
 
-                                    <p className="cmd-line">
-                                        <span className="prompt">$</span> <b>Date:</b> Spring 2026
-                                    </p>
+                {/* ========== RIGHT COLUMN — Info Cards (Tech / FOMO Style) ========== */}
+                <div ref={cardsRef} className="!w-full !grid !grid-cols-1 sm:!grid-cols-2 !gap-8 !h-full !place-items-stretch !transition-all !duration-300">
+                    {[
+                        { title: "📅 Date", text: "Spring 2026" },
+                        { title: "📍 Location", text: "Milan — Politecnico di Milano" },
+                        { title: "🧠 Applications", text: "Priority — Jan 2026\nRegular — Mar 2026" },
+                        { title: "💡 Theme", text: "Innovation, AI & Sustainability" },
+                    ].map((card, i) => (
+                        <div
+                            key={i}
+                            className="!relative !flex !flex-col !justify-center !items-center !text-center 
+                                       !w-full !rounded-2xl !p-8
+                                       !bg-gradient-to-br !from-gray-900/80 !to-black/80 
+                                       !border !border-cyan-500/30 
+                                       !shadow-[0_0_15px_rgba(0,255,255,0.15)] 
+                                       hover:!shadow-[0_0_25px_rgba(0,255,255,0.5)]
+                                       hover:!border-cyan-400
+                                       !transition-all !duration-500 !ease-out 
+                                       !overflow-hidden hover:!scale-[1.03] group"
+                        >
+                            {/* Animated neon border glow */}
+                            <div className="!absolute !inset-0 !rounded-2xl !p-[1px] !bg-gradient-to-r !from-cyan-500 !via-blue-500 !to-indigo-600 opacity-30 group-hover:opacity-60 blur-[4px] !transition-opacity !duration-500"></div>
 
-                                    <p className="cmd-line">
-                                        <span className="prompt">$</span> <b>Location:</b> Milan, Politecnico di Milano.
-                                    </p>
-
-                                    <p className="cmd-line">
-                                        <span className="prompt">$</span> <b>Application Priority Round:</b> January 2026
-                                    </p>
-
-                                    <p className="cmd-line">
-                                        <span className="prompt">$</span> <b>Regular Applications:</b> March
-                                    </p>
-                                </div>
-
-                                <div className="flex justify-center px-4 sm:px-0">
-                                    <button className="applyButton">Apply</button>
-                                </div>
+                            <div className="!relative z-10">
+                                <h3 className="!text-cyan-400 !font-bold !text-xl !tracking-wide !mb-3 group-hover:!text-cyan-300 transition-all duration-300">{card.title}</h3>
+                                <p className="!text-gray-300 !text-base !font-mono whitespace-pre-line leading-relaxed tracking-tight">{card.text}</p>
                             </div>
+
+                            {/* Corner glow effect */}
+                            <div className="!absolute !top-0 !left-0 !w-2 !h-2 !bg-cyan-400/40 !blur-md !rounded-full" />
+                            <div className="!absolute !bottom-0 !right-0 !w-3 !h-3 !bg-blue-400/30 !blur-lg !rounded-full" />
                         </div>
-                    </div>
-                </div>
-
-                <div className="rightSide">
-                    <TwitterFeed />
-                </div>
-            </div>
-
-            <div id="event" className="titleSection">
-                <TextAndCodeBlock title="The Event" code="HackTheBoot.getEventDesc()" />
-            </div>
-
-            <p className="eventDescription">
-                For 24 hours straight, you'll <span className="text-blue-600 font-bold">team up</span>, <span className="text-blue-600 font-bold">code</span>, <span className="text-blue-600 font-bold">design</span>, and brainstorm your way through
-                <br className="hidden lg:block" />
-                challenges. You'll meet brilliant minds from all over the world and build something
-                <br className="hidden lg:block" />
-                amazing together.
-            </p>
-
-            <div className="containerCardsInfo">
-                <CardInfo title="300+ Hackers" img="/img/Hackers Icon World.png" subtitle="From all over the world" items={["Students from top universities", "Industry professionals", "International participants", "Diverse skill levels welcome"]} />
-                <CardInfo title="Mentorships" img="/img/Mentorships.png" subtitle="From academia and industry" items={["One-on-one guidance", "Technical workshops", "Career advice sessions", "Code reviews and feedback"]} />
-                <CardInfo title="Prizes" img="/img/Prizes.png" subtitle="Cash & Tech Gadgets" items={["$5,000 grand prize", "Latest tech gadgets", "Internship opportunities", "Exclusive swag and merch"]} />
-            </div>
-
-            <div id="speakers" className="titleSection">
-                <TextAndCodeBlock title="Speakers & Judges" code="HackTheBoot.getSpeakers()" />
-                <div className="flex flex-col gap-4 mt-4">
-                    <p className="eventDescription">
-                        Learn from industry leaders who are shaping the future of technology
-                        <br className="hidden lg:block" />
-                        and innovation. Our speakers and judges come from top tech companies and renowned universities.
-                    </p>
-                </div>
-
-                <div className="speakerContainer">
-                    <SpeakerCard
-                        img="/img/speaker1.png"
-                        name="John Doe"
-                        roleAndCompany="Senior ML Engineer @ OpenAI"
-                        skills={["Fintech", "Machine Learning", "Cybersecurity"]}
-                        socialLinks={[
-                            { platform: "LinkedIn", url: "https://linkedin.com/in/speaker1" },
-                            { platform: "X", url: "https://x.com/speaker1" },
-                            { platform: "Instagram", url: "https://instagram.com/speaker1" },
-                        ]}
-                        description="John has over a decade of experience building large-scale machine learning systems. At HackTheBoot, he'll share insights on applying AI in fintech and how to protect critical models from evolving cybersecurity threats."
-                    />
-
-                    <SpeakerCard
-                        img="/img/speaker2.png"
-                        name="Mark Smith"
-                        roleAndCompany="AI Researcher @ DeepMind"
-                        skills={["NLP", "Neural Networks", "Reinforcement Learning"]}
-                        socialLinks={[
-                            { platform: "LinkedIn", url: "https://linkedin.com/in/speaker2" },
-                            { platform: "X", url: "https://x.com/speaker2" },
-                            { platform: "Instagram", url: "https://instagram.com/speaker2" },
-                        ]}
-                        description="Mark focuses on cutting-edge AI research in natural language processing and reinforcement learning. He'll dive into how neural architectures are evolving and what the next generation of intelligent systems could look like."
-                    />
-
-                    <SpeakerCard
-                        img="/img/speaker3.png"
-                        name="Alice Johnson"
-                        roleAndCompany="Security Architect @ Microsoft"
-                        skills={["Cloud Security", "DevSecOps", "Zero Trust Architecture"]}
-                        socialLinks={[
-                            { platform: "LinkedIn", url: "https://linkedin.com/in/speaker3" },
-                            { platform: "X", url: "https://x.com/speaker3" },
-                            { platform: "Instagram", url: "https://instagram.com/speaker3" },
-                        ]}
-                        description="Alice designs enterprise-scale security systems and leads Microsoft's efforts in cloud resilience. Her talk will highlight zero trust strategies, DevSecOps practices, and how to secure AI-driven infrastructures."
-                    />
-                </div>
-            </div>
-
-            <div className="titleSection">
-                <TextAndCodeBlock title="Event Timeline" code="HackTheBoot.getEventTimeline()" />
-                <div className="timelineContainer sm:pt-16 md:pt-20">
-                    {/* Row 1 (card left) */}
-                    <div className="grid items-center w-full">
-                        <div className="flex justify-end">
-                            <CardTimeLine date="January 10th, 2026" title="Priority Application Open" subtitle="Early bird registration for committed participants" daysRemaining={30} alignment="end" />
-                        </div>
-                        <div className="flex justify-center">
-                            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-800 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500">
-                                    <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm7 1.5L18.5 9H13V3.5zM10.97 15.03l-2.47-2.47a.75.75 0 0 0-1.06 1.06l3 3a.75.75 0 0 0 1.06 0l6-6a.75.75 0 0 0-1.06-1.06l-5.47 5.47z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div></div>
-                    </div>
-
-                    {/* Row 2 (card right) */}
-                    <div className="grid items-center w-full">
-                        <div></div>
-                        <div className="flex justify-center">
-                            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-800 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500">
-                                    <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm7 1.5L18.5 9H13V3.5zM10.97 15.03l-2.47-2.47a.75.75 0 0 0-1.06 1.06l3 3a.75.75 0 0 0 1.06 0l6-6a.75.75 0 0 0-1.06-1.06l-5.47 5.47z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div className="flex justify-start">
-                            <CardTimeLine date="February 10th, 2026" title="General Applications Open" subtitle="Open registration for all participants" daysRemaining={60} alignment="start" />
-                        </div>
-                    </div>
-
-                    {/* Row 3 (card left again) */}
-                    <div className="grid items-center w-full">
-                        <div className="flex justify-end">
-                            <CardTimeLine date="April 23-24th, 2026" title="Hack The Boot!" subtitle="24 hours of collaboration & coding" daysRemaining={90} alignment="end" />
-                        </div>
-                        <div className="flex justify-center">
-                            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-800 flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500">
-                                    <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm7 1.5L18.5 9H13V3.5zM10.97 15.03l-2.47-2.47a.75.75 0 0 0-1.06 1.06l3 3a.75.75 0 0 0 1.06 0l6-6a.75.75 0 0 0-1.06-1.06l-5.47 5.47z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <div></div>
-                    </div>
+                    ))}
                 </div>
             </div>
         </div>

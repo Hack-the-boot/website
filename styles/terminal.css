@@ -3,7 +3,7 @@
    ============================================ */
 
 .terminal-block {
-    @apply w-full flex flex-col items-center sm:items-start;
+    @apply w-full flex flex-col items-center sm:items-center;
 }
 
 .terminal-center {
