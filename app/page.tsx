@@ -5,153 +5,219 @@ import Image from "next/image";
 import Terminal, { Field } from "@/components/Terminal";
 
 export default function Home() {
-    const phrases = ["brand new international students Hackathon", "fastest-growing hackathon in Europe", "place where ideas become startups", "chance to compete with the best", "event you don't want to miss"];
+  const phrases = [
+    "Italy's international student hackathon",
+    "Where bold ideas become reality",
+    "Compete. Build. WIN.",
+    "24 hours of innovation in Milan",
+    "Create the future, one hack at a time",
+  ];
 
-    const [index, setIndex] = useState(0);
-    const [displayText, setDisplayText] = useState("");
-    const [isDeleting, setIsDeleting] = useState(false);
-    const [submitted, setSubmitted] = useState(false);
+  const [index, setIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-    const terminalRef = useRef<HTMLFormElement>(null);
-    const cardsRef = useRef<HTMLDivElement>(null);
+  const terminalRef = useRef<HTMLFormElement>(null);
 
-    useEffect(() => {
-        let typingSpeed = isDeleting ? 50 : 90;
-        const currentPhrase = phrases[index];
-        const handleTyping = () => {
-            if (!isDeleting && displayText.length < currentPhrase.length) {
-                setDisplayText(currentPhrase.slice(0, displayText.length + 1));
-            } else if (isDeleting && displayText.length > 0) {
-                setDisplayText(currentPhrase.slice(0, displayText.length - 1));
-            } else if (!isDeleting && displayText.length === currentPhrase.length) {
-                setTimeout(() => setIsDeleting(true), 4000);
-                return;
-            } else if (isDeleting && displayText.length === 0) {
-                setIsDeleting(false);
-                setIndex((prev) => (prev + 1) % phrases.length);
-                return;
-            }
-        };
-        const timer = setTimeout(handleTyping, typingSpeed);
-        return () => clearTimeout(timer);
-    }, [displayText, isDeleting, index]);
+  // Typewriter
+  useEffect(() => {
+    const typingSpeed = isDeleting ? 50 : 90;
+    const current = phrases[index];
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        setSubmitted(true);
+    const tick = () => {
+      if (!isDeleting && displayText.length < current.length) {
+        setDisplayText(current.slice(0, displayText.length + 1));
+      } else if (isDeleting && displayText.length > 0) {
+        setDisplayText(current.slice(0, displayText.length - 1));
+      } else if (!isDeleting && displayText.length === current.length) {
+        setTimeout(() => setIsDeleting(true), 4000);
+        return;
+      } else if (isDeleting && displayText.length === 0) {
+        setIsDeleting(false);
+        setIndex((p) => (p + 1) % phrases.length);
+        return;
+      }
     };
 
-    useEffect(() => {
-        const syncHeights = () => {
-            if (!terminalRef.current || !cardsRef.current) return;
+    const t = setTimeout(tick, typingSpeed);
+    return () => clearTimeout(t);
+  }, [displayText, isDeleting, index]);
 
-            const terminalHeight = terminalRef.current.offsetHeight;
-            const cardsHeight = cardsRef.current.scrollHeight;
-            const maxHeight = Math.max(terminalHeight, cardsHeight);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
 
-            terminalRef.current.style.height = `${maxHeight}px`;
-            cardsRef.current.style.height = `${maxHeight}px`;
-        };
-
-        syncHeights();
-        window.addEventListener("resize", syncHeights);
-        return () => window.removeEventListener("resize", syncHeights);
-    }, [submitted]);
-
-    return (
-        <div className="page">
-            {/* ================= HERO SECTION ================= */}
-            <div className="mainPageContainer">
-                <div className="logoAndText">
-                    <Image src="/img/Logo_Transparent.png" alt="Logo" width={300} height={300} className="logoHTB" priority />
-                    <h1>Hack The Boot</h1>
-                </div>
-
-                <p className="hackInfo">
-                    <span className="tech-gradient">
-                        Italy&apos;s <span className="typewriter">{displayText}</span>
-                        <span className="cursor"></span>
-                    </span>
-                </p>
-
-                <p className="descriptionHack !text-center !w-full">
-                    A student-powered international hackathon hosted in Italy — compete with a team, learn from mentors, and win prizes.
-                    <br />
-                    <b>Pre-register</b> to get notified when applications open.
-                </p>
-            </div>
-
-            {/* ================= BOTTOM WRAPPER ================= */}
-            <div className="!mt-20 sm:!mt-15 !w-full !max-w-6xl !mx-auto !grid !grid-cols-1 sm:!grid-cols-2 !gap-10 !items-start !justify-center">
-                {/* ========== LEFT COLUMN — Terminal Form ========== */}
-                <form ref={terminalRef} onSubmit={handleSubmit} className="!w-full !max-w-xl !mx-auto !transition-all !duration-300">
-                    <Terminal>
-                        {!submitted ? (
-                            <>
-                                <p className="!text-green-400 !font-mono !text-sm sm:!text-base">
-                                    $ Welcome to <span className="!text-cyan-400">HackTheBoot</span> pre-registration
-                                </p>
-                                <p className="!text-gray-400 !text-sm sm:!text-base !font-mono"># Please enter your info below:</p>
-
-                                <div className="!flex !flex-col !gap-5 !mt-2">
-                                    <Field text="Full Name" required id="fullName" />
-                                    <Field text="Email" type="email" required id="email" />
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    className="!mt-2 !w-full !rounded-xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 !py-3.5 
-                                               !text-white !font-semibold !font-mono !text-sm !tracking-wide !shadow-md 
-                                               hover:!from-blue-600 hover:!to-cyan-600 !transition-all !duration-300 
-                                               !transform hover:!scale-[1.02]"
-                                >
-                                    $ Submit
-                                </button>
-                            </>
-                        ) : (
-                            <>
-                                <p className="!text-green-400 !font-mono !text-sm sm:!text-base">$ Thank you for pre-registering!</p>
-                                <p className="!text-gray-400 !font-mono !text-sm sm:!text-base"># We&apos;ll notify you when applications open.</p>
-                            </>
-                        )}
-                    </Terminal>
-                </form>
-
-                {/* ========== RIGHT COLUMN — Info Cards (Tech / FOMO Style) ========== */}
-                <div ref={cardsRef} className="!w-full !grid !grid-cols-1 sm:!grid-cols-2 !gap-8 !h-full !place-items-stretch !transition-all !duration-300">
-                    {[
-                        { title: "📅 Date", text: "Spring 2026" },
-                        { title: "📍 Location", text: "Milan — Politecnico di Milano" },
-                        { title: "🧠 Applications", text: "Priority — Jan 2026\nRegular — Mar 2026" },
-                        { title: "💡 Theme", text: "Innovation, AI & Sustainability" },
-                    ].map((card, i) => (
-                        <div
-                            key={i}
-                            className="!relative !flex !flex-col !justify-center !items-center !text-center 
-                                       !w-full !rounded-2xl !p-8
-                                       !bg-gradient-to-br !from-gray-900/80 !to-black/80 
-                                       !border !border-cyan-500/30 
-                                       !shadow-[0_0_15px_rgba(0,255,255,0.15)] 
-                                       hover:!shadow-[0_0_25px_rgba(0,255,255,0.5)]
-                                       hover:!border-cyan-400
-                                       !transition-all !duration-500 !ease-out 
-                                       !overflow-hidden hover:!scale-[1.03] group"
-                        >
-                            {/* Animated neon border glow */}
-                            <div className="!absolute !inset-0 !rounded-2xl !p-[1px] !bg-gradient-to-r !from-cyan-500 !via-blue-500 !to-indigo-600 opacity-30 group-hover:opacity-60 blur-[4px] !transition-opacity !duration-500"></div>
-
-                            <div className="!relative z-10">
-                                <h3 className="!text-cyan-400 !font-bold !text-xl !tracking-wide !mb-3 group-hover:!text-cyan-300 transition-all duration-300">{card.title}</h3>
-                                <p className="!text-gray-300 !text-base !font-mono whitespace-pre-line leading-relaxed tracking-tight">{card.text}</p>
-                            </div>
-
-                            {/* Corner glow effect */}
-                            <div className="!absolute !top-0 !left-0 !w-2 !h-2 !bg-cyan-400/40 !blur-md !rounded-full" />
-                            <div className="!absolute !bottom-0 !right-0 !w-3 !h-3 !bg-blue-400/30 !blur-lg !rounded-full" />
-                        </div>
-                    ))}
-                </div>
-            </div>
+  return (
+    <div className="page">
+      {/* ================= HERO ================= */}
+      <div className="mainPageContainer">
+        <div className="logoAndText">
+          <Image
+            src="/img/Logo_Transparent.png"
+            alt="Logo"
+            width={300}
+            height={300}
+            className="logoHTB"
+            priority
+          />
+          <h1>Hack The Boot</h1>
         </div>
-    );
+
+        <p className="hackInfo">
+          <span className="tech-gradient">
+            <span className="typewriter">{displayText}</span>
+            <span className="cursor"></span>
+          </span>
+        </p>
+
+         <p className="descriptionHack !text-center !w-full !mb-0">
+           Italy&apos;s student-powered international hackathon - Compete. Build.{" "}
+           <span className="!font-bold">WIN.</span>
+         </p>
+
+        <div className="!text-center !w-full !mt-0">
+          <p className="!text-2xl sm:!text-3xl !font-bold !text-gray-300">
+            <span className="!text-blue-400">Pre-register</span> to get notified
+            when applications open.
+          </p>
+        </div>
+      </div>
+
+       {/* ================= TERMINAL (WIDE & CENTERED) ================= */}
+       <section className="!mt-10 !w-full">
+         <div className="!mx-auto !w-full !max-w-7xl px-4 sm:px-6">
+           <form
+             ref={terminalRef}
+             onSubmit={handleSubmit}
+             className="!w-full !mx-auto !max-w-6xl
+                        !transition-all !duration-300 
+                        !rounded-2xl
+                        !min-h-[380px]"
+           >
+             <Terminal>
+               {!submitted ? (
+                 <>
+                   <p className="!text-green-400 !font-mono !text-xl sm:!text-2xl">
+                     $ Welcome to{" "}
+                     <span className="!text-cyan-400">HackTheBoot</span>{" "}
+                     pre-registration
+                   </p>
+                   <p className="!text-gray-400 !text-lg sm:!text-xl !font-mono">
+                     # Please enter your info below:
+                   </p>
+
+                   <div className="!flex !flex-col !gap-8 !mt-6">
+                     <Field text="Full Name" required id="fullName" />
+                     <Field text="Email" type="email" required id="email" />
+                   </div>
+
+                   <button
+                     type="submit"
+                     className="!mt-8 !w-full !rounded-xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 !py-5 
+                                !text-white !font-semibold !font-mono !text-lg !tracking-wide !shadow-md 
+                                hover:!from-blue-600 hover:!to-cyan-600 !transition-all !duration-300 
+                                !transform hover:!scale-[1.02]"
+                   >
+                     $ Submit
+                   </button>
+                 </>
+               ) : (
+                 <>
+                   <p className="!text-green-400 !font-mono !text-xl sm:!text-2xl">
+                     $ Thank you for pre-registering!
+                   </p>
+                   <p className="!text-gray-400 !font-mono !text-lg sm:!text-xl">
+                     # We&apos;ll notify you when applications open.
+                   </p>
+                 </>
+               )}
+             </Terminal>
+          </form>
+        </div>
+      </section>
+
+      {/* ================= CARDS (BELOW TERMINAL) ================= */}
+      <section className="!mt-8 !w-full">
+        <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6">
+          <div
+            className="!grid !grid-cols-1 sm:!grid-cols-2 
+                       !gap-6"
+          >
+            {[
+              {
+                icon: (
+                  <svg
+                    className="w-6 h-6 text-blue-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                ),
+                title: "Date",
+                text: "Spring 2026",
+              },
+              {
+                icon: (
+                  <svg
+                    className="w-6 h-6 text-blue-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                ),
+                 title: "Location",
+                 text: "Milan",
+              },
+            ].map((card, i) => (
+               <div
+                 key={i}
+                 className="!relative !flex !flex-col !justify-center !items-center !text-center 
+                            !w-full !rounded-[20px] !p-8 !min-h-[180px]
+                            !bg-[rgba(51,54,56,0.27)] 
+                            !border-2 !border-blue-500/30 
+                            !transition-all !duration-300 !ease-out 
+                            hover:!bg-[rgba(51,54,56,0.40)] hover:!border-blue-500/50
+                            hover:!scale-[1.02] group"
+               >
+                 <div className="!flex !flex-col !items-center !justify-center !h-full !space-y-6">
+                   <div className="!p-6 !rounded-full !bg-blue-500/10 group-hover:!bg-blue-500/20 !transition-all !duration-300">
+                     {card.icon}
+                   </div>
+
+                   <h3 className="!text-blue-500 !font-semibold !text-3xl !tracking-wide group-hover:!text-blue-400 !transition-colors !duration-300">
+                     {card.title}
+                   </h3>
+                   <p className="!text-gray-300 !text-2xl !font-medium whitespace-pre-line leading-relaxed group-hover:!text-gray-200 !transition-colors !duration-300 !text-center">
+                     {card.text}
+                   </p>
+                 </div>
+               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }
