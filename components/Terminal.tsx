@@ -21,7 +21,7 @@ export function Field({ text, required = false, type = "text", id, className = "
     return (
         <div className={`relative w-full font-mono text-[18px] ${className}`}>
             {/* Input */}
-            <input id={id} type={inputType} value={value} onChange={(e) => setValue(e.target.value)} placeholder={text + (required ? " *" : "")} required={required} className="inputText pr-10 w-full focus:outline-none" aria-label={text} />
+            <input id={id} name={id} type={inputType} value={value} onChange={(e) => setValue(e.target.value)} placeholder={text + (required ? " *" : "")} required={required} className="inputText pr-10 w-full focus:outline-none" aria-label={text} />
 
             {/* Show/hide password toggle */}
             {isPassword && (

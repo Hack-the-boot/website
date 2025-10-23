@@ -44,9 +44,33 @@ export default function Home() {
     return () => clearTimeout(t);
   }, [displayText, isDeleting, index]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    
+    const formData = new FormData(e.target as HTMLFormElement);
+    const fullName = formData.get('fullName') as string;
+    const email = formData.get('email') as string;
+
+    try {
+      const response = await fetch('/api/pre-register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ fullName, email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        alert(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      alert('Error submitting pre-registration. Please try again.');
+    }
   };
 
   return (
