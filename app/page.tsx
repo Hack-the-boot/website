@@ -96,7 +96,7 @@ export default function Home() {
           </span>
         </p>
 
-         <p className="descriptionHack !text-center !w-full !mb-0">
+         <p className="descriptionHack !text-center !w-full !mb-8">
            Italy&apos;s student-powered international hackathon - Compete. Build.{" "}
            <span className="!font-bold">WIN.</span>
          </p>

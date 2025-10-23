@@ -79,8 +79,10 @@
 
 /* Logo and Header */
 .logoAndText {
-    @apply flex flex-col sm:flex-row
+    @apply flex flex-row sm:flex-row
          justify-center items-center
+         mb-5
+         sm:mb-10 md:mb-4 lg:mb-6
          mt-4 sm:mt-6 md:mt-8
          gap-4 sm:gap-6 md:gap-8;
 }
