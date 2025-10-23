@@ -25,7 +25,12 @@ export const metadata: Metadata = {
     title: "Hack The Boot",
     description: "Italy's student-powered international hackathon - Compete. Build. WIN.",
     icons: {
-        icon: "/favicon.png",
+        icon: [
+            { url: "/favicon.png", sizes: "any" },
+            { url: "/favicon.png", type: "image/png" }
+        ],
+        shortcut: "/favicon.png",
+        apple: "/favicon.png",
     },
 };
 
