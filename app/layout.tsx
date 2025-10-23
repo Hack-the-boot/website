@@ -24,6 +24,9 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
     title: "Hack The Boot",
     description: "Italy's student-powered international hackathon - Compete. Build. WIN.",
+    icons: {
+        icon: "/favicon.png",
+    },
 };
 
 export default function RootLayout({
