@@ -222,6 +222,47 @@ export default function Home() {
                     </div>
                 </section>
             </main>
+            {/* ================= ENHANCED FOOTER ================= */}
+            <footer className="!relative !mt-20 !w-full !border-t !border-blue-500/20 !bg-gradient-to-b !from-[rgba(51,54,56,0.2)] !to-[rgba(51,54,56,0.4)]">
+                {/* Decorative top border with glow */}
+                <div className="!absolute !top-0 !left-0 !right-0 !h-px !bg-gradient-to-r !from-transparent !via-cyan-400 !to-transparent !opacity-50"></div>
+
+                <div className="!relative !max-w-7xl !mx-auto !px-4 sm:!px-6 lg:!px-8 !py-16">
+                    <div className="!flex !flex-col !items-center !justify-center !space-y-8">
+                        {/* Contact Section */}
+                        <div className="!text-center !space-y-4">
+                            <p className="!text-xl sm:!text-2xl !font-semibold !text-gray-200">
+                                Have questions? <span className="tech-gradient !font-bold">Get in touch</span> 👇
+                            </p>
+                            <a
+                                href="mailto:support@hacktheboot.it"
+                                className="!inline-flex !items-center !gap-2 !text-blue-400 hover:!text-cyan-400 
+                             !transition-all !duration-300 !font-mono !text-lg sm:!text-xl
+                             hover:!scale-105 !transform"
+                            >
+                                <svg className="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                support@hacktheboot.it
+                            </a>
+                        </div>
+
+                        {/* Separator */}
+                        <div className="!w-full !max-w-md">
+                            <div className="!h-px !bg-gradient-to-r !from-transparent !via-blue-500/50 !to-transparent"></div>
+                        </div>
+
+                        {/* Copyright */}
+                        <div className="!text-center !space-y-2">
+                            <p className="!text-base !text-gray-400">© {new Date().getFullYear()} Hack The Boot | Made with ❤️ by students</p>
+                            <p className="!text-sm !text-gray-500">All rights reserved</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Bottom glow effect */}
+                <div className="!absolute !bottom-0 !left-1/2 !-translate-x-1/2 !w-1/2 !h-px !bg-gradient-to-r !from-transparent !via-cyan-500/30 !to-transparent !blur-sm"></div>
+            </footer>
         </>
     );
 }
