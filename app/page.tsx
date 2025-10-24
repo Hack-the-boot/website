@@ -231,9 +231,7 @@ export default function Home() {
                     <div className="!flex !flex-col !items-center !justify-center !space-y-8">
                         {/* Contact Section */}
                         <div className="!text-center !space-y-4">
-                            <p className="!text-xl sm:!text-2xl !font-semibold !text-gray-200">
-                                Have questions? <span className="tech-gradient !font-bold">Get in touch</span> 👇
-                            </p>
+                            <p className="!text-3xl !font-semibold !text-gray-200">Have questions? Get In Touch 👇</p>
                             <a
                                 href="mailto:support@hacktheboot.it"
                                 className="!inline-flex !items-center !gap-2 !text-blue-400 hover:!text-cyan-400 
@@ -254,7 +252,7 @@ export default function Home() {
 
                         {/* Copyright */}
                         <div className="!text-center !space-y-2">
-                            <p className="!text-base !text-gray-400">© {new Date().getFullYear()} Hack The Boot | Made with ❤️ by students</p>
+                            <p className="!text-base !text-gray-400">© {new Date().getFullYear()} Hack The Boot | Made with ❤️ by The Hack The Boot Team</p>
                             <p className="!text-sm !text-gray-500">All rights reserved</p>
                         </div>
                     </div>
