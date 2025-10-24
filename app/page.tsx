@@ -97,8 +97,6 @@ export default function Home() {
                         </span>
                     </p>
 
-                    <p className="!text-gray-300 !mt-4 !max-w-3xl !mx-auto">Hack The Boot is Italy’s largest student-driven international hackathon — bringing together developers, designers, and dreamers for 24 hours of coding, collaboration, and creativity in Milan.</p>
-
                     <p className="!text-2xl !mt-8 sm:!text-3xl !font-bold !text-gray-300">
                         <span className="!text-blue-400">Pre-register</span> below to get notified when applications open.
                     </p>
