@@ -90,7 +90,7 @@ export default function Home() {
                         <h1 id="hero-heading">Hack The Boot</h1>
                     </div>
 
-                    <p className="hackInfo !max-w-3xl !mx-auto !text-gray-300">
+                    <p className="hackInfo !max-w-5xl !mx-auto !text-gray-300">
                         <span className="tech-gradient">
                             <span className="typewriter">{displayText}</span>
                             <span className="cursor"></span>
