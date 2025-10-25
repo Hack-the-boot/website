@@ -262,7 +262,7 @@ export default function Home() {
                     Frequently Asked Questions
                 </h2>
 
-                <div className="!max-w-3xl !mx-auto !text-left !space-y-3">
+                <div className="!max-w-3xl !mx-auto !text-left !space-y-3 !px-4 sm:!px-0">
                     {[
                         {
                             q: "What is a hackathon?",
