@@ -6,7 +6,7 @@ import Image from "next/image";
 import Terminal, { Field } from "@/components/Terminal";
 
 export default function Home() {
-    const phrases = ["Italy's international student hackathon", "Where bold ideas become reality", "Compete. Build. WIN.", "24 hours of innovation in Milan", "Create the future, one hack at a time"];
+    const phrases = ["Where bold ideas become reality", "Compete. Build. WIN.", "24 hours of innovation in Milan", "Create the future, one hack at a time"];
 
     const [index, setIndex] = useState(0);
     const [displayText, setDisplayText] = useState("");
@@ -92,10 +92,14 @@ export default function Home() {
                 <section className="mainPageContainer text-center" aria-labelledby="hero-heading">
                     <div className="logoAndText">
                         <Image src="/img/Logo_Transparent.png" alt="Hack The Boot Hackathon Logo" width={300} height={300} className="logoHTB" priority />
-                        <h1 id="hero-heading">Hack The Boot</h1>
+                        <h1 id="hero-heading" className="!mt-2">
+                            Hack The Boot
+                        </h1>
                     </div>
-
-                    <p className="hackInfo !max-w-5xl !mx-auto !text-gray-300">
+                    {/* ================= SUBTITLE ================= */}
+                    <p className="!mt-[-40px] !text-gray-400 !text-sm sm:!text-base !font-medium !max-w-md !mx-auto">A 24-hour international student hackathon in Milan</p>
+                    {/* ================= TYPEWRITER ================= */}
+                    <p className="hackInfo !max-w-5xl !mx-auto !mt-6 !text-gray-300">
                         <span className="tech-gradient">
                             <span className="typewriter">{displayText}</span>
                             <span className="cursor" />
@@ -109,20 +113,12 @@ export default function Home() {
                     <button
                         onClick={scrollToTerminal}
                         className="!mt-8 !px-10 !mb-3 !py-5 !rounded-2xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 
-                       !text-white !font-bold !text-xl !tracking-wide !shadow-lg 
-                       hover:!from-blue-600 hover:!to-cyan-600 !transition-all !duration-300 
-                       !transform hover:!scale-105 hover:!shadow-cyan-500/50"
+                        !text-white !font-bold !text-xl !tracking-wide !shadow-lg 
+                        hover:!from-blue-600 hover:!to-cyan-600 !transition-all !duration-300 
+                        !transform hover:!scale-105 hover:!shadow-cyan-500/50"
                     >
                         Pre-Register Now
                     </button>
-                </section>
-
-                {/* ================= DESCRIPTIVE SUBTITLE ================= */}
-                <section className="!mt-16 !w-full text-center">
-                    <h2 className="!text-white !text-xl sm:!text-2xl mb-4">
-                        <span className="!font-medium">Join innovators from around the world for 24 hours of creativity, code, and collaboration in Milan:</span> <br />
-                        <span className="!font-bold">Hack The Boot is where ideas become reality.</span>
-                    </h2>
                 </section>
 
                 {/* ================= WHEN & WHERE ================= */}
@@ -167,10 +163,8 @@ export default function Home() {
                                     >
                                         <div className="!flex !flex-col !items-center !justify-center !h-full !space-y-4">
                                             <div className="!p-5 !rounded-full !bg-blue-500/10 group-hover:!bg-blue-500/20 !transition-all !duration-300">{card.icon}</div>
-
                                             <p className="!text-gray-400 !text-base sm:!text-lg !tracking-wide !uppercase !font-semibold">{card.label}</p>
-
-                                            <p className="!text-blue-400 !font-extrabold !text-4xl sm:!text-5xl !leading-snug group-hover:!text-blue-300 !transition-colors !duration-300">{card.text}</p>
+                                            <p className="!text-blue-400 !font-extrabold !text-2xl sm:!text-4xl !leading-snug group-hover:!text-blue-300 !transition-colors !duration-300">{card.text}</p>{" "}
                                         </div>
                                     </div>
                                 ))}
@@ -178,6 +172,14 @@ export default function Home() {
                         </div>
                     </section>
                 )}
+                {/* ================= DESCRIPTIVE SUBTITLE =================
+                <section className="!mt-16 !w-full text-center">
+                    <h2 className="!text-white !text-xl sm:!text-2xl mb-4">
+                        <span className="!font-medium">Hack The Boot is a 24-hour innovation marathon where students from around the world team up to build, design, and launch new ideas in Milan.</span>
+                        <br />
+                        <span className="!font-bold">Turn your creativity into reality: one hack at a time.</span>
+                    </h2>
+                </section> */}
 
                 {/* ================= ARROW CUE ================= */}
                 <section className="!mt-16 !flex !justify-center !items-center !w-full">
@@ -196,48 +198,110 @@ export default function Home() {
                 </section>
 
                 {/* ================= TERMINAL FORM ================= */}
+                {/* ================= TERMINAL FORM ================= */}
                 <section className="!mt-10 !w-full" aria-labelledby="pre-register">
                     <div className="!mx-auto !w-full !max-w-7xl px-4 sm:px-6">
                         <h2 id="pre-register" className="sr-only">
                             Pre-register Form
                         </h2>
-                        <form ref={terminalRef} onSubmit={handleSubmit} className="!w-full !mx-auto !max-w-6xl !transition-all !duration-300 !rounded-2xl !min-h-[380px]">
+                        <form ref={terminalRef} onSubmit={handleSubmit} className="!w-full !mx-auto !max-w-6xl !transition-all !duration-300 !rounded-2xl !min-h-[360px]">
                             <Terminal>
                                 {!submitted ? (
                                     <>
-                                        <p className="!text-green-400 !font-mono !text-xl sm:!text-2xl">
+                                        <p className="!text-green-400 !font-mono !text-lg sm:!text-xl mb-2">
                                             $ Welcome to <span className="!text-cyan-400">HackTheBoot</span> pre-registration
                                         </p>
-                                        <p className="!text-gray-400 !text-lg sm:!text-xl !font-mono"># Please enter your info below:</p>
+                                        <p className="!text-gray-400 !text-base sm:!text-lg !font-mono mb-4"># Please enter your info below:</p>
 
-                                        <div className="!flex !flex-col !gap-8 !mt-6">
-                                            <Field text="Full Name" required id="fullName" />
-                                            <Field text="Email" type="email" required id="email" />
+                                        <div className="!flex !flex-col !gap-5 !mt-2">
+                                            <div className="!flex !flex-col">
+                                                <label htmlFor="fullName" className="!block !text-gray-400 !font-mono !text-sm sm:!text-base !mb-1">
+                                                    Insert your full name
+                                                </label>
+                                                <Field id="fullName" text="Full name" required />
+                                            </div>
+
+                                            <div className="!flex !flex-col">
+                                                <label htmlFor="email" className="!block !text-gray-400 !font-mono !text-sm sm:!text-base !mb-1">
+                                                    Insert your email address
+                                                </label>
+                                                <Field id="email" type="email" text="Email address" required />
+                                            </div>
                                         </div>
 
                                         <button
                                             type="submit"
-                                            className="!mt-8 !w-full !rounded-xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 !py-5 
-                                 !text-white !font-semibold !font-mono !text-lg !tracking-wide !shadow-md 
-                                 hover:!from-blue-600 hover:!to-cyan-600 !transition-all !duration-300 
-                                 !transform hover:!scale-[1.02]"
+                                            className="!mt-6 !w-full !rounded-xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 !py-4
+              !text-white !font-semibold !font-mono !text-lg !tracking-wide !shadow-md
+              hover:!from-blue-600 hover:!to-cyan-600 !transition-all !duration-300 
+              !transform hover:!scale-[1.02]"
                                         >
                                             $ Submit
                                         </button>
                                     </>
                                 ) : (
-                                    <>
-                                        <div role="status" aria-live="polite" className="!space-y-2">
-                                            <p className="!text-green-400 !font-mono !text-xl sm:!text-2xl">$ Thank you for pre-registering!</p>
-                                            <p className="!text-gray-400 !font-mono !text-lg sm:!text-xl"># We&apos;ll notify you when applications open.</p>
-                                        </div>
-                                    </>
+                                    <div role="status" aria-live="polite" className="!space-y-2">
+                                        <p className="!text-green-400 !font-mono !text-xl sm:!text-2xl">$ Thank you for pre-registering!</p>
+                                        <p className="!text-gray-400 !font-mono !text-lg sm:!text-xl"># We&apos;ll notify you when applications open.</p>
+                                    </div>
                                 )}
                             </Terminal>
                         </form>
                     </div>
                 </section>
             </main>
+            {/* ================= FAQ SECTION ================= */}
+            {/* ================= FAQ SECTION ================= */}
+            <section className="!mt-20 !w-full !text-center" aria-labelledby="faq-heading">
+                <h2 id="faq-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold !mb-10">
+                    Frequently Asked Questions
+                </h2>
+
+                <div className="!max-w-4xl !mx-auto !text-left !space-y-3">
+                    {[
+                        {
+                            q: "What is a hackathon?",
+                            a: "A hackathon is a 24-hour creative tech marathon where students team up to build prototypes: from software and hardware to AI tools or IoT devices. It’s not just coding: it’s collaboration, design, innovation, and fun. Hack The Boot will bring this experience to Milan, empowering students to turn bold ideas into reality.",
+                        },
+                        {
+                            q: "How much does it cost?",
+                            a: "Nothing at all! Hack The Boot is completely free to attend. The only thing you need to bring is your curiosity and energy.",
+                        },
+                        {
+                            q: "What if I don’t know how to code?",
+                            a: "No worries! Hackathons are for everyone! Whether you’re a designer, researcher, storyteller, or just curious, you can contribute. Our beginner track and mentors will guide you through tools and creative processes so you can still build something amazing.",
+                        },
+                        {
+                            q: "What if I don’t have an idea or a team?",
+                            a: "You can still join! We’ll organize team formation sessions and idea jams before hacking begins, so you can meet other participants and collaborate on something exciting together.",
+                        },
+                        {
+                            q: "What can I build?",
+                            a: "Anything that solves a real problem or inspires others: from apps and AI tools to hardware prototypes and data-driven projects. You’ll be able to choose from themes like Education, Healthcare, and Sustainability, or even tackle custom sponsor challenges.",
+                        },
+                        {
+                            q: "Who can come?",
+                            a: "Hack The Boot is open to all students: undergraduate, graduate, from Italy and around the world. Whether you’re a first-timer or an experienced builder, you’re welcome to join us in Milan for 24 hours of creativity, collaboration, and discovery.",
+                        },
+                    ].map((item, i) => (
+                        <details
+                            key={i}
+                            className="!group !rounded-xl !bg-[rgba(30,32,33,0.6)] !border !border-blue-500/20 
+                   !overflow-hidden !transition-all !duration-300 hover:!border-blue-500/40"
+                        >
+                            <summary
+                                className="!flex !justify-between !items-center !cursor-pointer !p-5 
+                     !text-gray-200 !font-semibold !text-lg 
+                     hover:!text-blue-400 !transition-all"
+                            >
+                                {item.q}
+                                <span className="!text-blue-400 !text-2xl !font-light group-open:!rotate-45 !transition-transform">+</span>
+                            </summary>
+                            <div className="!p-5 !pt-0 !text-gray-400 !leading-relaxed !border-t !border-blue-500/10">{item.a}</div>
+                        </details>
+                    ))}
+                </div>
+            </section>
 
             {/* ================= FOOTER ================= */}
             <footer className="!relative !mt-20 !w-full !border-t !border-blue-500/20 !bg-gradient-to-b !from-[rgba(51,54,56,0.2)] !to-[rgba(51,54,56,0.4)]">
