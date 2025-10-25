@@ -96,7 +96,7 @@ export default function Home() {
                 {/* ================= HERO ================= */}
                 <section className="mainPageContainer text-center" aria-labelledby="hero-heading">
                     <div className="logoAndText">
-                        <Image src="/img/Logo_Transparent.png" alt="Hack The Boot Hackathon Logo" width={300} height={300} className="logoHTB" priority />
+                        <Image src="/img/Logo_Transparent.png" alt="Hack The Boot Hackathon Logo" width={300} height={300} className="logoHTB w-48 h-48 sm:w-72 sm:h-72" priority />
                         <h1 id="hero-heading" className="!mt-2">
                             Hack The Boot
                         </h1>
@@ -117,8 +117,8 @@ export default function Home() {
 
                     <button
                         onClick={scrollToTerminal}
-                        className="!mt-8 !px-10 !mb-3 !py-5 !rounded-2xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 
-                        !text-white !font-bold !text-xl !tracking-wide !shadow-lg 
+                        className="!mt-8 !px-6 sm:!px-10 !mb-3 !py-4 sm:!py-5 !rounded-2xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 
+                        !text-white !font-bold !text-lg sm:!text-xl !tracking-wide !shadow-lg 
                         hover:!from-blue-600 hover:!to-cyan-600 !transition-all !duration-300 
                         !transform hover:!scale-105 hover:!shadow-cyan-500/50"
                     >
@@ -159,7 +159,7 @@ export default function Home() {
                                     <div
                                         key={i}
                                         className="!relative !flex !flex-col !justify-center !items-center !text-center 
-                               !w-full !rounded-[20px] !p-8 !min-h-[180px]
+                               !w-full !rounded-[20px] !p-6 sm:!p-8 !min-h-[160px] sm:!min-h-[180px]
                                !bg-[rgba(51,54,56,0.27)] 
                                !border-2 !border-blue-500/30 
                                !transition-all !duration-300 !ease-out 
@@ -167,9 +167,9 @@ export default function Home() {
                                hover:!scale-[1.02] group"
                                     >
                                         <div className="!flex !flex-col !items-center !justify-center !h-full !space-y-4">
-                                            <div className="!p-5 !rounded-full !bg-blue-500/10 group-hover:!bg-blue-500/20 !transition-all !duration-300">{card.icon}</div>
-                                            <p className="!text-gray-400 !text-base sm:!text-lg !tracking-wide !uppercase !font-semibold">{card.label}</p>
-                                            <p className="!text-blue-400 !font-extrabold !text-2xl sm:!text-4xl !leading-snug group-hover:!text-blue-300 !transition-colors !duration-300">{card.text}</p>{" "}
+                                            <div className="!p-4 sm:!p-5 !rounded-full !bg-blue-500/10 group-hover:!bg-blue-500/20 !transition-all !duration-300">{card.icon}</div>
+                                            <p className="!text-gray-400 !text-sm sm:!text-lg !tracking-wide !uppercase !font-semibold">{card.label}</p>
+                                            <p className="!text-blue-400 !font-extrabold !text-xl sm:!text-4xl !leading-snug group-hover:!text-blue-300 !transition-colors !duration-300">{card.text}</p>{" "}
                                         </div>
                                     </div>
                                 ))}
@@ -187,7 +187,7 @@ export default function Home() {
                 </section> */}
 
                 {/* ================= ARROW CUE ================= */}
-                <section className="!mt-16 !flex !justify-center !items-center !w-full">
+                <section className="!mt-8 sm:!mt-16 !flex !justify-center !items-center !w-full">
                     <div className="!flex !flex-col !items-center !gap-3 animate-bounce">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="url(#techGradient)" className="w-8 h-8 !drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]">
                             <defs>
@@ -204,12 +204,12 @@ export default function Home() {
 
                 {/* ================= TERMINAL FORM ================= */}
                 {/* ================= TERMINAL FORM ================= */}
-                <section className="!mt-10 !w-full" aria-labelledby="pre-register">
+                <section className="!mt-6 sm:!mt-10 !w-full" aria-labelledby="pre-register">
                     <div className="!mx-auto !w-full !max-w-7xl px-4 sm:px-6">
                         <h2 id="pre-register" className="sr-only">
                             Pre-register Form
                         </h2>
-                        <form ref={terminalRef} onSubmit={handleSubmit} className="!w-full !mx-auto !max-w-6xl !transition-all !duration-300 !rounded-2xl !min-h-[360px]">
+                        <form ref={terminalRef} onSubmit={handleSubmit} className="!w-full !mx-auto !max-w-6xl !transition-all !duration-300 !rounded-2xl !min-h-[280px] sm:!min-h-[360px]">
                             <Terminal>
                                 {!submitted ? (
                                     <>
@@ -296,8 +296,8 @@ export default function Home() {
                         >
                             <button
                                 onClick={() => toggleFAQ(i)}
-                                className="!w-full !flex !justify-between !items-start !cursor-pointer !p-5 
-                     !text-gray-200 !font-semibold !text-lg !text-left
+                                className="!w-full !flex !justify-between !items-start !cursor-pointer !p-4 sm:!p-5 
+                     !text-gray-200 !font-semibold !text-base sm:!text-lg !text-left
                      hover:!text-blue-400 !transition-all"
                             >
                                 <span className="!flex-1 !text-left !pr-4">{item.q}</span>
@@ -340,8 +340,8 @@ export default function Home() {
                         </div>
 
                         <div className="!text-center !space-y-2">
-                            <p className="!text-base !text-gray-400">© {new Date().getFullYear()} Hack The Boot | Made with ❤️ by The Hack The Boot Team</p>
-                            <p className="!text-sm !text-gray-500">All rights reserved</p>
+                            <p className="!text-sm sm:!text-base !text-gray-400">© {new Date().getFullYear()} Hack The Boot | Made with ❤️ by The Hack The Boot Team</p>
+                            <p className="!text-xs sm:!text-sm !text-gray-500">All rights reserved</p>
                         </div>
                     </div>
                 </div>
