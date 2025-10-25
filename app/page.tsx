@@ -63,6 +63,10 @@ export default function Home() {
         }
     };
 
+    const scrollToTerminal = () => {
+        terminalRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    };
+
     return (
         <>
             {/* ================= SEO METADATA ================= */}
@@ -71,7 +75,7 @@ export default function Home() {
                 <meta name="description" content="Hack The Boot — Italy's premier international student hackathon in Milan. 24 hours of innovation, creativity, and competition. Pre-register now for Spring 2026!" />
                 <meta name="keywords" content="Hack The Boot, Hackathon Italy, Student Hackathon Milan, Hack The Boot 2026, International Hackathon Europe, Tech Competition Italy, Hackathon for Students" />
                 <meta property="og:title" content="Hack The Boot | Italy's International Student Hackathon 2026" />
-                <meta property="og:description" content="Compete. Build. WIN. Join Italy’s international student hackathon — 24 hours of innovation in Milan." />
+                <meta property="og:description" content="Compete. Build. WIN. Join Italy's international student hackathon — 24 hours of innovation in Milan." />
                 <meta property="og:image" content="/img/Logo_Transparent.png" />
                 <meta property="og:url" content="https://hacktheboot.it" />
                 <meta name="twitter:card" content="summary_large_image" />
@@ -98,8 +102,18 @@ export default function Home() {
                     </p>
 
                     <p className="!text-2xl !mt-8 sm:!text-3xl !font-bold !text-gray-300">
-                        <span className="!text-blue-400">Pre-register</span> below to get notified when applications open.
+                        <span className="!text-blue-400">Limited spots available.</span> Be the first to know when applications open.
                     </p>
+
+                    <button
+                        onClick={scrollToTerminal}
+                        className="!mt-8 !px-10 !mb-3 !py-5 !rounded-2xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 
+                                   !text-white !font-bold !text-xl !tracking-wide !shadow-lg 
+                                   hover:!from-blue-600 hover:!to-cyan-600 !transition-all !duration-300 
+                                   !transform hover:!scale-105 hover:!shadow-cyan-500/50"
+                    >
+                        Pre-Register Now
+                    </button>
                 </section>
 
                 {/* ================= CARDS ================= */}
