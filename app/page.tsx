@@ -296,12 +296,12 @@ export default function Home() {
                         >
                             <button
                                 onClick={() => toggleFAQ(i)}
-                                className="!w-full !flex !justify-between !items-center !cursor-pointer !p-5 
-                     !text-gray-200 !font-semibold !text-lg 
+                                className="!w-full !flex !justify-between !items-start !cursor-pointer !p-5 
+                     !text-gray-200 !font-semibold !text-lg !text-left
                      hover:!text-blue-400 !transition-all"
                             >
-                                {item.q}
-                                <span className="!text-blue-400 !text-2xl !font-light !transition-transform !duration-300">
+                                <span className="!flex-1 !text-left !pr-4">{item.q}</span>
+                                <span className="!text-blue-400 !text-2xl !font-light !transition-transform !duration-300 !flex-shrink-0">
                                     {openFAQ === i ? "−" : "+"}
                                 </span>
                             </button>
