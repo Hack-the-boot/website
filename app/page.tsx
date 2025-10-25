@@ -12,6 +12,7 @@ export default function Home() {
     const [displayText, setDisplayText] = useState("");
     const [isDeleting, setIsDeleting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const [openFAQ, setOpenFAQ] = useState<number | null>(null);
 
     const terminalRef = useRef<HTMLFormElement>(null);
 
@@ -68,6 +69,10 @@ export default function Home() {
         terminalRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
     };
 
+    const toggleFAQ = (index: number) => {
+        setOpenFAQ(openFAQ === index ? null : index);
+    };
+
     return (
         <>
             {/* ================= SEO ================= */}
@@ -97,7 +102,7 @@ export default function Home() {
                         </h1>
                     </div>
                     {/* ================= SUBTITLE ================= */}
-                    <p className="!mt-[-40px] !text-gray-400 !text-sm sm:!text-base !font-medium !max-w-md !mx-auto">A 24-hour international student hackathon in Milan</p>
+                    <p className="!mt-2 sm:!mt-[-40px] !text-gray-400 !text-sm sm:!text-base !font-medium !max-w-md !mx-auto">A 24-hour international student hackathon in Milan</p>
                     {/* ================= TYPEWRITER ================= */}
                     <p className="hackInfo !max-w-5xl !mx-auto !mt-6 !text-gray-300">
                         <span className="tech-gradient">
@@ -257,7 +262,7 @@ export default function Home() {
                     Frequently Asked Questions
                 </h2>
 
-                <div className="!max-w-4xl !mx-auto !text-left !space-y-3">
+                <div className="!max-w-3xl !mx-auto !text-left !space-y-3">
                     {[
                         {
                             q: "What is a hackathon?",
@@ -284,21 +289,28 @@ export default function Home() {
                             a: "Hack The Boot is open to all students: undergraduate, graduate, from Italy and around the world. Whether you’re a first-timer or an experienced builder, you’re welcome to join us in Milan for 24 hours of creativity, collaboration, and discovery.",
                         },
                     ].map((item, i) => (
-                        <details
+                        <div
                             key={i}
                             className="!group !rounded-xl !bg-[rgba(30,32,33,0.6)] !border !border-blue-500/20 
                    !overflow-hidden !transition-all !duration-300 hover:!border-blue-500/40"
                         >
-                            <summary
-                                className="!flex !justify-between !items-center !cursor-pointer !p-5 
+                            <button
+                                onClick={() => toggleFAQ(i)}
+                                className="!w-full !flex !justify-between !items-center !cursor-pointer !p-5 
                      !text-gray-200 !font-semibold !text-lg 
                      hover:!text-blue-400 !transition-all"
                             >
                                 {item.q}
-                                <span className="!text-blue-400 !text-2xl !font-light group-open:!rotate-45 !transition-transform">+</span>
-                            </summary>
-                            <div className="!p-5 !pt-0 !text-gray-400 !leading-relaxed !border-t !border-blue-500/10">{item.a}</div>
-                        </details>
+                                <span className="!text-blue-400 !text-2xl !font-light !transition-transform !duration-300">
+                                    {openFAQ === i ? "−" : "+"}
+                                </span>
+                            </button>
+                            {openFAQ === i && (
+                                <div className="!p-5 !pt-0 !text-gray-400 !leading-relaxed !border-t !border-blue-500/10">
+                                    {item.a}
+                                </div>
+                            )}
+                        </div>
                     ))}
                 </div>
             </section>
