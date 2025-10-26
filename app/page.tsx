@@ -40,6 +40,13 @@ export default function Home() {
         return () => clearTimeout(t);
     }, [displayText, isDeleting, index]);
 
+    // ================= SCROLL TO TOP ON SUBMIT =================
+    useEffect(() => {
+        if (submitted) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, [submitted]);
+
     // ================= SUBMIT HANDLER =================
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -228,7 +235,7 @@ export default function Home() {
 
                                             <div className="!flex !flex-col">
                                                 <label htmlFor="email" className="!block !text-gray-400 !font-mono !text-sm sm:!text-base !mb-1">
-                                                    Insert your email address
+                                                    Insert your email address (Please avoid institutional emails)
                                                 </label>
                                                 <Field id="email" type="email" text="E.g. paolo.rossi@example.com" required />
                                             </div>
@@ -255,9 +262,12 @@ export default function Home() {
                     </div>
                 </section>
             </main>
+            
             {/* ================= FAQ SECTION ================= */}
-            {/* ================= FAQ SECTION ================= */}
-            <section className="!mt-20 !w-full !text-center" aria-labelledby="faq-heading">
+            {!submitted && (
+                <>
+                    {/* ================= FAQ SECTION ================= */}
+                    <section className="!mt-20 !w-full !text-center" aria-labelledby="faq-heading">
                 <h2 id="faq-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold !mb-10">
                     Frequently Asked Questions
                 </h2>
@@ -313,7 +323,9 @@ export default function Home() {
                         </div>
                     ))}
                 </div>
-            </section>
+                    </section>
+                </>
+            )}
 
             {/* ================= FOOTER ================= */}
             <footer className="!relative !mt-20 !w-full !border-t !border-blue-500/20 !bg-gradient-to-b !from-[rgba(51,54,56,0.2)] !to-[rgba(51,54,56,0.4)]">

@@ -50,6 +50,30 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Block institutional email domains
+    const institutionalDomains = [
+      'edu', 'ac.', 'university', 'college', 'school', 'unibo', 'polimi', 'polito',
+      'unimi', 'unipd', 'unito', 'unina', 'unifi', 'uniro', 'unipg', 'univaq',
+      'uniud', 'units', 'unisalento', 'uniba', 'unical', 'unicatt', 'unitn',
+      'unicam', 'uniurb', 'unibs', 'unimc', 'unimol', 'unisannio', 'unibas',
+      'unicz', 'unica', 'unime', 'unikore', 'unitus', 'unich', 'uniroma',
+      'uniroma1', 'uniroma2', 'uniroma3', 'unimib', 'unipv', 'unige', 'unibo.it',
+      'studenti', 'student', 'mail.studenti', 'campus'
+    ];
+    
+    const emailDomain = trimmedEmail.toLowerCase().split('@')[1];
+    
+    const isInstitutional = institutionalDomains.some(domain => 
+      emailDomain.includes(domain.toLowerCase())
+    );
+    
+    if (isInstitutional) {
+      return NextResponse.json(
+        { error: 'Institutional email addresses are not allowed. Please use a personal email address.' },
+        { status: 400 }
+      );
+    }
+
     // Check if email already exists
     const existingUser = await sql`
       SELECT id FROM pre_registrations 
