@@ -106,6 +106,9 @@ export async function POST(request: NextRequest) {
     // Provide more specific error messages
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     
+    // Log the full error details
+    console.error('Full error details:', JSON.stringify(error, null, 2));
+    
     // Check for specific database errors
     if (errorMessage.includes('does not exist')) {
       return NextResponse.json(
@@ -123,7 +126,7 @@ export async function POST(request: NextRequest) {
     
     // Generic error for unexpected issues
     return NextResponse.json(
-      { error: 'An unexpected error occurred. Please try again later or contact support if the problem persists.' },
+      { error: `An unexpected error occurred: ${errorMessage}. Please try again later or contact support if the problem persists.` },
       { status: 500 }
     );
   }

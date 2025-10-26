@@ -290,8 +290,8 @@ export default function Home() {
                             a: "No worries! Hackathons are for everyone! Whether you’re a designer, researcher, storyteller, or just curious, you can contribute. Our beginner track and mentors will guide you through tools and creative processes so you can still build something amazing.",
                         },
                         {
-                            q: "What if I don’t have an idea or a team?",
-                            a: "You can still join! We’ll organize team formation sessions and idea jams before hacking begins, so you can meet other participants and collaborate on something exciting together.",
+                            q: "What if I don't have an idea or a team?",
+                            a: "You can still join! We'll organize team formation sessions and idea jams before hacking begins, so you can meet other participants and collaborate on something exciting together. Teams must be between 1-4 people.",
                         },
                         {
                             q: "What can I build?",
