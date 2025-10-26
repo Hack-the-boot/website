@@ -43,8 +43,8 @@ export default function Home() {
     // ================= SCROLL TO TOP ON SUBMIT =================
     useEffect(() => {
         if (submitted) {
-            // Use instant scroll for more reliable behavior
-            window.scrollTo({ top: 0, behavior: 'instant' });
+            // Scroll to top with smooth animation
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }, [submitted]);
 
