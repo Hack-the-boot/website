@@ -223,14 +223,14 @@ export default function Home() {
                                                 <label htmlFor="fullName" className="!block !text-gray-400 !font-mono !text-sm sm:!text-base !mb-1">
                                                     Insert your full name
                                                 </label>
-                                                <Field id="fullName" text="Full name" required />
+                                                <Field id="fullName" text="E.g. Paolo Rossi" required />
                                             </div>
 
                                             <div className="!flex !flex-col">
                                                 <label htmlFor="email" className="!block !text-gray-400 !font-mono !text-sm sm:!text-base !mb-1">
                                                     Insert your email address
                                                 </label>
-                                                <Field id="email" type="email" text="Email address" required />
+                                                <Field id="email" type="email" text="E.g. paolo.rossi@example.com" required />
                                             </div>
                                         </div>
 

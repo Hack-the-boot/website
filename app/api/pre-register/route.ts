@@ -5,19 +5,47 @@ export async function POST(request: NextRequest) {
   try {
     const { fullName, email } = await request.json();
 
+    // Trim whitespace from inputs to prevent issues with trailing spaces
+    const trimmedFullName = fullName?.trim();
+    const trimmedEmail = email?.trim();
+
     // Validate input
-    if (!fullName || !email) {
+    if (!trimmedFullName || !trimmedEmail) {
       return NextResponse.json(
-        { error: 'Full name and email are required' },
+        { error: 'Full name and email are required fields' },
+        { status: 400 }
+      );
+    }
+
+    // Validate full name (no empty strings after trimming)
+    if (trimmedFullName.length === 0) {
+      return NextResponse.json(
+        { error: 'Full name cannot be empty. Please enter your name.' },
+        { status: 400 }
+      );
+    }
+
+    // Validate full name length
+    if (trimmedFullName.length > 255) {
+      return NextResponse.json(
+        { error: 'Full name is too long. Please use less than 255 characters.' },
         { status: 400 }
       );
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!emailRegex.test(trimmedEmail)) {
       return NextResponse.json(
-        { error: 'Invalid email format' },
+        { error: 'Invalid email format. Please enter a valid email address (e.g., name@example.com)' },
+        { status: 400 }
+      );
+    }
+
+    // Validate email length
+    if (trimmedEmail.length > 255) {
+      return NextResponse.json(
+        { error: 'Email is too long. Please use less than 255 characters.' },
         { status: 400 }
       );
     }
@@ -25,12 +53,12 @@ export async function POST(request: NextRequest) {
     // Check if email already exists
     const existingUser = await sql`
       SELECT id FROM pre_registrations 
-      WHERE email = ${email}
+      WHERE email = ${trimmedEmail}
     `;
 
     if (existingUser.rows.length > 0) {
       return NextResponse.json(
-        { error: 'Email already registered' },
+        { error: 'This email is already registered. Please use a different email address.' },
         { status: 409 }
       );
     }
@@ -38,20 +66,40 @@ export async function POST(request: NextRequest) {
     // Insert new pre-registration
     const result = await sql`
       INSERT INTO pre_registrations (full_name, email, created_at)
-      VALUES (${fullName}, ${email}, NOW())
+      VALUES (${trimmedFullName}, ${trimmedEmail}, NOW())
       RETURNING id
     `;
 
     return NextResponse.json({
       success: true,
-      message: 'Pre-registration successful!',
+      message: 'Thank you! Your pre-registration was successful.',
       id: result.rows[0].id
     });
 
   } catch (error) {
     console.error('Pre-registration error:', error);
+    
+    // Provide more specific error messages
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    
+    // Check for specific database errors
+    if (errorMessage.includes('does not exist')) {
+      return NextResponse.json(
+        { error: 'Database error: The registration table could not be found. Please contact support.' },
+        { status: 503 }
+      );
+    }
+    
+    if (errorMessage.includes('connection') || errorMessage.includes('timeout')) {
+      return NextResponse.json(
+        { error: 'Unable to connect to the database. Please try again in a moment.' },
+        { status: 503 }
+      );
+    }
+    
+    // Generic error for unexpected issues
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'An unexpected error occurred. Please try again later or contact support if the problem persists.' },
       { status: 500 }
     );
   }
