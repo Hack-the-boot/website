@@ -32,6 +32,15 @@ export const metadata: Metadata = {
         shortcut: "/favicon.png",
         apple: "/favicon.png",
     },
+    openGraph: {
+        title: "Hack The Boot",
+        description: "Italy's student-powered international hackathon - Compete. Build. WIN.",
+        images: ["/favicon.png"],
+    },
+    twitter: {
+        card: "summary",
+        images: ["/favicon.png"],
+    },
 };
 
 export default function RootLayout({
