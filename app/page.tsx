@@ -43,8 +43,10 @@ export default function Home() {
     // ================= SCROLL TO TOP ON SUBMIT =================
     useEffect(() => {
         if (submitted) {
-            // Scroll to top with smooth animation
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Wait a bit for the DOM to update, then scroll to top with smooth animation
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 100);
         }
     }, [submitted]);
 
