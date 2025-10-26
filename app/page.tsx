@@ -235,7 +235,7 @@ export default function Home() {
 
                                             <div className="!flex !flex-col">
                                                 <label htmlFor="email" className="!block !text-gray-400 !font-mono !text-sm sm:!text-base !mb-1">
-                                                    Insert your email address (Please avoid institutional emails)
+                                                    Insert your email address (Use a personal email address)
                                                 </label>
                                                 <Field id="email" type="email" text="E.g. paolo.rossi@example.com" required />
                                             </div>
