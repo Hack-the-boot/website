@@ -1,6 +1,5 @@
 "use client";
 
-import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Terminal, { Field } from "@/components/Terminal";
@@ -45,7 +44,7 @@ export default function Home() {
         if (submitted) {
             // Wait a bit for the DOM to update, then scroll to top with smooth animation
             setTimeout(() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({ top: 0, behavior: "smooth" });
             }, 100);
         }
     }, [submitted]);
@@ -85,21 +84,49 @@ export default function Home() {
 
     return (
         <>
-            {/* ================= SEO ================= */}
-            <Head>
-                <title>Hack The Boot | Italy&apos;s International Student Hackathon 2026</title>
-                <meta name="description" content="Hack The Boot — Italy's premier international student hackathon in Milan. 24 hours of innovation, creativity, and competition. Pre-register now for Spring 2026!" />
-                <meta name="keywords" content="Hack The Boot, Hackathon Italy, Student Hackathon Milan, Hack The Boot 2026, International Hackathon Europe, Tech Competition Italy, Hackathon for Students" />
-                <meta property="og:title" content="Hack The Boot | Italy's International Student Hackathon 2026" />
-                <meta property="og:description" content="Compete. Build. WIN. Join Italy's international student hackathon — 24 hours of innovation in Milan." />
-                <meta property="og:image" content="/img/Logo_Transparent.png" />
-                <meta property="og:url" content="https://hacktheboot.it" />
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="Hack The Boot | Student Hackathon in Milan" />
-                <meta name="twitter:description" content="Join hundreds of students for 24 hours of creativity, code, and competition. Pre-register now!" />
-                <meta name="twitter:image" content="/img/Logo_Transparent.png" />
-                <link rel="canonical" href="https://hacktheboot.it" />
-            </Head>
+            {/* ================= STRUCTURED DATA ================= */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Event",
+                        name: "Hack The Boot",
+                        description: "Italy's premier international student hackathon in Milan. 24 hours of innovation, creativity, and competition.",
+                        startDate: "2026-03-01T00:00:00+01:00",
+                        endDate: "2026-03-02T00:00:00+01:00",
+                        eventStatus: "https://schema.org/EventScheduled",
+                        eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+                        location: {
+                            "@type": "Place",
+                            name: "Milan, Italy",
+                            address: {
+                                "@type": "PostalAddress",
+                                addressLocality: "Milan",
+                                addressCountry: "IT",
+                            },
+                        },
+                        organizer: {
+                            "@type": "Organization",
+                            name: "Hack The Boot",
+                            url: "https://hacktheboot.it",
+                            logo: "https://hacktheboot.it/img/Logo_Transparent.png",
+                        },
+                        offers: {
+                            "@type": "Offer",
+                            price: "0",
+                            priceCurrency: "EUR",
+                            availability: "https://schema.org/InStock",
+                        },
+                        audience: {
+                            "@type": "Audience",
+                            audienceType: "Students",
+                        },
+                        url: "https://hacktheboot.it",
+                        image: "https://hacktheboot.it/img/Logo_Transparent.png",
+                    }),
+                }}
+            />
 
             {/* ================= MAIN ================= */}
             <main className="page">
@@ -265,67 +292,61 @@ export default function Home() {
                     </div>
                 </section>
             </main>
-            
+
             {/* ================= FAQ SECTION ================= */}
             {!submitted && (
                 <>
                     {/* ================= FAQ SECTION ================= */}
                     <section className="!mt-20 !w-full !text-center" aria-labelledby="faq-heading">
-                <h2 id="faq-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold !mb-10">
-                    Frequently Asked Questions
-                </h2>
+                        <h2 id="faq-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold !mb-10">
+                            Frequently Asked Questions
+                        </h2>
 
-                <div className="!max-w-3xl !mx-auto !text-left !space-y-3 !px-4 sm:!px-0">
-                    {[
-                        {
-                            q: "What is a hackathon?",
-                            a: "A hackathon is a 24-hour creative tech marathon where students team up to build prototypes: from software and hardware to AI tools or IoT devices. It’s not just coding: it’s collaboration, design, innovation, and fun. Hack The Boot will bring this experience to Milan, empowering students to turn bold ideas into reality.",
-                        },
-                        {
-                            q: "How much does it cost?",
-                            a: "Nothing at all! Hack The Boot is completely free to attend. The only thing you need to bring is your curiosity and energy.",
-                        },
-                        {
-                            q: "What if I don’t know how to code?",
-                            a: "No worries! Hackathons are for everyone! Whether you’re a designer, researcher, storyteller, or just curious, you can contribute. Our beginner track and mentors will guide you through tools and creative processes so you can still build something amazing.",
-                        },
-                        {
-                            q: "What if I don't have an idea or a team?",
-                            a: "You can still join! We'll organize team formation sessions and idea jams before hacking begins, so you can meet other participants and collaborate on something exciting together. Teams must be between 1-4 people.",
-                        },
-                        {
-                            q: "What can I build?",
-                            a: "Anything that solves a real problem or inspires others: from apps and AI tools to hardware prototypes and data-driven projects. You’ll be able to choose from themes like Education, Healthcare, and Sustainability, or even tackle custom sponsor challenges.",
-                        },
-                        {
-                            q: "Who can come?",
-                            a: "Hack The Boot is open to all students: undergraduate, graduate, from Italy and around the world. Whether you’re a first-timer or an experienced builder, you’re welcome to join us in Milan for 24 hours of creativity, collaboration, and discovery.",
-                        },
-                    ].map((item, i) => (
-                        <div
-                            key={i}
-                            className="!group !rounded-xl !bg-[rgba(30,32,33,0.6)] !border !border-blue-500/20 
+                        <div className="!max-w-3xl !mx-auto !text-left !space-y-3 !px-4 sm:!px-0">
+                            {[
+                                {
+                                    q: "What is a hackathon?",
+                                    a: "A hackathon is a 24-hour creative tech marathon where students team up to build prototypes: from software and hardware to AI tools or IoT devices. It’s not just coding: it’s collaboration, design, innovation, and fun. Hack The Boot will bring this experience to Milan, empowering students to turn bold ideas into reality.",
+                                },
+                                {
+                                    q: "How much does it cost?",
+                                    a: "Nothing at all! Hack The Boot is completely free to attend. The only thing you need to bring is your curiosity and energy.",
+                                },
+                                {
+                                    q: "What if I don’t know how to code?",
+                                    a: "No worries! Hackathons are for everyone! Whether you’re a designer, researcher, storyteller, or just curious, you can contribute. Our beginner track and mentors will guide you through tools and creative processes so you can still build something amazing.",
+                                },
+                                {
+                                    q: "What if I don't have an idea or a team?",
+                                    a: "You can still join! We'll organize team formation sessions and idea jams before hacking begins, so you can meet other participants and collaborate on something exciting together. Teams must be between 1-4 people.",
+                                },
+                                {
+                                    q: "What can I build?",
+                                    a: "Anything that solves a real problem or inspires others: from apps and AI tools to hardware prototypes and data-driven projects. You’ll be able to choose from themes like Education, Healthcare, and Sustainability, or even tackle custom sponsor challenges.",
+                                },
+                                {
+                                    q: "Who can come?",
+                                    a: "Hack The Boot is open to all students: undergraduate, graduate, from Italy and around the world. Whether you’re a first-timer or an experienced builder, you’re welcome to join us in Milan for 24 hours of creativity, collaboration, and discovery.",
+                                },
+                            ].map((item, i) => (
+                                <div
+                                    key={i}
+                                    className="!group !rounded-xl !bg-[rgba(30,32,33,0.6)] !border !border-blue-500/20 
                    !overflow-hidden !transition-all !duration-300 hover:!border-blue-500/40"
-                        >
-                            <button
-                                onClick={() => toggleFAQ(i)}
-                                className="!w-full !flex !justify-between !items-start !cursor-pointer !p-4 sm:!p-5 
+                                >
+                                    <button
+                                        onClick={() => toggleFAQ(i)}
+                                        className="!w-full !flex !justify-between !items-start !cursor-pointer !p-4 sm:!p-5 
                      !text-gray-200 !font-semibold !text-base sm:!text-lg !text-left
                      hover:!text-blue-400 !transition-all"
-                            >
-                                <span className="!flex-1 !text-left !pr-4">{item.q}</span>
-                                <span className="!text-blue-400 !text-2xl !font-light !transition-transform !duration-300 !flex-shrink-0">
-                                    {openFAQ === i ? "−" : "+"}
-                                </span>
-                            </button>
-                            {openFAQ === i && (
-                                <div className="!p-5 !pt-0 !text-gray-400 !leading-relaxed !border-t !border-blue-500/10">
-                                    {item.a}
+                                    >
+                                        <span className="!flex-1 !text-left !pr-4">{item.q}</span>
+                                        <span className="!text-blue-400 !text-2xl !font-light !transition-transform !duration-300 !flex-shrink-0">{openFAQ === i ? "−" : "+"}</span>
+                                    </button>
+                                    {openFAQ === i && <div className="!p-5 !pt-0 !text-gray-400 !leading-relaxed !border-t !border-blue-500/10">{item.a}</div>}
                                 </div>
-                            )}
+                            ))}
                         </div>
-                    ))}
-                </div>
                     </section>
                 </>
             )}
