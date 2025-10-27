@@ -63,7 +63,9 @@ export default function Terminal({ children }: TerminalProps) {
                             <span className="dot-input dot-green-input" />
                         </div>
 
-                        <span className="terminal-title-input">HackTheBoot — bash</span>
+                        <span className="terminal-title-input" aria-hidden="true" role="presentation">
+                            HackTheBoot — bash
+                        </span>
                     </div>
 
                     {/* Content (flex column now) */}
