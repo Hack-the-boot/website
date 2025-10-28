@@ -107,7 +107,7 @@ export default function Home() {
     };
 
     const shareInvite = async () => {
-        const shareText = "I’m joining Italy’s national student hackathon in Milan — open to students worldwide. Come build with me at Hack The Boot! #HackTheBoot";
+        const shareText = "I’m joining Italy’s national student hackathon in Milan, open to students worldwide. Come build with me at Hack The Boot! #HackTheBoot";
         const shareUrl = typeof window !== "undefined" ? window.location.origin : "https://hacktheboot.it";
         const title = "Hack The Boot — Italy’s Student Hackathon";
         try {
@@ -279,7 +279,7 @@ export default function Home() {
                                 label: "Food, swag, prizes",
                                 icon: (
                                     <svg className="!w-4 !h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
                                     </svg>
                                 ),
                             },
