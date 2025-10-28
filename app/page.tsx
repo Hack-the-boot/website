@@ -582,7 +582,7 @@ export default function Home() {
             {!submitted && ctaStickyVisible && (
                 <div className="!fixed !bottom-4 !left-1/2 !-translate-x-1/2 !z-50 !backdrop-blur !bg-[rgba(30,32,33,0.6)] !border !border-blue-500/30 !rounded-2xl !shadow-xl !px-4 !py-3 !flex !items-center !gap-3">
                     <span className="!hidden sm:!inline !text-gray-200">Be part of Italy’s innovation story</span>
-                    <button onClick={scrollToTerminal} className="!px-4 !py-2 !rounded-xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 !text-white !font-semibold hover:!from-blue-600 hover:!to-cyan-600 !transition-all">
+                    <button onClick={scrollToTerminal} className="!px-6 !py-3 !rounded-xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 !text-white !font-semibold !text-base sm:!text-sm !whitespace-nowrap hover:!from-blue-600 hover:!to-cyan-600 !transition-all">
                         Join Now
                     </button>
                     <button onClick={shareInvite} className="!px-4 !py-2 !rounded-xl !border !border-blue-500/50 !text-blue-300 hover:!bg-blue-500/10 !transition-all">
