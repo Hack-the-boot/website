@@ -186,7 +186,8 @@ export default function Home() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                             </svg>
                         </button>
-                        <a href="#hero-heading" className="!hidden sm:!inline !text-gray-200 !font-semibold hover:!text-white !transition">
+                        <a href="#hero-heading" className="!hidden sm:!flex !items-center !gap-3 !text-gray-200 !font-semibold hover:!text-white !transition">
+                            <Image src="/img/Logo_Transparent.png" alt="Hack The Boot Logo" width={32} height={32} className="!w-8 !h-8" />
                             Hack The Boot
                         </a>
                     </div>
@@ -194,18 +195,11 @@ export default function Home() {
                         <a href="#why-join-heading" className="!text-gray-300 hover:!text-white !transition">
                             Why Join
                         </a>
-
-                        <a href="#how-heading" className="!text-gray-300 hover:!text-white !transition">
-                            How It Works
-                        </a>
-                        <a href="#community-heading" className="!text-gray-300 hover:!text-white !transition">
-                            Community
-                        </a>
-                        <a href="#logistics-heading" className="!text-gray-300 hover:!text-white !transition">
-                            Logistics
-                        </a>
                         <a href="#faq-heading" className="!text-gray-300 hover:!text-white !transition">
                             FAQs
+                        </a>
+                        <a href="#contacts" className="!text-gray-300 hover:!text-white !transition">
+                            Contacts
                         </a>
                         <a href="#pre-register" className="!text-blue-300 hover:!text-white !font-bold !transition">
                             Join
@@ -215,12 +209,14 @@ export default function Home() {
                 {mobileNavOpen && (
                     <div className="sm:!hidden !px-4 !pb-3">
                         <div className="!mt-2 !rounded-xl !border !border-blue-500/20 !bg-[rgba(30,32,33,0.75)] !backdrop-blur !p-3 !space-y-2">
+                            <a href="#hero-heading" onClick={() => setMobileNavOpen(false)} className="!flex !items-center !gap-3 !px-5 !py-2 !rounded-lg !text-gray-200 hover:!bg-blue-500/10 !transition !mb-2">
+                                <Image src="/img/Logo_Transparent.png" alt="Hack The Boot Logo" width={24} height={24} className="!w-6 !h-6" />
+                                <span className="!font-semibold">Hack The Boot</span>
+                            </a>
                             {[
                                 { href: "#why-join-heading", label: "Why Join" },
-                                { href: "#how-heading", label: "How It Works" },
-                                { href: "#community-heading", label: "Community" },
-                                { href: "#logistics-heading", label: "Logistics" },
                                 { href: "#faq-heading", label: "FAQs" },
+                                { href: "#contacts", label: "Contacts" },
                                 { href: "#pre-register", label: "Join" },
                             ].map((l, i) => (
                                 <a key={i} href={l.href} onClick={() => setMobileNavOpen(false)} className="!block !w-full !px-3 !py-2 !rounded-lg !text-gray-200 hover:!bg-blue-500/10 !transition">
@@ -239,13 +235,11 @@ export default function Home() {
                     <div className="logoAndText !mt-12 sm:!mt-20">
                         <Image src="/img/Logo_Transparent.png" alt="Hack The Boot Hackathon Logo" width={300} height={300} className="logoHTB w-48 h-48 sm:w-72 sm:h-72" priority />
                         <h1 id="hero-heading" className="!mt-2">
-                            Italy Now Has Its Own Hackathon
+                            Italy's Signature Hackathon
                         </h1>
                     </div>
                     {/* ================= SUBTITLE ================= */}
-                    <p className="!mt-2 sm:!mt-[-40px] !text-gray-300 !text-base sm:!text-lg !font-medium !max-w-2xl !mx-auto">
-                        Build something real in <b>Milan, Italy's tech hub</b>. An inclusive, international movement for makers across all disciplines, no experience required.
-                    </p>
+                    <p className="!mt-2 sm:!mt-[-40px] !text-gray-300 !text-base sm:!text-lg !font-medium !max-w-2xl !mx-auto">Made by students, for students.</p>
                     {/* ================= TYPEWRITER ================= */}
                     <p className="hackInfo !max-w-5xl !mx-auto !mt-6 !text-gray-300">
                         <span className="tech-gradient">
@@ -257,21 +251,45 @@ export default function Home() {
                     {/* ================= HYPE BADGES ================= */}
                     <div className="!mt-8 !flex !items-center !justify-center !gap-3 sm:!gap-4 !flex-wrap">
                         {[
-                            { label: "No experience required", emoji: "✨" },
-                            { label: "International students welcome", emoji: "🌍" },
-                            { label: "Mentors & workshops", emoji: "🧠" },
-                            { label: "Food, swag, prizes", emoji: "🎁" },
+                            {
+                                label: "No experience required",
+                                icon: (
+                                    <svg className="!w-4 !h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                    </svg>
+                                ),
+                            },
+                            {
+                                label: "International students welcome",
+                                icon: (
+                                    <svg className="!w-4 !h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                                    </svg>
+                                ),
+                            },
+                            {
+                                label: "Mentors & workshops",
+                                icon: (
+                                    <svg className="!w-4 !h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                    </svg>
+                                ),
+                            },
+                            {
+                                label: "Food, swag, prizes",
+                                icon: (
+                                    <svg className="!w-4 !h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                                    </svg>
+                                ),
+                            },
                         ].map((b, i) => (
                             <div key={i} className="!px-3 !py-2 !rounded-full !border !border-blue-500/30 !bg-[rgba(51,54,56,0.27)] !text-gray-200 !text-sm !flex !items-center !gap-2">
-                                <span>{b.emoji}</span>
+                                {b.icon}
                                 <span>{b.label}</span>
                             </div>
                         ))}
                     </div>
-
-                    <p className="!text-2xl !mt-8 sm:!text-3xl !font-bold !text-gray-300">
-                        <span className="!text-blue-400">Limited spots available.</span> Be the first to know when applications open.
-                    </p>
 
                     <div className="!mt-8 !flex !items-center !justify-center !gap-3 sm:!gap-4 !flex-wrap">
                         <button
@@ -293,11 +311,13 @@ export default function Home() {
                             Invite a Friend
                         </button>
                     </div>
+                    <p className="!text-lg !mt-6 sm:!text-xl !font-medium !text-gray-400 !text-center">
+                        <span className="!text-blue-300">Limited spots available.</span> Be the first to know when applications open.
+                    </p>
                 </section>
-
                 {/* ================= WHEN & WHERE ================= */}
                 {!submitted && (
-                    <section className="!mt-12 !w-full" aria-labelledby="event-details-heading">
+                    <section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="event-details-heading">
                         <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6">
                             <h2 id="event-details-heading" className="sr-only">
                                 Event Details
@@ -307,7 +327,7 @@ export default function Home() {
                                 {[
                                     {
                                         label: "When",
-                                        text: "Spring 2026",
+                                        text: "March 2026",
                                         icon: (
                                             <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -354,9 +374,8 @@ export default function Home() {
                         <span className="!font-bold">Turn your creativity into reality: one hack at a time.</span>
                     </h2>
                 </section> */}
-
                 {/* ================= ARROW CUE ================= */}
-                <section className="!mt-8 sm:!mt-16 !flex !justify-center !items-center !w-full">
+                <section className="!mt-12 sm:!mt-16 !flex !justify-center !items-center !w-full">
                     <div className="!flex !flex-col !items-center !gap-3 animate-bounce">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="url(#techGradient)" className="w-8 h-8 !drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]">
                             <defs>
@@ -370,9 +389,8 @@ export default function Home() {
                         </svg>
                     </div>
                 </section>
-
                 {/* ================= WHY JOIN ================= */}
-                <section className="!mt-14 sm:!mt-20 !w-full" aria-labelledby="why-join-heading">
+                <section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="why-join-heading">
                     <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6">
                         <h2 id="why-join-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold !text-center !mb-8">
                             Why Join
@@ -382,17 +400,29 @@ export default function Home() {
                                 {
                                     title: "Learn & Grow",
                                     desc: "Workshops, mentors, and hands-on building. Pick up new skills by doing.",
-                                    icon: <span className="!text-2xl">📚</span>,
+                                    icon: (
+                                        <svg className="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                        </svg>
+                                    ),
                                 },
                                 {
                                     title: "Connect & Collaborate",
                                     desc: "Meet students from Italy and abroad. Team up across disciplines.",
-                                    icon: <span className="!text-2xl">🤝</span>,
+                                    icon: (
+                                        <svg className="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        </svg>
+                                    ),
                                 },
                                 {
                                     title: "Create & Shine",
                                     desc: "Prototype, pitch, and get recognized. Prizes, opportunities, and stories to tell.",
-                                    icon: <span className="!text-2xl">🚀</span>,
+                                    icon: (
+                                        <svg className="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                        </svg>
+                                    ),
                                 },
                             ].map((c, i) => (
                                 <div key={i} className="!rounded-2xl !p-6 !bg-[rgba(51,54,56,0.27)] !border !border-blue-500/20 hover:!border-blue-500/40 !transition-all">
@@ -406,8 +436,7 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
-
-                {/* ================= HOW IT WORKS ================= */}
+                {/* ================= HOW IT WORKS =================
                 <section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="how-heading">
                     <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6">
                         <h2 id="how-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold !text-center">
@@ -431,10 +460,9 @@ export default function Home() {
                             ))}
                         </div>
                     </div>
-                </section>
-
+                </section> */}
                 {/* ================= COMMUNITY & SOCIAL PROOF ================= */}
-                <section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="community-heading">
+                {/* <section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="community-heading">
                     <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6">
                         <h2 id="community-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold !text-center">
                             Be part of the first cohort.
@@ -454,10 +482,9 @@ export default function Home() {
                             </button>
                         </div>
                     </div>
-                </section>
-
+                </section> */}
                 {/* ================= TIMELINE & LOGISTICS ================= */}
-                <section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="logistics-heading">
+                {/* <section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="logistics-heading">
                     <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6">
                         <h2 id="logistics-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold !text-center">
                             At a Glance
@@ -505,14 +532,16 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-                </section>
-
+                </section> */}
                 {/* ================= TERMINAL FORM ================= */}
-                <section className="!mt-6 sm:!mt-10 !w-full" aria-labelledby="pre-register">
+                <section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="pre-register">
                     <div className="!mx-auto !w-full !max-w-7xl px-4 sm:px-6">
-                        <h2 id="pre-register" className="sr-only">
-                            Pre-register Form
-                        </h2>
+                        <div className="!text-center !mb-8">
+                            <h2 id="pre-register" className="!text-white !text-2xl sm:!text-3xl !font-bold !mb-4">
+                                Pre-Register Now
+                            </h2>
+                            <p className="!text-gray-300 !text-base sm:!text-lg !max-w-2xl !mx-auto">Secure your spot for Italy's premier student hackathon. Fill out the form below to be the first to know when applications open.</p>
+                        </div>
                         <form ref={terminalRef} onSubmit={handleSubmit} className="!w-full !mx-auto !max-w-6xl !transition-all !duration-300 !rounded-2xl !min-h-[280px] sm:!min-h-[360px]">
                             <Terminal>
                                 {!submitted ? (
@@ -558,18 +587,14 @@ export default function Home() {
                         </form>
                     </div>
                 </section>
-
                 {/* ================= BOTTOM CTA ================= */}
-                <section className="!mt-14 sm:!mt-20 !w-full" aria-labelledby="bottom-cta-heading">
+                <section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="bottom-cta-heading">
                     <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6 !text-center">
                         <h2 id="bottom-cta-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold">
                             This is where Italy’s student innovators rise.
                         </h2>
-                        <p className="!mt-3 !text-gray-300">Join the movement. Build, learn, and create the future — together.</p>
+                        <p className="!mt-3 !text-gray-300">Join the movement. Build, learn, and create the future, together.</p>
                         <div className="!mt-6 !flex !items-center !justify-center !gap-3 !flex-wrap">
-                            <button onClick={scrollToTerminal} className="!px-6 !py-4 !rounded-2xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 !text-white !font-bold hover:!from-blue-600 hover:!to-cyan-600 !transition-all">
-                                Join Now
-                            </button>
                             <button onClick={shareInvite} className="!px-6 !py-4 !rounded-2xl !border !border-blue-500/50 !text-blue-300 hover:!bg-blue-500/10 !transition-all">
                                 Invite a Friend
                             </button>
@@ -595,7 +620,7 @@ export default function Home() {
             {!submitted && (
                 <>
                     {/* ================= FAQ SECTION ================= */}
-                    <section className="!mt-20 !w-full !text-center" aria-labelledby="faq-heading">
+                    <section className="!mt-16 sm:!mt-24 !w-full !text-center" aria-labelledby="faq-heading">
                         <h2 id="faq-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold !mb-10">
                             Frequently Asked Questions
                         </h2>
@@ -650,7 +675,7 @@ export default function Home() {
             )}
 
             {/* ================= FOOTER ================= */}
-            <footer className="!relative !mt-20 !w-full !border-t !border-blue-500/20 !bg-gradient-to-b !from-[rgba(51,54,56,0.2)] !to-[rgba(51,54,56,0.4)]">
+            <footer id="contacts" className="!relative !mt-20 !w-full !border-t !border-blue-500/20 !bg-gradient-to-b !from-[rgba(51,54,56,0.2)] !to-[rgba(51,54,56,0.4)]">
                 <div className="!absolute !top-0 !left-0 !right-0 !h-px !bg-gradient-to-r !from-transparent !via-cyan-400 !to-transparent !opacity-50" />
 
                 <div className="!relative !max-w-7xl !mx-auto !px-4 sm:!px-6 lg:!px-8 !py-16">
