@@ -11,7 +11,10 @@ export default function Home() {
     const [displayText, setDisplayText] = useState("");
     const [isDeleting, setIsDeleting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const [ctaStickyVisible, setCtaStickyVisible] = useState(false);
+    const [countdown, setCountdown] = useState<{ days: number; hours: number; minutes: number; seconds: number }>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
     const [openFAQ, setOpenFAQ] = useState<number | null>(null);
+    const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
     const terminalRef = useRef<HTMLFormElement>(null);
 
@@ -38,6 +41,31 @@ export default function Home() {
         const t = setTimeout(tick, typingSpeed);
         return () => clearTimeout(t);
     }, [displayText, isDeleting, index]);
+
+    // ================= COUNTDOWN =================
+    useEffect(() => {
+        const eventDate = new Date("2026-03-01T09:00:00+01:00").getTime();
+        const timer = setInterval(() => {
+            const now = Date.now();
+            const diff = Math.max(0, eventDate - now);
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            setCountdown({ days, hours, minutes, seconds });
+        }, 1000);
+        return () => clearInterval(timer);
+    }, []);
+
+    // ================= STICKY CTA VISIBILITY =================
+    useEffect(() => {
+        const onScroll = () => {
+            const scrolled = window.scrollY;
+            setCtaStickyVisible(scrolled > 600 && !submitted);
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+    }, [submitted]);
 
     // ================= SCROLL TO TOP ON SUBMIT =================
     useEffect(() => {
@@ -76,6 +104,27 @@ export default function Home() {
 
     const scrollToTerminal = () => {
         terminalRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    };
+
+    const shareInvite = async () => {
+        const shareText = "I’m joining Italy’s national student hackathon in Milan — open to students worldwide. Come build with me at Hack The Boot! #HackTheBoot";
+        const shareUrl = typeof window !== "undefined" ? window.location.origin : "https://hacktheboot.it";
+        const title = "Hack The Boot — Italy’s Student Hackathon";
+        try {
+            if (navigator.share) {
+                await navigator.share({ title, text: shareText, url: shareUrl });
+            } else {
+                await navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
+                alert("Share message copied to clipboard!");
+            }
+        } catch (e) {
+            try {
+                await navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
+                alert("Share message copied to clipboard!");
+            } catch (_) {
+                // ignore
+            }
+        }
     };
 
     const toggleFAQ = (index: number) => {
@@ -128,18 +177,75 @@ export default function Home() {
                 }}
             />
 
+            {/* ================= NAVBAR ================= */}
+            <header className="!fixed !top-0 !left-0 !right-0 !z-50 !backdrop-blur !bg-[rgba(20,22,23,0.55)] !border-b !border-blue-500/20">
+                <div className="!max-w-7xl !mx-auto !px-4 sm:!px-6 !h-14 !flex !items-center !justify-between">
+                    <div className="!flex !items-center !gap-3">
+                        <button className="sm:!hidden !p-2 !rounded-lg !border !border-blue-500/30 !text-gray-200 hover:!bg-blue-500/10 !transition" aria-label="Toggle navigation" onClick={() => setMobileNavOpen((v) => !v)}>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="!h-5 !w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                        <a href="#hero-heading" className="!hidden sm:!inline !text-gray-200 !font-semibold hover:!text-white !transition">
+                            Hack The Boot
+                        </a>
+                    </div>
+                    <nav className="!hidden sm:!flex !items-center !gap-5">
+                        <a href="#why-join-heading" className="!text-gray-300 hover:!text-white !transition">
+                            Why Join
+                        </a>
+
+                        <a href="#how-heading" className="!text-gray-300 hover:!text-white !transition">
+                            How It Works
+                        </a>
+                        <a href="#community-heading" className="!text-gray-300 hover:!text-white !transition">
+                            Community
+                        </a>
+                        <a href="#logistics-heading" className="!text-gray-300 hover:!text-white !transition">
+                            Logistics
+                        </a>
+                        <a href="#faq-heading" className="!text-gray-300 hover:!text-white !transition">
+                            FAQs
+                        </a>
+                        <a href="#pre-register" className="!text-blue-300 hover:!text-white !font-bold !transition">
+                            Join
+                        </a>
+                    </nav>
+                </div>
+                {mobileNavOpen && (
+                    <div className="sm:!hidden !px-4 !pb-3">
+                        <div className="!mt-2 !rounded-xl !border !border-blue-500/20 !bg-[rgba(30,32,33,0.75)] !backdrop-blur !p-3 !space-y-2">
+                            {[
+                                { href: "#why-join-heading", label: "Why Join" },
+                                { href: "#how-heading", label: "How It Works" },
+                                { href: "#community-heading", label: "Community" },
+                                { href: "#logistics-heading", label: "Logistics" },
+                                { href: "#faq-heading", label: "FAQs" },
+                                { href: "#pre-register", label: "Join" },
+                            ].map((l, i) => (
+                                <a key={i} href={l.href} onClick={() => setMobileNavOpen(false)} className="!block !w-full !px-3 !py-2 !rounded-lg !text-gray-200 hover:!bg-blue-500/10 !transition">
+                                    {l.label}
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </header>
+
             {/* ================= MAIN ================= */}
             <main className="page">
                 {/* ================= HERO ================= */}
                 <section className="mainPageContainer text-center" aria-labelledby="hero-heading">
-                    <div className="logoAndText">
+                    <div className="logoAndText !mt-12 sm:!mt-20">
                         <Image src="/img/Logo_Transparent.png" alt="Hack The Boot Hackathon Logo" width={300} height={300} className="logoHTB w-48 h-48 sm:w-72 sm:h-72" priority />
                         <h1 id="hero-heading" className="!mt-2">
-                            Hack The Boot
+                            Italy Now Has Its Own Hackathon
                         </h1>
                     </div>
                     {/* ================= SUBTITLE ================= */}
-                    <p className="!mt-2 sm:!mt-[-40px] !text-gray-400 !text-sm sm:!text-base !font-medium !max-w-md !mx-auto">A 24-hour international student hackathon in Milan</p>
+                    <p className="!mt-2 sm:!mt-[-40px] !text-gray-300 !text-base sm:!text-lg !font-medium !max-w-2xl !mx-auto">
+                        Build something real in <b>Milan, Italy's tech hub</b>. An inclusive, international movement for makers across all disciplines, no experience required.
+                    </p>
                     {/* ================= TYPEWRITER ================= */}
                     <p className="hackInfo !max-w-5xl !mx-auto !mt-6 !text-gray-300">
                         <span className="tech-gradient">
@@ -148,19 +254,45 @@ export default function Home() {
                         </span>
                     </p>
 
+                    {/* ================= HYPE BADGES ================= */}
+                    <div className="!mt-8 !flex !items-center !justify-center !gap-3 sm:!gap-4 !flex-wrap">
+                        {[
+                            { label: "No experience required", emoji: "✨" },
+                            { label: "International students welcome", emoji: "🌍" },
+                            { label: "Mentors & workshops", emoji: "🧠" },
+                            { label: "Food, swag, prizes", emoji: "🎁" },
+                        ].map((b, i) => (
+                            <div key={i} className="!px-3 !py-2 !rounded-full !border !border-blue-500/30 !bg-[rgba(51,54,56,0.27)] !text-gray-200 !text-sm !flex !items-center !gap-2">
+                                <span>{b.emoji}</span>
+                                <span>{b.label}</span>
+                            </div>
+                        ))}
+                    </div>
+
                     <p className="!text-2xl !mt-8 sm:!text-3xl !font-bold !text-gray-300">
                         <span className="!text-blue-400">Limited spots available.</span> Be the first to know when applications open.
                     </p>
 
-                    <button
-                        onClick={scrollToTerminal}
-                        className="!mt-8 !px-6 sm:!px-10 !mb-3 !py-4 sm:!py-5 !rounded-2xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 
-                        !text-white !font-bold !text-lg sm:!text-xl !tracking-wide !shadow-lg 
-                        hover:!from-blue-600 hover:!to-cyan-600 !transition-all !duration-300 
-                        !transform hover:!scale-105 hover:!shadow-cyan-500/50"
-                    >
-                        Pre-Register Now
-                    </button>
+                    <div className="!mt-8 !flex !items-center !justify-center !gap-3 sm:!gap-4 !flex-wrap">
+                        <button
+                            onClick={scrollToTerminal}
+                            className="!px-6 sm:!px-10 !py-4 sm:!py-5 !rounded-2xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 
+                            !text-white !font-bold !text-lg sm:!text-xl !tracking-wide !shadow-lg 
+                            hover:!from-blue-600 hover:!to-cyan-600 !transition-all !duration-300 
+                            !transform hover:!scale-105 hover:!shadow-cyan-500/50"
+                            aria-label="Join now"
+                        >
+                            Join Now
+                        </button>
+                        <button
+                            onClick={shareInvite}
+                            className="!px-6 sm:!px-10 !py-4 sm:!py-5 !rounded-2xl !border !border-blue-500/50 !text-blue-300 !font-bold !text-lg sm:!text-xl 
+                            hover:!bg-blue-500/10 !transition-all !duration-300"
+                            aria-label="Invite a friend"
+                        >
+                            Invite a Friend
+                        </button>
+                    </div>
                 </section>
 
                 {/* ================= WHEN & WHERE ================= */}
@@ -239,7 +371,142 @@ export default function Home() {
                     </div>
                 </section>
 
-                {/* ================= TERMINAL FORM ================= */}
+                {/* ================= WHY JOIN ================= */}
+                <section className="!mt-14 sm:!mt-20 !w-full" aria-labelledby="why-join-heading">
+                    <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6">
+                        <h2 id="why-join-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold !text-center !mb-8">
+                            Why Join
+                        </h2>
+                        <div className="!grid !grid-cols-1 sm:!grid-cols-3 !gap-4 sm:!gap-6">
+                            {[
+                                {
+                                    title: "Learn & Grow",
+                                    desc: "Workshops, mentors, and hands-on building. Pick up new skills by doing.",
+                                    icon: <span className="!text-2xl">📚</span>,
+                                },
+                                {
+                                    title: "Connect & Collaborate",
+                                    desc: "Meet students from Italy and abroad. Team up across disciplines.",
+                                    icon: <span className="!text-2xl">🤝</span>,
+                                },
+                                {
+                                    title: "Create & Shine",
+                                    desc: "Prototype, pitch, and get recognized. Prizes, opportunities, and stories to tell.",
+                                    icon: <span className="!text-2xl">🚀</span>,
+                                },
+                            ].map((c, i) => (
+                                <div key={i} className="!rounded-2xl !p-6 !bg-[rgba(51,54,56,0.27)] !border !border-blue-500/20 hover:!border-blue-500/40 !transition-all">
+                                    <div className="!flex !items-center !gap-3">
+                                        <div className="!p-3 !rounded-full !bg-blue-500/10">{c.icon}</div>
+                                        <p className="!font-bold !text-white">{c.title}</p>
+                                    </div>
+                                    <p className="!mt-3 !text-gray-400">{c.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* ================= HOW IT WORKS ================= */}
+                <section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="how-heading">
+                    <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6">
+                        <h2 id="how-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold !text-center">
+                            How It Works
+                        </h2>
+                        <div className="!mt-8 !grid !grid-cols-1 sm:!grid-cols-5 !gap-4">
+                            {["Apply", "Form Team", "Build", "Present", "Celebrate"].map((step, i) => (
+                                <div key={i} className="!rounded-2xl !p-5 !bg-[rgba(51,54,56,0.27)] !border !border-blue-500/20">
+                                    <div className="!flex !items-center !gap-3">
+                                        <div className="!h-8 !w-8 !rounded-full !bg-blue-500/20 !text-blue-300 !flex !items-center !justify-center !font-bold">{i + 1}</div>
+                                        <p className="!text-white !font-semibold">{step}</p>
+                                    </div>
+                                    <p className="!mt-3 !text-gray-400 !text-sm">
+                                        {step === "Apply" && "Simple pre-registration. No prior experience required."}
+                                        {step === "Form Team" && "Meet students from all disciplines. We help you match."}
+                                        {step === "Build" && "24 hours with mentors, food, and fun. Learn by doing."}
+                                        {step === "Present" && "Pitch your prototype to judges and peers."}
+                                        {step === "Celebrate" && "Prizes, recognition, and a new community."}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* ================= COMMUNITY & SOCIAL PROOF ================= */}
+                <section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="community-heading">
+                    <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6">
+                        <h2 id="community-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold !text-center">
+                            Be part of the first cohort.
+                        </h2>
+                        <div className="!mt-8 !grid !grid-cols-1 sm:!grid-cols-3 !gap-4">
+                            {["Day 1 of Italy’s hackathon movement starts with you.", "Limited spots. Big stage. Build something you’ll talk about.", "No experience needed — just bring ambition and curiosity."].map((t, i) => (
+                                <div key={i} className="!rounded-2xl !p-5 !bg-[rgba(51,54,56,0.27)] !border !border-blue-500/20 !text-gray-300">
+                                    {t}
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="!mt-6 !flex !items-center !justify-between !flex-col sm:!flex-row !gap-3">
+                            <p className="!text-gray-300">#HackTheBoot — Italy’s first national student hackathon in Milan, open to the world. Join me?</p>
+                            <button onClick={shareInvite} className="!px-5 !py-3 !rounded-xl !border !border-blue-500/50 !text-blue-300 hover:!bg-blue-500/10 !transition-all">
+                                Share your intent
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                {/* ================= TIMELINE & LOGISTICS ================= */}
+                <section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="logistics-heading">
+                    <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6">
+                        <h2 id="logistics-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold !text-center">
+                            At a Glance
+                        </h2>
+                        <div className="!mt-8 !grid !grid-cols-1 sm:!grid-cols-4 !gap-4">
+                            <div className="!rounded-2xl !p-5 !bg-[rgba(51,54,56,0.27)] !border !border-blue-500/20">
+                                <div className="!flex !items-center !gap-2">
+                                    <span className="!text-xl">🗓️📍</span>
+                                    <p className="!text-gray-400 !uppercase !text-xs !tracking-wide">When & Where</p>
+                                </div>
+                                <p className="!mt-2 !text-white !font-semibold">Spring 2026 — Milan</p>
+                                <p className="!mt-2 !text-gray-400 !text-sm">Exact venue announcement coming soon.</p>
+                            </div>
+                            <div className="!rounded-2xl !p-5 !bg-[rgba(51,54,56,0.27)] !border !border-blue-500/20">
+                                <div className="!flex !items-center !gap-2">
+                                    <span className="!text-xl">💸</span>
+                                    <p className="!text-gray-400 !uppercase !text-xs !tracking-wide">Cost</p>
+                                </div>
+                                <p className="!mt-2 !text-white !font-semibold">Free for students</p>
+                                <p className="!mt-2 !text-gray-400 !text-sm">Every expense will be covered by sponsors and the university.</p>
+                            </div>
+                            <div className="!rounded-2xl !p-5 !bg-[rgba(51,54,56,0.27)] !border !border-blue-500/20">
+                                <div className="!flex !items-center !gap-2">
+                                    <span className="!text-xl">🎓</span>
+                                    <p className="!text-gray-400 !uppercase !text-xs !tracking-wide">Who can join</p>
+                                </div>
+                                <p className="!mt-2 !text-white !font-semibold">All disciplines. All universities.</p>
+                                <p className="!mt-2 !text-gray-400 !text-sm">Don't know how to code? We welcome any background, skills, or ideas.</p>
+                            </div>
+                            <div className="!rounded-2xl !p-5 !bg-[rgba(51,54,56,0.27)] !border !border-blue-500/20">
+                                <div className="!flex !items-center !gap-2">
+                                    <span className="!text-xl">📝</span>
+                                    <p className="!text-gray-400 !uppercase !text-xs !tracking-wide">How to apply</p>
+                                </div>
+                                <p className="!mt-2 !text-white !font-semibold">Pre-register below in seconds.</p>
+                                <p className="!mt-2 !text-gray-400 !text-sm">We'll notify you when applications open.</p>
+                            </div>
+                        </div>
+                        <div className="!mt-8 !text-center">
+                            <p className="!text-gray-300 !mb-3">Applications open in</p>
+                        </div>
+                        <div className="!mt-2 !flex !items-center !justify-center !gap-6 !text-center">
+                            <div className="!px-6 !py-4 !rounded-2xl !bg-gradient-to-r !from-green-500/10 !via-white/5 !to-red-500/10 !border !border-blue-500/20 !text-white !font-mono">
+                                {countdown.days}d : {countdown.hours}h : {countdown.minutes}m : {countdown.seconds}s
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 {/* ================= TERMINAL FORM ================= */}
                 <section className="!mt-6 sm:!mt-10 !w-full" aria-labelledby="pre-register">
                     <div className="!mx-auto !w-full !max-w-7xl px-4 sm:px-6">
@@ -291,7 +558,38 @@ export default function Home() {
                         </form>
                     </div>
                 </section>
+
+                {/* ================= BOTTOM CTA ================= */}
+                <section className="!mt-14 sm:!mt-20 !w-full" aria-labelledby="bottom-cta-heading">
+                    <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6 !text-center">
+                        <h2 id="bottom-cta-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold">
+                            This is where Italy’s student innovators rise.
+                        </h2>
+                        <p className="!mt-3 !text-gray-300">Join the movement. Build, learn, and create the future — together.</p>
+                        <div className="!mt-6 !flex !items-center !justify-center !gap-3 !flex-wrap">
+                            <button onClick={scrollToTerminal} className="!px-6 !py-4 !rounded-2xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 !text-white !font-bold hover:!from-blue-600 hover:!to-cyan-600 !transition-all">
+                                Join Now
+                            </button>
+                            <button onClick={shareInvite} className="!px-6 !py-4 !rounded-2xl !border !border-blue-500/50 !text-blue-300 hover:!bg-blue-500/10 !transition-all">
+                                Invite a Friend
+                            </button>
+                        </div>
+                    </div>
+                </section>
             </main>
+
+            {/* ================= STICKY CTA ================= */}
+            {!submitted && ctaStickyVisible && (
+                <div className="!fixed !bottom-4 !left-1/2 !-translate-x-1/2 !z-50 !backdrop-blur !bg-[rgba(30,32,33,0.6)] !border !border-blue-500/30 !rounded-2xl !shadow-xl !px-4 !py-3 !flex !items-center !gap-3">
+                    <span className="!hidden sm:!inline !text-gray-200">Be part of Italy’s innovation story</span>
+                    <button onClick={scrollToTerminal} className="!px-4 !py-2 !rounded-xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 !text-white !font-semibold hover:!from-blue-600 hover:!to-cyan-600 !transition-all">
+                        Join Now
+                    </button>
+                    <button onClick={shareInvite} className="!px-4 !py-2 !rounded-xl !border !border-blue-500/50 !text-blue-300 hover:!bg-blue-500/10 !transition-all">
+                        Invite
+                    </button>
+                </div>
+            )}
 
             {/* ================= FAQ SECTION ================= */}
             {!submitted && (
