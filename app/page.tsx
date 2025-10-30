@@ -3,6 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Terminal, { Field } from "@/components/Terminal";
+import { motion, AnimatePresence } from "framer-motion";
+
+const sectionFadeVariant = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+};
 
 export default function Home() {
     const phrases = ["Where bold ideas become reality", "Compete. Build. WIN.", "24 hours of innovation in Milan", "Create the future, one hack at a time"];
@@ -231,25 +237,27 @@ export default function Home() {
             {/* ================= MAIN ================= */}
             <main className="page">
                 {/* ================= HERO ================= */}
-                <section className="mainPageContainer text-center" aria-labelledby="hero-heading">
-                    <div className="logoAndText !mt-12 sm:!mt-20">
+                <motion.section className="mainPageContainer text-center" aria-labelledby="hero-heading" variants={sectionFadeVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.48 }} transition={{ duration: 0.8, ease: "easeOut" }}>
+                    <motion.div initial={{ scale: 0.95, opacity: 0 }} whileInView={{ scale: 1, opacity: 1, transition: { duration: 0.65, ease: "easeOut" } }} viewport={{ once: true, amount: 0.33 }} transition={{ duration: 0.65, ease: "easeOut" }} className="logoAndText !mt-12 sm:!mt-20">
                         <Image src="/img/Logo_Transparent.png" alt="Hack The Boot Hackathon Logo" width={300} height={300} className="logoHTB w-48 h-48 sm:w-72 sm:h-72" priority />
-                        <h1 id="hero-heading" className="!mt-2">
+                        <motion.h1 id="hero-heading" className="!mt-2" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.62, ease: "easeOut" } }} viewport={{ once: true, amount: 0.6 }} transition={{ delay: 0.4, duration: 0.6 }}>
                             Italy's Signature Hackathon
-                        </h1>
-                    </div>
+                        </motion.h1>
+                    </motion.div>
                     {/* ================= SUBTITLE ================= */}
-                    <p className="!mt-2 sm:!mt-[-40px] !text-gray-300 !text-base sm:!text-lg !font-medium !max-w-2xl !mx-auto">Made by students, for students.</p>
+                    <motion.p className="!mt-2 sm:!mt-[-40px] !text-gray-300 !text-base sm:!text-lg !font-medium !max-w-2xl !mx-auto" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut", delay: 0.08 } }} viewport={{ once: true, amount: 0.6 }} transition={{ delay: 0.45, duration: 0.5 }}>
+                        Made by students, for students.
+                    </motion.p>
                     {/* ================= TYPEWRITER ================= */}
-                    <p className="hackInfo !max-w-5xl !mx-auto !mt-6 !text-gray-300">
+                    <motion.p className="hackInfo !max-w-5xl !mx-auto !mt-6 !text-gray-300" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.6 }} transition={{ delay: 0.6, duration: 0.7 }}>
                         <span className="tech-gradient">
                             <span className="typewriter">{displayText}</span>
                             <span className="cursor" />
                         </span>
-                    </p>
+                    </motion.p>
 
                     {/* ================= HYPE BADGES ================= */}
-                    <div className="!mt-8 !flex !items-center !justify-center !gap-3 sm:!gap-4 !flex-wrap">
+                    <motion.div className="!mt-8 !flex !items-center !justify-center !gap-3 sm:!gap-4 !flex-wrap" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.19, delayChildren: 0.07 } } }}>
                         {[
                             {
                                 label: "No experience required",
@@ -284,88 +292,106 @@ export default function Home() {
                                 ),
                             },
                         ].map((b, i) => (
-                            <div key={i} className="!px-3 !py-2 !rounded-full !border !border-blue-500/30 !bg-[rgba(51,54,56,0.27)] !text-gray-200 !text-sm !flex !items-center !gap-2">
+                            <motion.div key={i} className="!px-3 !py-2 !rounded-full !border !border-blue-500/30 !bg-[rgba(51,54,56,0.27)] !text-gray-200 !text-sm !flex !items-center !gap-2" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } }} viewport={{ once: true, amount: 0.65 }} transition={{ delay: 0.7 + i * 0.1, duration: 0.35 }}>
                                 {b.icon}
                                 <span>{b.label}</span>
-                            </div>
+                            </motion.div>
                         ))}
-                    </div>
+                    </motion.div>
 
-                    <div className="!mt-8 !flex !items-center !justify-center !gap-3 sm:!gap-4 !flex-wrap">
-                        <button
+                    <motion.div className="!mt-8 !flex !items-center !justify-center !gap-3 sm:!gap-4 !flex-wrap" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.33 }} variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.2 } } }}>
+                        <motion.button
+                            whileHover={{ scale: 1.1, boxShadow: "0 0 8px #22d3ee" }}
+                            whileTap={{ scale: 0.96 }}
                             onClick={scrollToTerminal}
                             className="!px-6 sm:!px-10 !py-4 sm:!py-5 !rounded-2xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 
                             !text-white !font-bold !text-lg sm:!text-xl !tracking-wide !shadow-lg 
                             hover:!from-blue-600 hover:!to-cyan-600 !transition-all !duration-300 
                             !transform hover:!scale-105 hover:!shadow-cyan-500/50"
                             aria-label="Join now"
+                            initial={{ opacity: 0, y: 18 }}
+                            whileInView={{ opacity: 1, y: 0, transition: { duration: 0.49, ease: "easeOut", delay: 0.13 } }}
+                            viewport={{ once: true, amount: 0.75 }}
+                            transition={{ delay: 0.7, duration: 0.5 }}
                         >
                             Join Now
-                        </button>
-                        <button
+                        </motion.button>
+                        <motion.button
+                            whileHover={{ scale: 1.1, boxShadow: "0 0 8px #22d3ee" }}
+                            whileTap={{ scale: 0.96 }}
                             onClick={shareInvite}
                             className="!px-6 sm:!px-10 !py-4 sm:!py-5 !rounded-2xl !border !border-blue-500/50 !text-blue-300 !font-bold !text-lg sm:!text-xl 
                             hover:!bg-blue-500/10 !transition-all !duration-300"
                             aria-label="Invite a friend"
+                            initial={{ opacity: 0, y: 18 }}
+                            whileInView={{ opacity: 1, y: 0, transition: { duration: 0.49, ease: "easeOut", delay: 0.17 } }}
+                            viewport={{ once: true, amount: 0.75 }}
+                            transition={{ delay: 0.8, duration: 0.5 }}
                         >
                             Invite a Friend
-                        </button>
-                    </div>
+                        </motion.button>
+                    </motion.div>
                     <p className="!text-lg !mt-6 sm:!text-xl !font-medium !text-gray-400 !text-center">
                         <span className="!text-blue-300">Limited spots available.</span> Be the first to know when applications open.
                     </p>
-                </section>
+                </motion.section>
                 {/* ================= WHEN & WHERE ================= */}
-                {!submitted && (
-                    <section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="event-details-heading">
-                        <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6">
-                            <h2 id="event-details-heading" className="sr-only">
-                                Event Details
-                            </h2>
+                <AnimatePresence>
+                    {!submitted && (
+                        <motion.section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="event-details-heading" variants={sectionFadeVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.45 }} exit={{ opacity: 0, y: 50 }} transition={{ duration: 0.7, delay: 0.2 }}>
+                            <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6">
+                                <h2 id="event-details-heading" className="sr-only">
+                                    Event Details
+                                </h2>
 
-                            <div className="!grid !grid-cols-1 sm:!grid-cols-2 !gap-6">
-                                {[
-                                    {
-                                        label: "When",
-                                        text: "March 2026",
-                                        icon: (
-                                            <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                            </svg>
-                                        ),
-                                    },
-                                    {
-                                        label: "Where",
-                                        text: "Milan, Italy",
-                                        icon: (
-                                            <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            </svg>
-                                        ),
-                                    },
-                                ].map((card, i) => (
-                                    <div
-                                        key={i}
-                                        className="!relative !flex !flex-col !justify-center !items-center !text-center 
+                                <div className="!grid !grid-cols-1 sm:!grid-cols-2 !gap-6">
+                                    {[
+                                        {
+                                            label: "When",
+                                            text: "March 2026",
+                                            icon: (
+                                                <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
+                                            ),
+                                        },
+                                        {
+                                            label: "Where",
+                                            text: "Milan, Italy",
+                                            icon: (
+                                                <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                </svg>
+                                            ),
+                                        },
+                                    ].map((card, i) => (
+                                        <motion.div
+                                            key={i}
+                                            initial={{ opacity: 0, y: 30 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: true, amount: 0.6 }}
+                                            transition={{ delay: 0.25 + i * 0.1, duration: 0.4 }}
+                                            className="!relative !flex !flex-col !justify-center !items-center !text-center 
                                !w-full !rounded-[20px] !p-6 sm:!p-8 !min-h-[160px] sm:!min-h-[180px]
                                !bg-[rgba(51,54,56,0.27)] 
                                !border-2 !border-blue-500/30 
                                !transition-all !duration-300 !ease-out 
                                hover:!bg-[rgba(51,54,56,0.40)] hover:!border-blue-500/50
                                hover:!scale-[1.02] group"
-                                    >
-                                        <div className="!flex !flex-col !items-center !justify-center !h-full !space-y-4">
-                                            <div className="!p-4 sm:!p-5 !rounded-full !bg-blue-500/10 group-hover:!bg-blue-500/20 !transition-all !duration-300">{card.icon}</div>
-                                            <p className="!text-gray-400 !text-sm sm:!text-lg !tracking-wide !uppercase !font-semibold">{card.label}</p>
-                                            <p className="!text-blue-400 !font-extrabold !text-xl sm:!text-4xl !leading-snug group-hover:!text-blue-300 !transition-colors !duration-300">{card.text}</p>{" "}
-                                        </div>
-                                    </div>
-                                ))}
+                                        >
+                                            <div className="!flex !flex-col !items-center !justify-center !h-full !space-y-4">
+                                                <div className="!p-4 sm:!p-5 !rounded-full !bg-blue-500/10 group-hover:!bg-blue-500/20 !transition-all !duration-300">{card.icon}</div>
+                                                <p className="!text-gray-400 !text-sm sm:!text-lg !tracking-wide !uppercase !font-semibold">{card.label}</p>
+                                                <p className="!text-blue-400 !font-extrabold !text-xl sm:!text-4xl !leading-snug group-hover:!text-blue-300 !transition-colors !duration-300">{card.text}</p>{" "}
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                    </section>
-                )}
+                        </motion.section>
+                    )}
+                </AnimatePresence>
                 {/* ================= DESCRIPTIVE SUBTITLE =================
                 <section className="!mt-16 !w-full text-center">
                     <h2 className="!text-white !text-xl sm:!text-2xl mb-4">
@@ -390,7 +416,7 @@ export default function Home() {
                     </div>
                 </section>
                 {/* ================= WHY JOIN ================= */}
-                <section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="why-join-heading">
+                <motion.section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="why-join-heading" variants={sectionFadeVariant} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.48 }} transition={{ duration: 0.7, ease: "easeOut" }}>
                     <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6">
                         <h2 id="why-join-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold !text-center !mb-8">
                             Why Join
@@ -425,17 +451,17 @@ export default function Home() {
                                     ),
                                 },
                             ].map((c, i) => (
-                                <div key={i} className="!rounded-2xl !p-6 !bg-[rgba(51,54,56,0.27)] !border !border-blue-500/20 hover:!border-blue-500/40 !transition-all">
+                                <motion.div key={i} initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.7 }} transition={{ delay: 0.22 + i * 0.09, duration: 0.37 }} className="!rounded-2xl !p-6 !bg-[rgba(51,54,56,0.27)] !border !border-blue-500/20 hover:!border-blue-500/40 !transition-all">
                                     <div className="!flex !items-center !gap-3">
                                         <div className="!p-3 !rounded-full !bg-blue-500/10">{c.icon}</div>
                                         <p className="!font-bold !text-white">{c.title}</p>
                                     </div>
                                     <p className="!mt-3 !text-gray-400">{c.desc}</p>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                     </div>
-                </section>
+                </motion.section>
                 {/* ================= HOW IT WORKS =================
                 <section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="how-heading">
                     <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6">
@@ -652,22 +678,36 @@ export default function Home() {
                                     a: "Hack The Boot is open to all students: undergraduate, graduate, from Italy and around the world. Whether you’re a first-timer or an experienced builder, you’re welcome to join us in Milan for 24 hours of creativity, collaboration, and discovery.",
                                 },
                             ].map((item, i) => (
-                                <div
+                                <motion.div
                                     key={i}
+                                    layout
+                                    transition={{ layout: { duration: 0.45, type: "spring" } }}
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
+                                    viewport={{ once: true, amount: 0.23 }}
                                     className="!group !rounded-xl !bg-[rgba(30,32,33,0.6)] !border !border-blue-500/20 
                    !overflow-hidden !transition-all !duration-300 hover:!border-blue-500/40"
                                 >
-                                    <button
-                                        onClick={() => toggleFAQ(i)}
+                                    <motion.button
+                                        layout
                                         className="!w-full !flex !justify-between !items-start !cursor-pointer !p-4 sm:!p-5 
                      !text-gray-200 !font-semibold !text-base sm:!text-lg !text-left
                      hover:!text-blue-400 !transition-all"
+                                        onClick={() => toggleFAQ(i)}
                                     >
                                         <span className="!flex-1 !text-left !pr-4">{item.q}</span>
-                                        <span className="!text-blue-400 !text-2xl !font-light !transition-transform !duration-300 !flex-shrink-0">{openFAQ === i ? "−" : "+"}</span>
-                                    </button>
-                                    {openFAQ === i && <div className="!p-5 !pt-0 !text-gray-400 !leading-relaxed !border-t !border-blue-500/10">{item.a}</div>}
-                                </div>
+                                        <motion.span animate={{ rotate: openFAQ === i ? 90 : 0 }} transition={{ duration: 0.25 }} className="!text-blue-400 !text-2xl !font-light !transition-transform !duration-300 !flex-shrink-0">
+                                            {openFAQ === i ? "−" : "+"}
+                                        </motion.span>
+                                    </motion.button>
+                                    <AnimatePresence>
+                                        {openFAQ === i && (
+                                            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } }} exit={{ opacity: 0, y: 9, transition: { duration: 0.22, ease: "easeIn" } }} className="!p-5 !pt-0 !text-gray-400 !leading-relaxed !border-t !border-blue-500/10">
+                                                {item.a}
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </motion.div>
                             ))}
                         </div>
                     </section>
