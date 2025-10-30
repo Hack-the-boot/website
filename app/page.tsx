@@ -673,7 +673,7 @@ export default function Home() {
                                     </button>
                                     <AnimatePresence>
                                         {openFAQ === i && (
-                                            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } }} exit={{ opacity: 0, y: 9, transition: { duration: 0.22, ease: "easeIn" } }} className="!p-5 !pt-0 !text-gray-400 !leading-relaxed !border-t !border-blue-500/10">
+                                            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto", transition: { duration: 0.2, ease: [0.4, 0, 0.2, 1] } }} exit={{ opacity: 0, height: 0, transition: { duration: 0.15, ease: [0.4, 0, 1, 1] } }} className="!p-5 !pt-0 !text-gray-400 !leading-relaxed !border-t !border-blue-500/10 !overflow-hidden">
                                                 {item.a}
                                             </motion.div>
                                         )}
