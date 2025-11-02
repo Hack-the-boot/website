@@ -743,7 +743,7 @@ export default function Home() {
                             <div className="!h-px !bg-gradient-to-r !from-transparent !via-blue-500/50 !to-transparent" />
                         </div>
 
-                        <div className="!text-center !space-y-4">
+                        {/* <div className="!text-center !space-y-4">
                             <p className="!text-xl !font-semibold !text-gray-200">{t.footer.followUs}</p>
                             <div className="!flex !items-center !justify-center !gap-4 !flex-wrap">
                                 <a href="https://linkedin.com/company/hacktheboot" target="_blank" rel="noopener noreferrer" className="!inline-flex !items-center !justify-center !w-12 !h-12 !rounded-full !bg-[rgba(51,54,56,0.4)] !border !border-blue-500/30 !text-blue-400 hover:!bg-blue-500/20 hover:!border-blue-500/50 !transition-all !duration-300" aria-label="LinkedIn">
@@ -767,11 +767,11 @@ export default function Home() {
                                     </svg>
                                 </a>
                             </div>
-                        </div>
+                        </div> */}
 
-                        <div className="!w-full !max-w-md">
+                        {/* <div className="!w-full !max-w-md">
                             <div className="!h-px !bg-gradient-to-r !from-transparent !via-blue-500/50 !to-transparent" />
-                        </div>
+                        </div> */}
 
                         <div className="!text-center !space-y-2">
                             <p className="!text-sm sm:!text-base !text-gray-400">{t.footer.copyright.replace("{year}", String(new Date().getFullYear()))}</p>
