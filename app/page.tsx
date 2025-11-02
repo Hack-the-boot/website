@@ -596,7 +596,7 @@ export default function Home() {
                                             <div className="!flex !items-start !gap-3">
                                                 <input type="checkbox" id="ageConfirm" name="ageConfirm" required className="!mt-1.5 !h-4 !w-4 !rounded !border-gray-600 !bg-gray-700 !text-blue-500 focus:!ring-blue-500" />
                                                 <label htmlFor="ageConfirm" className="!text-gray-300 !text-sm !font-mono">
-                                                    I confirm I am 14 years or older. (required)
+                                                    I confirm I am 14 years old or above. (required)
                                                 </label>
                                             </div>
 
