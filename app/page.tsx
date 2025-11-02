@@ -4,9 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Terminal, { Field } from "@/components/Terminal";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Home() {
-    const phrases = ["Where bold ideas become reality", "Compete. Build. WIN.", "24 hours of innovation in Milan", "Create the future, one hack at a time"];
+    const { language, setLanguage, t } = useLanguage();
+    const phrases = t.hero.phrases;
 
     const [index, setIndex] = useState(0);
     const [displayText, setDisplayText] = useState("");
@@ -89,7 +91,7 @@ export default function Home() {
         const privacyPolicy = formData.get("privacyPolicy") === "on";
 
         if (!ageConfirm || !privacyPolicy) {
-            alert("Please confirm your age and accept the privacy policy to continue.");
+            alert(t.preRegister.ageError);
             return;
         }
 
@@ -109,7 +111,7 @@ export default function Home() {
             else alert(`Error: ${data.error}`);
         } catch (error) {
             console.error("Submission error:", error);
-            alert("Error submitting pre-registration. Please try again.");
+            alert(t.preRegister.submitError);
         }
     };
 
@@ -118,20 +120,20 @@ export default function Home() {
     };
 
     const shareInvite = async () => {
-        const shareText = "I’m joining Italy’s national student hackathon in Milan, open to students worldwide. Come build with me at Hack The Boot! #HackTheBoot";
+        const shareText = t.share.text;
         const shareUrl = typeof window !== "undefined" ? window.location.origin : "https://hacktheboot.it";
-        const title = "Hack The Boot — Italy’s Student Hackathon";
+        const title = t.share.title;
         try {
             if (navigator.share) {
                 await navigator.share({ title, text: shareText, url: shareUrl });
             } else {
                 await navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
-                alert("Share message copied to clipboard!");
+                alert(t.share.copied);
             }
         } catch (e) {
             try {
                 await navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
-                alert("Share message copied to clipboard!");
+                alert(t.share.copied);
             } catch (_) {
                 // ignore
             }
@@ -202,22 +204,39 @@ export default function Home() {
                             Hack The Boot
                         </a>
                     </div>
+                    {/* Mobile Language Switcher - Top Right */}
+                    <div className="!flex !items-center !gap-2 sm:!hidden">
+                        <button onClick={() => setLanguage("en")} className={`!px-2 !py-1 !rounded !text-xs !font-medium !transition ${language === "en" ? "!bg-blue-500 !text-white" : "!bg-[rgba(51,54,56,0.4)] !text-gray-300 hover:!bg-[rgba(51,54,56,0.6)]"}`} aria-label="English">
+                            EN
+                        </button>
+                        <button onClick={() => setLanguage("it")} className={`!px-2 !py-1 !rounded !text-xs !font-medium !transition ${language === "it" ? "!bg-blue-500 !text-white" : "!bg-[rgba(51,54,56,0.4)] !text-gray-300 hover:!bg-[rgba(51,54,56,0.6)]"}`} aria-label="Italiano">
+                            IT
+                        </button>
+                    </div>
                     <nav className="!hidden sm:!flex !items-center !gap-5">
                         <a href="#why-join-heading" className="!text-gray-300 hover:!text-white !transition">
-                            Why Join
+                            {t.nav.whyJoin}
                         </a>
                         <a href="#faq-heading" className="!text-gray-300 hover:!text-white !transition">
-                            FAQs
+                            {t.nav.faqs}
                         </a>
                         <a href="/sponsors" className="!text-gray-300 hover:!text-white !transition">
-                            Sponsors
+                            {t.nav.sponsors}
                         </a>
                         <a href="#contacts" className="!text-gray-300 hover:!text-white !transition">
-                            Contacts
+                            {t.nav.contacts}
                         </a>
                         <a href="#pre-register" className="!text-blue-300 hover:!text-white !font-bold !transition">
-                            Join
+                            {t.nav.join}
                         </a>
+                        <div className="!flex !items-center !gap-2 !ml-2">
+                            <button onClick={() => setLanguage("en")} className={`!px-2 !py-1 !rounded !text-xs !font-medium !transition ${language === "en" ? "!bg-blue-500 !text-white" : "!bg-[rgba(51,54,56,0.4)] !text-gray-300 hover:!bg-[rgba(51,54,56,0.6)]"}`} aria-label="English">
+                                EN
+                            </button>
+                            <button onClick={() => setLanguage("it")} className={`!px-2 !py-1 !rounded !text-xs !font-medium !transition ${language === "it" ? "!bg-blue-500 !text-white" : "!bg-[rgba(51,54,56,0.4)] !text-gray-300 hover:!bg-[rgba(51,54,56,0.6)]"}`} aria-label="Italiano">
+                                IT
+                            </button>
+                        </div>
                     </nav>
                 </div>
                 {mobileNavOpen && (
@@ -228,11 +247,11 @@ export default function Home() {
                                 <span className="!font-semibold">Hack The Boot</span>
                             </a>
                             {[
-                                { href: "#why-join-heading", label: "Why Join" },
-                                { href: "#faq-heading", label: "FAQs" },
-                                { href: "/sponsors", label: "Sponsors" },
-                                { href: "#contacts", label: "Contacts" },
-                                { href: "#pre-register", label: "Join" },
+                                { href: "#why-join-heading", label: t.nav.whyJoin },
+                                { href: "#faq-heading", label: t.nav.faqs },
+                                { href: "/sponsors", label: t.nav.sponsors },
+                                { href: "#contacts", label: t.nav.contacts },
+                                { href: "#pre-register", label: t.nav.join },
                             ].map((l, i) => (
                                 <a key={i} href={l.href} onClick={() => setMobileNavOpen(false)} className="!block !w-full !px-3 !py-2 !rounded-lg !text-gray-200 hover:!bg-blue-500/10 !transition">
                                     {l.label}
@@ -249,12 +268,12 @@ export default function Home() {
                 <section className="mainPageContainer text-center" aria-labelledby="hero-heading">
                     <div className="logoAndText !mt-12 sm:!mt-20">
                         <Image src="/img/Logo_Transparent.png" alt="Hack The Boot Hackathon Logo" width={300} height={300} className="logoHTB w-48 h-48 sm:w-72 sm:h-72" priority />
-                        <h1 id="hero-heading" className="!mt-2">
-                            Italy's Signature Hackathon
-                        </h1>
+                        <motion.h1 id="hero-heading" className="!mt-2" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.62, ease: "easeOut" } }} viewport={{ once: true, amount: 0.6 }} transition={{ delay: 0.4, duration: 0.6 }}>
+                            {t.hero.title}
+                        </motion.h1>
                     </div>
                     {/* ================= SUBTITLE ================= */}
-                    <p className="!mt-2 sm:!mt-[-40px] !text-gray-300 !text-base sm:!text-lg !font-medium !max-w-2xl !mx-auto">Made by students, for students.</p>
+                    <motion.p className="!mt-2 sm:!mt-[-40px] !text-gray-300 !text-base sm:!text-lg !font-medium !max-w-2xl !mx-auto">{t.hero.subtitle}</motion.p>
                     {/* ================= TYPEWRITER ================= */}
                     <p className="hackInfo !max-w-5xl !mx-auto !mt-6 !text-gray-300">
                         <span className="tech-gradient">
@@ -267,7 +286,7 @@ export default function Home() {
                     <div className="!mt-8 !flex !items-center !justify-center !gap-3 sm:!gap-4 !flex-wrap">
                         {[
                             {
-                                label: "No experience required",
+                                label: t.badges.noExperience,
                                 icon: (
                                     <svg className="!w-4 !h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -275,7 +294,7 @@ export default function Home() {
                                 ),
                             },
                             {
-                                label: "International students welcome",
+                                label: t.badges.international,
                                 icon: (
                                     <svg className="!w-4 !h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
@@ -283,7 +302,7 @@ export default function Home() {
                                 ),
                             },
                             {
-                                label: "Mentors & workshops",
+                                label: t.badges.mentors,
                                 icon: (
                                     <svg className="!w-4 !h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -291,7 +310,7 @@ export default function Home() {
                                 ),
                             },
                             {
-                                label: "Food, swag, prizes",
+                                label: t.badges.prizes,
                                 icon: (
                                     <svg className="!w-4 !h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
@@ -315,7 +334,7 @@ export default function Home() {
                             !transform hover:!scale-105 hover:!shadow-cyan-500/50"
                             aria-label="Join now"
                         >
-                            Join Now
+                            {t.hero.joinNow}
                         </button>
                         <button
                             onClick={shareInvite}
@@ -323,11 +342,11 @@ export default function Home() {
                             hover:!bg-blue-500/10 !transition-all !duration-300"
                             aria-label="Invite a friend"
                         >
-                            Invite a Friend
+                            {t.hero.inviteFriend}
                         </button>
                     </div>
                     <p className="!text-lg !mt-6 sm:!text-xl !font-medium !text-gray-400 !text-center">
-                        <span className="!text-blue-300">Limited spots available.</span> Be the first to know when applications open.
+                        <span className="!text-blue-300">{t.hero.limitedSpots}</span> {t.hero.beFirst}
                     </p>
                 </section>
                 {/* ================= WHEN & WHERE ================= */}
@@ -341,8 +360,8 @@ export default function Home() {
                             <div className="!grid !grid-cols-1 sm:!grid-cols-3 !gap-6">
                                 {[
                                     {
-                                        label: "When",
-                                        text: "March 2026",
+                                        label: t.eventDetails.when,
+                                        text: t.eventDetails.march2026,
                                         icon: (
                                             <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -350,8 +369,8 @@ export default function Home() {
                                         ),
                                     },
                                     {
-                                        label: "Where",
-                                        text: "Milan, Italy",
+                                        label: t.eventDetails.where,
+                                        text: t.eventDetails.milanItaly,
                                         icon: (
                                             <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -360,8 +379,8 @@ export default function Home() {
                                         ),
                                     },
                                     {
-                                        label: "More Info",
-                                        text: "Fall 2025",
+                                        label: t.eventDetails.moreInfo,
+                                        text: t.eventDetails.fall2025,
                                         icon: (
                                             <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -383,7 +402,7 @@ export default function Home() {
                                             <div className="!p-4 sm:!p-5 !rounded-full !bg-blue-500/10 group-hover:!bg-blue-500/20 !transition-all !duration-300">{card.icon}</div>
                                             <p className="!text-gray-400 !text-sm sm:!text-lg !tracking-wide !uppercase !font-semibold">{card.label}</p>
                                             <p className="!text-blue-400 !font-extrabold !text-xl sm:!text-4xl !leading-snug group-hover:!text-blue-300 !transition-colors !duration-300">{card.text}</p>
-                                            {card.label === "More Info" && <p className="!text-gray-400 !text-xs sm:!text-sm !mt-2">Check back for updates</p>}
+                                            {card.label === t.eventDetails.moreInfo && <p className="!text-gray-400 !text-xs sm:!text-sm !mt-2">{t.eventDetails.checkBack}</p>}
                                         </div>
                                     </div>
                                 ))}
@@ -418,13 +437,13 @@ export default function Home() {
                 <section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="why-join-heading">
                     <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6">
                         <h2 id="why-join-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold !text-center !mb-8">
-                            Why Join
+                            {t.whyJoin.title}
                         </h2>
                         <div className="!grid !grid-cols-1 sm:!grid-cols-3 !gap-4 sm:!gap-6">
                             {[
                                 {
-                                    title: "Learn & Grow",
-                                    desc: "Workshops, mentors, and hands-on building. Pick up new skills by doing.",
+                                    title: t.whyJoin.learn.title,
+                                    desc: t.whyJoin.learn.desc,
                                     icon: (
                                         <svg className="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -432,8 +451,8 @@ export default function Home() {
                                     ),
                                 },
                                 {
-                                    title: "Connect & Collaborate",
-                                    desc: "Meet students from Italy and abroad. Team up across disciplines.",
+                                    title: t.whyJoin.connect.title,
+                                    desc: t.whyJoin.connect.desc,
                                     icon: (
                                         <svg className="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -441,8 +460,8 @@ export default function Home() {
                                     ),
                                 },
                                 {
-                                    title: "Create & Shine",
-                                    desc: "Prototype, pitch, and get recognized. Prizes, opportunities, and stories to tell.",
+                                    title: t.whyJoin.create.title,
+                                    desc: t.whyJoin.create.desc,
                                     icon: (
                                         <svg className="!w-6 !h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -563,32 +582,32 @@ export default function Home() {
                     <div className="!mx-auto !w-full !max-w-7xl px-4 sm:px-6">
                         <div className="!text-center !mb-8">
                             <h2 id="pre-register" className="!text-white !text-2xl sm:!text-3xl !font-bold !mb-4">
-                                Pre-Register Now
+                                {t.preRegister.title}
                             </h2>
-                            <p className="!text-gray-300 !text-base sm:!text-lg !max-w-2xl !mx-auto">Secure your spot for Italy's premier student hackathon. Fill out the form below to be the first to know when applications open.</p>
+                            <p className="!text-gray-300 !text-base sm:!text-lg !max-w-2xl !mx-auto">{t.preRegister.description}</p>
                         </div>
                         <form ref={terminalRef} onSubmit={handleSubmit} className="!w-full !mx-auto !max-w-6xl !transition-all !duration-300 !rounded-2xl !min-h-[280px] sm:!min-h-[360px]">
                             <Terminal>
                                 {!submitted ? (
                                     <>
                                         <p className="!text-green-400 !font-mono !text-lg sm:!text-xl mb-2">
-                                            $ Welcome to <span className="!text-cyan-400">HackTheBoot</span> pre-registration
+                                            $ {t.preRegister.welcome} <span className="!text-cyan-400">HackTheBoot</span> pre-registration
                                         </p>
-                                        <p className="!text-gray-400 !text-base sm:!text-lg !font-mono mb-4"># Please enter your info below:</p>
+                                        <p className="!text-gray-400 !text-base sm:!text-lg !font-mono mb-4"># {t.preRegister.enterInfo}</p>
 
                                         <div className="!flex !flex-col !gap-5 !mt-2">
                                             <div className="!flex !flex-col">
                                                 <label htmlFor="fullName" className="!block !text-gray-400 !font-mono !text-sm sm:!text-base !mb-1">
-                                                    Insert your full name
+                                                    {t.preRegister.fullName}
                                                 </label>
-                                                <Field id="fullName" text="E.g. Paolo Rossi" required />
+                                                <Field id="fullName" text={t.preRegister.fullNamePlaceholder} required />
                                             </div>
 
                                             <div className="!flex !flex-col">
                                                 <label htmlFor="email" className="!block !text-gray-400 !font-mono !text-sm sm:!text-base !mb-1">
-                                                    Insert your email address (Use a personal email address)
+                                                    {t.preRegister.email}
                                                 </label>
-                                                <Field id="email" type="email" text="E.g. paolo.rossi@example.com" required />
+                                                <Field id="email" type="email" text={t.preRegister.emailPlaceholder} required />
                                             </div>
                                         </div>
 
@@ -596,18 +615,18 @@ export default function Home() {
                                             <div className="!flex !items-start !gap-3">
                                                 <input type="checkbox" id="ageConfirm" name="ageConfirm" required className="!mt-1.5 !h-4 !w-4 !rounded !border-gray-600 !bg-gray-700 !text-blue-500 focus:!ring-blue-500" />
                                                 <label htmlFor="ageConfirm" className="!text-gray-300 !text-sm !font-mono">
-                                                    I confirm I am 14 years old or above. (required)
+                                                    {t.preRegister.ageConfirm}
                                                 </label>
                                             </div>
 
                                             <div className="!flex !items-start !gap-3">
                                                 <input type="checkbox" id="privacyPolicy" name="privacyPolicy" required className="!mt-1.5 !h-4 !w-4 !rounded !border-gray-600 !bg-gray-700 !text-blue-500 focus:!ring-blue-500" />
                                                 <label htmlFor="privacyPolicy" className="!text-gray-300 !text-sm !font-mono">
-                                                    I have read and accept the{" "}
+                                                    {t.preRegister.privacyPolicy}{" "}
                                                     <a href="/privacy" className="!text-blue-400 hover:!text-blue-300 hover:!underline">
-                                                        Privacy Policy
+                                                        {t.preRegister.privacyPolicyLink}
                                                     </a>
-                                                    . (required)
+                                                    {t.preRegister.privacyPolicyEnd}
                                                 </label>
                                             </div>
                                         </div>
@@ -619,13 +638,13 @@ export default function Home() {
               hover:!from-blue-600 hover:!to-cyan-600 !transition-all !duration-300 
               !transform hover:!scale-[1.02]"
                                         >
-                                            $ Submit
+                                            {t.preRegister.submit}
                                         </button>
                                     </>
                                 ) : (
                                     <div role="status" aria-live="polite" className="!space-y-2">
-                                        <p className="!text-green-400 !font-mono !text-xl sm:!text-2xl">$ Thank you for pre-registering!</p>
-                                        <p className="!text-gray-400 !font-mono !text-lg sm:!text-xl"># We&apos;ll notify you when applications open.</p>
+                                        <p className="!text-green-400 !font-mono !text-xl sm:!text-2xl">{t.preRegister.thankYou}</p>
+                                        <p className="!text-gray-400 !font-mono !text-lg sm:!text-xl">{t.preRegister.notifyYou}</p>
                                     </div>
                                 )}
                             </Terminal>
@@ -636,12 +655,12 @@ export default function Home() {
                 <section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="bottom-cta-heading">
                     <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6 !text-center">
                         <h2 id="bottom-cta-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold">
-                            This is where Italy’s student innovators rise.
+                            {t.bottomCTA.title}
                         </h2>
-                        <p className="!mt-3 !text-gray-300">Join the movement. Build, learn, and create the future, together.</p>
+                        <p className="!mt-3 !text-gray-300">{t.bottomCTA.subtitle}</p>
                         <div className="!mt-6 !flex !items-center !justify-center !gap-3 !flex-wrap">
                             <button onClick={shareInvite} className="!px-6 !py-4 !rounded-2xl !border !border-blue-500/50 !text-blue-300 hover:!bg-blue-500/10 !transition-all">
-                                Invite a Friend
+                                {t.bottomCTA.inviteFriend}
                             </button>
                         </div>
                     </div>
@@ -651,12 +670,12 @@ export default function Home() {
             {/* ================= STICKY CTA ================= */}
             {!submitted && ctaStickyVisible && (
                 <div className="!fixed !bottom-4 !left-1/2 !-translate-x-1/2 !z-50 !backdrop-blur !bg-[rgba(30,32,33,0.6)] !border !border-blue-500/30 !rounded-2xl !shadow-xl !px-4 !py-3 !flex !items-center !gap-3">
-                    <span className="!hidden sm:!inline !text-gray-200">Be part of Italy’s innovation story</span>
+                    <span className="!hidden sm:!inline !text-gray-200">{t.stickyCTA.text}</span>
                     <button onClick={scrollToTerminal} className="!px-6 !py-3 !rounded-xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 !text-white !font-semibold !text-base sm:!text-sm !whitespace-nowrap hover:!from-blue-600 hover:!to-cyan-600 !transition-all">
-                        Join Now
+                        {t.stickyCTA.joinNow}
                     </button>
                     <button onClick={shareInvite} className="!px-4 !py-2 !rounded-xl !border !border-blue-500/50 !text-blue-300 hover:!bg-blue-500/10 !transition-all">
-                        Invite
+                        {t.stickyCTA.invite}
                     </button>
                 </div>
             )}
@@ -665,38 +684,13 @@ export default function Home() {
             {!submitted && (
                 <>
                     {/* ================= FAQ SECTION ================= */}
-                    <section className="!mt-16 sm:!mt-24 !w-full !text-center" aria-labelledby="faq-heading">
+                    <section className="!mt-16 sm:!mt-13 !w-full !text-center" aria-labelledby="faq-heading">
                         <h2 id="faq-heading" className="!text-white !text-2xl sm:!text-3xl !font-bold !mb-10">
-                            Frequently Asked Questions
+                            {t.faq.title}
                         </h2>
 
                         <div className="!max-w-3xl !mx-auto !text-left !space-y-3 !px-4 sm:!px-0">
-                            {[
-                                {
-                                    q: "What is a hackathon?",
-                                    a: "A hackathon is a 24-hour creative tech marathon where students team up to build prototypes: from software and hardware to AI tools or IoT devices. It’s not just coding: it’s collaboration, design, innovation, and fun. Hack The Boot will bring this experience to Milan, empowering students to turn bold ideas into reality.",
-                                },
-                                {
-                                    q: "How much does it cost?",
-                                    a: "Nothing at all! Hack The Boot is completely free to attend. The only thing you need to bring is your curiosity and energy.",
-                                },
-                                {
-                                    q: "What if I don’t know how to code?",
-                                    a: "No worries! Hackathons are for everyone! Whether you’re a designer, researcher, storyteller, or just curious, you can contribute. Our beginner track and mentors will guide you through tools and creative processes so you can still build something amazing.",
-                                },
-                                {
-                                    q: "What if I don't have an idea or a team?",
-                                    a: "You can still join! We'll organize team formation sessions and idea jams before hacking begins, so you can meet other participants and collaborate on something exciting together. Teams must be between 1-4 people.",
-                                },
-                                {
-                                    q: "What can I build?",
-                                    a: "Anything that solves a real problem or inspires others: from apps and AI tools to hardware prototypes and data-driven projects. You’ll be able to choose from themes like Education, Healthcare, and Sustainability, or even tackle custom sponsor challenges.",
-                                },
-                                {
-                                    q: "Who can come?",
-                                    a: "Hack The Boot is open to all students: undergraduate, graduate, from Italy and around the world. Whether you’re a first-timer or an experienced builder, you’re welcome to join us in Milan for 24 hours of creativity, collaboration, and discovery.",
-                                },
-                            ].map((item, i) => (
+                            {t.faq.items.map((item: { q: string; a: string }, i: number) => (
                                 <div
                                     key={i}
                                     className="!group !rounded-xl !bg-[rgba(30,32,33,0.6)] !border !border-blue-500/20 
@@ -732,7 +726,7 @@ export default function Home() {
                 <div className="!relative !max-w-7xl !mx-auto !px-4 sm:!px-6 lg:!px-8 !py-16">
                     <div className="!flex !flex-col !items-center !justify-center !space-y-8">
                         <div className="!text-center !space-y-4">
-                            <p className="!text-3xl !font-semibold !text-gray-200">Have questions? Get In Touch 👇</p>
+                            <p className="!text-3xl !font-semibold !text-gray-200">{t.footer.questions}</p>
                             <a
                                 href="mailto:support@hacktheboot.it"
                                 className="!inline-flex !items-center !gap-2 !text-blue-400 hover:!text-cyan-400 
@@ -741,7 +735,7 @@ export default function Home() {
                                 <svg className="!w-5 !h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                 </svg>
-                                support@hacktheboot.it
+                                {t.footer.email}
                             </a>
                         </div>
 
@@ -750,7 +744,7 @@ export default function Home() {
                         </div>
 
                         <div className="!text-center !space-y-4">
-                            <p className="!text-xl !font-semibold !text-gray-200">Follow Us</p>
+                            <p className="!text-xl !font-semibold !text-gray-200">{t.footer.followUs}</p>
                             <div className="!flex !items-center !justify-center !gap-4 !flex-wrap">
                                 <a href="https://linkedin.com/company/hacktheboot" target="_blank" rel="noopener noreferrer" className="!inline-flex !items-center !justify-center !w-12 !h-12 !rounded-full !bg-[rgba(51,54,56,0.4)] !border !border-blue-500/30 !text-blue-400 hover:!bg-blue-500/20 hover:!border-blue-500/50 !transition-all !duration-300" aria-label="LinkedIn">
                                     <svg className="!w-6 !h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -780,8 +774,8 @@ export default function Home() {
                         </div>
 
                         <div className="!text-center !space-y-2">
-                            <p className="!text-sm sm:!text-base !text-gray-400">© {new Date().getFullYear()} Hack The Boot | Made with ❤️ by The Hack The Boot Team</p>
-                            <p className="!text-xs sm:!text-sm !text-gray-500">All rights reserved</p>
+                            <p className="!text-sm sm:!text-base !text-gray-400">{t.footer.copyright.replace("{year}", String(new Date().getFullYear()))}</p>
+                            <p className="!text-xs sm:!text-sm !text-gray-500">{t.footer.rights}</p>
                         </div>
                     </div>
                 </div>

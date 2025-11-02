@@ -2,34 +2,37 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Sponsors() {
+    const { t } = useLanguage();
+
     return (
         <main className="page">
             <motion.section className="mainPageContainer" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
                 <div className="!text-center !mb-5">
                     <Image src="/img/Logo_Transparent.png" alt="Hack The Boot Logo" width={120} height={120} className="!mx-auto !mb-6" />
-                    <h1 className="!text-4xl sm:!text-5xl !font-bold !text-white !mb-4">Partner With Us</h1>
-                    <p className="!text-xl !text-gray-300 !max-w-3xl !mx-auto">Support Italy's premier student hackathon and connect with the next generation of innovators</p>
+                    <h1 className="!text-4xl sm:!text-5xl !font-bold !text-white !mb-4">{t.sponsors.title}</h1>
+                    <p className="!text-xl !text-gray-300 !max-w-3xl !mx-auto">{t.sponsors.subtitle}</p>
                 </div>
 
                 <div className="!max-w-4xl !mx-auto !space-y-8">
                     {/* Event Information */}
                     <motion.div className="!rounded-2xl !p-8 !bg-[rgba(51,54,56,0.27)] !border !border-blue-500/20" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
-                        <h2 className="!text-2xl !font-bold !text-white !mb-6">About Hack The Boot</h2>
+                        <h2 className="!text-2xl !font-bold !text-white !mb-6">{t.sponsors.aboutTitle}</h2>
                         <div className="!prose !prose-invert !text-gray-300 !space-y-4">
                             <p>
-                                <strong className="!text-white">Hack The Boot</strong> is Italy's first international student hackathon, bringing together hundreds of students from across Italy and around the world for 24 hours of innovation, creativity, and collaboration in Milan.
+                                <strong className="!text-white">Hack The Boot</strong> {t.sponsors.aboutDesc1}
                             </p>
-                            <p>Our event empowers students of all backgrounds and skill levels to build impactful solutions, learn new technologies, and connect with peers and industry leaders. From AI tools to IoT devices, web apps to hardware prototypes: anything is possible when ambitious students come together.</p>
+                            <p>{t.sponsors.aboutDesc2}</p>
                             <div className="!grid !grid-cols-1 sm:!grid-cols-2 !gap-4 !mt-6">
                                 <div className="!flex !items-start !gap-3">
                                     <svg className="!w-6 !h-6 !text-blue-400 !mt-1 !flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                                     </svg>
                                     <div>
-                                        <p className="!font-semibold !text-white">Hundreds of Students</p>
-                                        <p className="!text-sm !text-gray-400">From Italy and around the world</p>
+                                        <p className="!font-semibold !text-white">{t.sponsors.stats.students}</p>
+                                        <p className="!text-sm !text-gray-400">{t.sponsors.stats.studentsDesc}</p>
                                     </div>
                                 </div>
                                 <div className="!flex !items-start !gap-3">
@@ -37,8 +40,8 @@ export default function Sponsors() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
                                     <div>
-                                        <p className="!font-semibold !text-white">March 2026</p>
-                                        <p className="!text-sm !text-gray-400">24 hours of innovation</p>
+                                        <p className="!font-semibold !text-white">{t.sponsors.stats.date}</p>
+                                        <p className="!text-sm !text-gray-400">{t.sponsors.stats.dateDesc}</p>
                                     </div>
                                 </div>
                                 <div className="!flex !items-start !gap-3">
@@ -47,8 +50,8 @@ export default function Sponsors() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                     <div>
-                                        <p className="!font-semibold !text-white">Milan, Italy</p>
-                                        <p className="!text-sm !text-gray-400">Premier tech hub location</p>
+                                        <p className="!font-semibold !text-white">{t.sponsors.stats.location}</p>
+                                        <p className="!text-sm !text-gray-400">{t.sponsors.stats.locationDesc}</p>
                                     </div>
                                 </div>
                                 <div className="!flex !items-start !gap-3">
@@ -56,8 +59,8 @@ export default function Sponsors() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                                     </svg>
                                     <div>
-                                        <p className="!font-semibold !text-white">Impactful Projects</p>
-                                        <p className="!text-sm !text-gray-400">Real solutions to real problems</p>
+                                        <p className="!font-semibold !text-white">{t.sponsors.stats.impact}</p>
+                                        <p className="!text-sm !text-gray-400">{t.sponsors.stats.impactDesc}</p>
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +69,7 @@ export default function Sponsors() {
 
                     {/* Why Sponsor */}
                     <motion.div className="!rounded-2xl !p-8 !bg-[rgba(51,54,56,0.27)] !border !border-blue-500/20" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
-                        <h2 className="!text-2xl !font-bold !text-white !mb-6">Why Sponsor Hack The Boot?</h2>
+                        <h2 className="!text-2xl !font-bold !text-white !mb-6">{t.sponsors.whyTitle}</h2>
                         <div className="!space-y-4 !text-gray-300">
                             <div className="!flex !items-start !gap-4">
                                 <div className="!p-2 !rounded-lg !bg-blue-500/10 !flex-shrink-0">
@@ -75,8 +78,8 @@ export default function Sponsors() {
                                     </svg>
                                 </div>
                                 <div>
-                                    <p className="!font-semibold !text-white !mb-1">Talent Recruitment</p>
-                                    <p className="!text-sm">Connect directly with top-performing students from leading universities. Many participants go on to join sponsor companies after graduation.</p>
+                                    <p className="!font-semibold !text-white !mb-1">{t.sponsors.why.talent.title}</p>
+                                    <p className="!text-sm">{t.sponsors.why.talent.desc}</p>
                                 </div>
                             </div>
                             <div className="!flex !items-start !gap-4">
@@ -86,8 +89,8 @@ export default function Sponsors() {
                                     </svg>
                                 </div>
                                 <div>
-                                    <p className="!font-semibold !text-white !mb-1">Brand Visibility</p>
-                                    <p className="!text-sm">Your logo and brand will be featured prominently throughout the event, website, and marketing materials, reaching thousands of students and tech enthusiasts.</p>
+                                    <p className="!font-semibold !text-white !mb-1">{t.sponsors.why.brand.title}</p>
+                                    <p className="!text-sm">{t.sponsors.why.brand.desc}</p>
                                 </div>
                             </div>
                             <div className="!flex !items-start !gap-4">
@@ -97,8 +100,8 @@ export default function Sponsors() {
                                     </svg>
                                 </div>
                                 <div>
-                                    <p className="!font-semibold !text-white !mb-1">Innovation & Challenges</p>
-                                    <p className="!text-sm">Propose custom challenges aligned with your company's goals. Students will build solutions using your APIs, platforms, or addressing your specific problem domains.</p>
+                                    <p className="!font-semibold !text-white !mb-1">{t.sponsors.why.innovation.title}</p>
+                                    <p className="!text-sm">{t.sponsors.why.innovation.desc}</p>
                                 </div>
                             </div>
                             <div className="!flex !items-start !gap-4">
@@ -108,8 +111,8 @@ export default function Sponsors() {
                                     </svg>
                                 </div>
                                 <div>
-                                    <p className="!font-semibold !text-white !mb-1">Community Engagement</p>
-                                    <p className="!text-sm">Demonstrate your commitment to education and innovation. Mentor students, run workshops, and be part of shaping the future of tech in Italy.</p>
+                                    <p className="!font-semibold !text-white !mb-1">{t.sponsors.why.community.title}</p>
+                                    <p className="!text-sm">{t.sponsors.why.community.desc}</p>
                                 </div>
                             </div>
                         </div>
@@ -117,11 +120,11 @@ export default function Sponsors() {
 
                     {/* Our Team */}
                     <motion.div className="!rounded-2xl !p-8 !bg-[rgba(51,54,56,0.27)] !border !border-blue-500/20" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }}>
-                        <h2 className="!text-2xl !font-bold !text-white !mb-6">About Our Team</h2>
+                        <h2 className="!text-2xl !font-bold !text-white !mb-6">{t.sponsors.teamTitle}</h2>
                         <div className="!prose !prose-invert !text-gray-300 !space-y-4">
-                            <p>Hack The Boot is organized by a passionate team of students and alumni dedicated to creating an inclusive, inspiring hackathon experience. We believe in the power of hands-on learning and bringing together diverse perspectives to solve real-world challenges.</p>
-                            <p>Our team combines experience from leading tech companies, universities, and previous hackathons to ensure a seamless, impactful event. We're committed to making Hack The Boot not just a competition, but a community-building experience that lasts long after the 24 hours are over.</p>
-                            <p className="!text-sm !text-gray-400 !mt-4">We're always looking to grow our community. If you're interested in volunteering, mentoring, or contributing in other ways, don't hesitate to reach out.</p>
+                            <p>{t.sponsors.teamDesc1}</p>
+                            <p>{t.sponsors.teamDesc2}</p>
+                            <p className="!text-sm !text-gray-400 !mt-4">{t.sponsors.teamDesc3}</p>
                         </div>
                     </motion.div>
 
@@ -129,8 +132,8 @@ export default function Sponsors() {
                     <motion.div className="!rounded-2xl !p-8 !bg-gradient-to-br !from-blue-500/10 !to-cyan-500/10 !border !border-blue-500/30" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }}>
                         <div className="!text-center !space-y-6">
                             <div>
-                                <h2 className="!text-3xl !font-bold !text-white !mb-3">Interested in Sponsoring?</h2>
-                                <p className="!text-gray-300 !max-w-2xl !mx-auto">We'd love to discuss partnership opportunities and how we can create value for your organization. Let's build something amazing together.</p>
+                                <h2 className="!text-3xl !font-bold !text-white !mb-3">{t.sponsors.contactTitle}</h2>
+                                <p className="!text-gray-300 !max-w-2xl !mx-auto">{t.sponsors.contactDesc}</p>
                             </div>
                             <div className="!flex !flex-col !items-center !gap-4">
                                 <a href="mailto:sponsors@hacktheboot.it" className="!inline-flex !items-center !gap-3 !px-8 !py-4 !rounded-xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 !text-white !font-bold !text-lg !shadow-lg hover:!from-blue-600 hover:!to-cyan-600 !transition-all !duration-300 !transform hover:!scale-105">
@@ -139,17 +142,17 @@ export default function Sponsors() {
                                     </svg>
                                     sponsors@hacktheboot.it
                                 </a>
-                                <p className="!text-sm !text-gray-400">We typically respond within 2-3 business days. Looking forward to hearing from you!</p>
+                                <p className="!text-sm !text-gray-400">{t.sponsors.contactResponse}</p>
                             </div>
                         </div>
                     </motion.div>
 
                     {/* Footer Note */}
                     <div className="!border-t !border-blue-500/20 !pt-6 !text-center !text-sm !text-gray-400">
-                        <p>© {new Date().getFullYear()} Hack The Boot — Made with ❤️ by students, for students</p>
+                        <p>{t.sponsors.copyright.replace("{year}", String(new Date().getFullYear()))}</p>
                         <p className="!mt-2">
                             <a href="/" className="!text-blue-400 hover:!text-blue-300 !underline">
-                                Return to Home
+                                {t.sponsors.returnHome}
                             </a>
                         </p>
                     </div>
