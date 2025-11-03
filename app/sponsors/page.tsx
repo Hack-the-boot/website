@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Sponsors() {
@@ -11,7 +12,10 @@ export default function Sponsors() {
         <main className="page">
             <motion.section className="mainPageContainer !px-4 sm:!px-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
                 <div className="!text-center !mb-4 sm:!mb-5">
-                    <Image src="/img/Logo_Transparent.png" alt="Hack The Boot Logo" width={120} height={120} className="!mx-auto !mb-4 sm:!mb-6" />
+                    <Link href="/" className="!inline-flex !items-center !gap-3 !mx-auto !mb-4 sm:!mb-6">
+                        <Image src="/img/Logo_Transparent.png" alt="Hack The Boot Logo" width={40} height={40} className="!w-10 !h-10 sm:!w-12 sm:!h-12" />
+                        <span className="!text-white !font-semibold !text-xl sm:!text-2xl">Hack The Boot</span>
+                    </Link>
                     <h1 className="!text-3xl sm:!text-5xl !font-bold !text-white !mb-3 sm:!mb-4">{t.sponsors.title}</h1>
                     <p className="!text-base sm:!text-xl !text-gray-300 !max-w-3xl !mx-auto">{t.sponsors.subtitle}</p>
                 </div>
