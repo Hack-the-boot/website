@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Montserrat, Source_Code_Pro } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
 
 const geistSans = Geist({
@@ -23,9 +23,9 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-    title: "Hack The Boot: Italy's Signature Hackathon",
-    description: "Hack The Boot — Italy's premier international student hackathon in Milan. 24 hours of innovation, creativity, and competition. Pre-register now for Spring 2026!",
-    keywords: "Hack The Boot, Hackathon Italy, Student Hackathon Milan, Hack The Boot 2026, International Hackathon Europe, Tech Competition Italy, Hackathon for Students",
+    title: "Hack The Boot: L'hackathon Made In Italy",
+    description: "Hack The Boot — l'hackathon studentesco internazionale in Italia. 24 ore di innovazione, creatività e competizione a Milano. Pre-registrati per la Spring 2026!",
+    keywords: "Hack The Boot, Hackathon Italia, Hackathon Studenti Milano, Hack The Boot 2026, Hackathon Internazionale Europa, Competizione Tech Italia, Hackathon per Studenti",
     authors: [{ name: "Hack The Boot Team" }],
     creator: "Hack The Boot",
     publisher: "Hack The Boot",
@@ -53,31 +53,30 @@ export const metadata: Metadata = {
     },
     openGraph: {
         type: "website",
-        locale: "en_US",
-        url: "https://hacktheboot.it",
+        locale: "it_IT",
+        url: "https://hacktheboot.it/it",
         siteName: "Hack The Boot",
-        title: "Hack The Boot: Italy's Signature Hackathon",
-        description: "Compete. Build. WIN. Join Italy's international student hackathon — 24 hours of innovation in Milan.",
+        title: "Hack The Boot: L'hackathon Made In Italy",
+        description: "Partecipa all'hackathon studentesco internazionale in Italia — 24 ore di innovazione a Milano.",
         images: [
             {
                 url: "/img/Logo_Transparent.png",
                 width: 1200,
                 height: 630,
-                alt: "Hack The Boot Hackathon Logo",
+                alt: "Logo Hack The Boot Hackathon",
             },
         ],
-        // Declare Italian as an alternate locale for better SERP localization
-        alternateLocale: ["it_IT"],
+        alternateLocale: ["en_US"],
     },
     twitter: {
         card: "summary_large_image",
-        title: "Hack The Boot: Italy's Signature Hackathon",
-        description: "Join hundreds of students for 24 hours of creativity, code, and competition. Pre-register now!",
+        title: "Hack The Boot: L'hackathon Made In Italy",
+        description: "Unisciti a centinaia di studenti per 24 ore di creatività, codice e competizione. Pre-registrati ora!",
         images: ["/img/Logo_Transparent.png"],
         creator: "@hacktheboot",
     },
     alternates: {
-        canonical: "https://hacktheboot.it",
+        canonical: "https://hacktheboot.it/it",
         languages: {
             en: "/",
             it: "/it",
@@ -85,14 +84,20 @@ export const metadata: Metadata = {
     },
 };
 
-export default function RootLayout({
+export default function ItLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
+        <html lang="it">
             <body className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${sourceCodePro.variable} antialiased`}>
+                {/* Ensure client UI loads in Italian */}
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: "try{localStorage.setItem('hacktheboot-language','it');}catch(e){}",
+                    }}
+                />
                 <LanguageProvider>{children}</LanguageProvider>
             </body>
         </html>

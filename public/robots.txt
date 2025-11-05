@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Host
+Host: https://hacktheboot.it
+
+# Sitemaps
+Sitemap: https://hacktheboot.it/sitemap.xml
