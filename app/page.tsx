@@ -147,6 +147,21 @@ export default function Home() {
     return (
         <>
             {/* ================= STRUCTURED DATA ================= */}
+            {/* Organization Schema for Google Search Results Logo */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Organization",
+                        name: "Hack The Boot",
+                        url: "https://hacktheboot.it",
+                        logo: "https://hacktheboot.it/Logo_Transparent.ico",
+                        description: "Italy's premier international student hackathon in Milan.",
+                    }),
+                }}
+            />
+            {/* Event Schema */}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
@@ -172,7 +187,7 @@ export default function Home() {
                             "@type": "Organization",
                             name: "Hack The Boot",
                             url: "https://hacktheboot.it",
-                            logo: "https://hacktheboot.it/img/Logo_Transparent.png",
+                            logo: "https://hacktheboot.it/Logo_Transparent.ico",
                         },
                         offers: {
                             "@type": "Offer",
