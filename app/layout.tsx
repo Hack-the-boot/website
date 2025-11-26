@@ -61,7 +61,7 @@ export const metadata: Metadata = {
         description: "Compete. Build. WIN. Join Italy's international student hackathon — 24 hours of innovation in Milan.",
         images: [
             {
-                url: "/img/Logo_Transparent.png",
+                url: "/img/Logo_Text_PoliNetwork.png",
                 width: 1200,
                 height: 630,
                 alt: "Hack The Boot Hackathon Logo",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Hack The Boot: Italy's Signature Hackathon",
         description: "Join hundreds of students for 24 hours of creativity, code, and competition. Pre-register now!",
-        images: ["/img/Logo_Transparent.png"],
+        images: ["/img/Logo_Text_PoliNetwork.png"],
         creator: "@hacktheboot",
     },
     alternates: {
