@@ -280,64 +280,26 @@ export default function Home() {
             {/* ================= MAIN ================= */}
             <main className="page">
                 {/* ================= HERO ================= */}
-                <section className="mainPageContainer text-center" aria-labelledby="hero-heading">
+                <section className="mainPageContainer text-center !flex !flex-col !items-center !justify-center" aria-labelledby="hero-heading">
                     <div className="logoAndText !mt-12 sm:!mt-20">
                         <Image src="/img/Logo_Transparent.png" alt="Hack The Boot Hackathon Logo" width={300} height={300} className="logoHTB w-48 h-48 sm:w-72 sm:h-72" priority />
                         <motion.h1 id="hero-heading" className="!mt-2" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.62, ease: "easeOut" } }} viewport={{ once: true, amount: 0.6 }} transition={{ delay: 0.4, duration: 0.6 }}>
                             {t.hero.title}
                         </motion.h1>
                     </div>
-                    {/* ================= SUBTITLE ================= */}
-                    <motion.p className="!mt-2 sm:!mt-[-40px] !text-gray-300 !text-base sm:!text-lg !font-medium !max-w-2xl !mx-auto">{t.hero.subtitle}</motion.p>
-                    {/* ================= TYPEWRITER ================= */}
+
+                    {/* <motion.p className="!mt-2 sm:!mt-[-40px] !text-gray-300 !text-base sm:!text-lg !font-medium !max-w-2xl !mx-auto">{t.hero.subtitle}</motion.p>
                     <p className="hackInfo !max-w-5xl !mx-auto !mt-6 !text-gray-300">
                         <span className="tech-gradient">
                             <span className="typewriter">{displayText}</span>
                             <span className="cursor" />
                         </span>
-                    </p>
-
-                    {/* ================= HYPE BADGES ================= */}
-                    <div className="!mt-8 !flex !items-center !justify-center !gap-3 sm:!gap-4 !flex-wrap">
-                        {[
-                            {
-                                label: t.badges.noExperience,
-                                icon: (
-                                    <svg className="!w-4 !h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                                    </svg>
-                                ),
-                            },
-                            {
-                                label: t.badges.international,
-                                icon: (
-                                    <svg className="!w-4 !h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
-                                    </svg>
-                                ),
-                            },
-                            {
-                                label: t.badges.mentors,
-                                icon: (
-                                    <svg className="!w-4 !h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                    </svg>
-                                ),
-                            },
-                            {
-                                label: t.badges.prizes,
-                                icon: (
-                                    <svg className="!w-4 !h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
-                                    </svg>
-                                ),
-                            },
-                        ].map((b, i) => (
-                            <div key={i} className="!px-3 !py-2 !rounded-full !border !border-blue-500/30 !bg-[rgba(51,54,56,0.27)] !text-gray-200 !text-sm !flex !items-center !gap-2">
-                                {b.icon}
-                                <span>{b.label}</span>
-                            </div>
-                        ))}
+                    </p>*/}
+                    <div className="!mt-3 sm:!mt-4 !flex !flex-col !items-center !justify-center !gap-3 sm:!gap-4">
+                        <span className="!text-gray-400 !text-sm sm:!text-base !font-semibold !tracking-wide !uppercase">{t.hero.sponsoredBy}</span>
+                        <a href="https://lovable.dev/" target="_blank" rel="noreferrer" className="!flex !items-center !rounded-xl !px-3 !py-2 !backdrop-blur-sm hover:!opacity-90 !transition">
+                            <Image src="/img/lovable_white.png" alt="Lovable logo" width={200} height={120} className="!h-8 sm:!h-13 !w-auto" />
+                        </a>
                     </div>
 
                     <div className="!mt-8 !flex !items-center !justify-center !gap-3 sm:!gap-4 !flex-wrap">
