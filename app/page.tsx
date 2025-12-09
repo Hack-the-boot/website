@@ -280,8 +280,8 @@ export default function Home() {
             {/* ================= MAIN ================= */}
             <main className="page">
                 {/* ================= HERO ================= */}
-                <section className="mainPageContainer text-center !flex !flex-col !items-center !justify-center" aria-labelledby="hero-heading">
-                    <div className="logoAndText !mt-12 sm:!mt-20">
+                <section className="mainPageContainer text-center !flex !flex-col !items-center !justify-center !gap-0 !pt-16  !pb-12 sm:!pb-16" aria-labelledby="hero-heading">
+                    <div className="logoAndText !mt-10 sm:!mt-8">
                         <Image src="/img/Logo_Transparent.png" alt="Hack The Boot Hackathon Logo" width={300} height={300} className="logoHTB w-48 h-48 sm:w-72 sm:h-72" priority />
                         <motion.h1 id="hero-heading" className="!mt-2" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0, transition: { duration: 0.62, ease: "easeOut" } }} viewport={{ once: true, amount: 0.6 }} transition={{ delay: 0.4, duration: 0.6 }}>
                             {t.hero.title}
@@ -295,16 +295,16 @@ export default function Home() {
                             <span className="cursor" />
                         </span>
                     </p>*/}
-                    <p className="!mt-2 sm:!mt-[-40px] !text-gray-300 !text-base sm:!text-lg !font-medium !max-w-2xl !mx-auto">Made by students, for students.</p>
+                    <p className="!mt-1 sm:!mt-0 !text-gray-500 !text-base !italic sm:!text-lg !font-medium !max-w-2xl !mx-auto">Made by students, for students.</p>
 
-                    <div className="!mt-3 sm:!mt-4 !flex !flex-col !items-center !justify-center !gap-3 sm:!gap-4">
+                    <div className="!mt-10 sm:!mt-10 !flex !flex-col !items-center !justify-center !gap-3 sm:!gap-4">
                         <span className="!text-gray-400 !text-sm sm:!text-base !font-semibold !tracking-wide !uppercase">{t.hero.sponsoredBy}</span>
                         <a href="https://lovable.dev/" target="_blank" rel="noreferrer" className="!flex !items-center !rounded-xl !px-3 !py-2 !backdrop-blur-sm hover:!opacity-90 !transition">
                             <Image src="/img/lovable_white.png" alt="Lovable logo" width={200} height={120} className="!h-8 sm:!h-13 !w-auto" />
                         </a>
                     </div>
 
-                    <div className="!mt-8 !flex !items-center !justify-center !gap-3 sm:!gap-4 !flex-wrap">
+                    <div className="!mt-10 sm:!mt-16 !flex !items-center !justify-center !gap-3 sm:!gap-4 !flex-wrap">
                         <button
                             onClick={scrollToTerminal}
                             className="!px-6 sm:!px-10 !py-4 sm:!py-5 !rounded-2xl !bg-gradient-to-r !from-blue-500 !to-cyan-500 
@@ -324,13 +324,13 @@ export default function Home() {
                             {t.hero.inviteFriend}
                         </button>
                     </div>
-                    <p className="!text-lg !mt-6 sm:!text-xl !font-medium !text-gray-400 !text-center">
+                    <p className="!text-lg !mt-12 sm:!text-xl !font-medium !text-gray-400 !text-center">
                         <span className="!text-blue-300">{t.hero.limitedSpots}</span> {t.hero.beFirst}
                     </p>
                 </section>
                 {/* ================= WHEN & WHERE ================= */}
                 {!submitted && (
-                    <section className="!mt-16 sm:!mt-24 !w-full" aria-labelledby="event-details-heading">
+                    <section className="!mt-4 sm:!mt-24 !w-full" aria-labelledby="event-details-heading">
                         <div className="!mx-auto !w-full !max-w-6xl px-4 sm:px-6">
                             <h2 id="event-details-heading" className="sr-only">
                                 Event Details
