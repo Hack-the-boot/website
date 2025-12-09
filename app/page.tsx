@@ -295,7 +295,7 @@ export default function Home() {
                             <span className="cursor" />
                         </span>
                     </p>*/}
-                    <p className="!mt-[-30px] !text-gray-300 !font-semibold !text-sm sm:!text-lg !max-w-2xl !mx-auto">Made by students, for students.</p>
+                    <p className="!mt-2 sm:!mt-[-40px] !text-gray-300 !text-base sm:!text-lg !font-medium !max-w-2xl !mx-auto">Made by students, for students.</p>
 
                     <div className="!mt-3 sm:!mt-4 !flex !flex-col !items-center !justify-center !gap-3 sm:!gap-4">
                         <span className="!text-gray-400 !text-sm sm:!text-base !font-semibold !tracking-wide !uppercase">{t.hero.sponsoredBy}</span>
