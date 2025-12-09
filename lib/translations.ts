@@ -15,6 +15,7 @@ export const translations = {
             phrases: ["Where bold ideas become reality", "Compete. Build. WIN.", "24 hours of innovation in Milan", "Create the future, one hack at a time"],
             joinNow: "Join Now",
             inviteFriend: "Invite a Friend",
+            sponsoredBy: "Sponsored by",
             limitedSpots: "Limited spots available.",
             beFirst: "Be the first to know when applications open.",
         },
@@ -30,7 +31,7 @@ export const translations = {
             moreInfo: "More Info",
             march2026: "March 2026",
             milanItaly: "Milan, Italy",
-            fall2025: "Fall 2025",
+            fall2025: "Very Soon",
             checkBack: "Check back for updates",
         },
         whyJoin: {
@@ -204,6 +205,7 @@ export const translations = {
             phrases: ["Where bold ideas become reality", "Compete. Build. WIN.", "24 hours of innovation in Milan", "Create the future, one hack at a time"],
             joinNow: "Partecipa ora",
             inviteFriend: "Invita un amico",
+            sponsoredBy: "Sponsor",
             limitedSpots: "Posti limitati.",
             beFirst: "Sii il primo a sapere quando aprono le iscrizioni.",
         },
@@ -219,7 +221,7 @@ export const translations = {
             moreInfo: "Prossimi Aggiornamenti",
             march2026: "Marzo 2026",
             milanItaly: "Milano, Italia",
-            fall2025: "Autunno 2025",
+            fall2025: "Presto",
             checkBack: "Torna a trovarci per sapere di più",
         },
         whyJoin: {
