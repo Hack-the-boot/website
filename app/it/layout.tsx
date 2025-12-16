@@ -60,7 +60,7 @@ export const metadata: Metadata = {
         description: "Partecipa all'hackathon studentesco internazionale in Italia — 24 ore di innovazione a Milano.",
         images: [
             {
-                url: "/img/Logo_Text_PoliNetwork.png",
+                url: "https://hacktheboot.it/img/Logo_Text.png",
                 width: 1200,
                 height: 630,
                 alt: "Logo Hack The Boot Hackathon",
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Hack The Boot: L'hackathon Made In Italy",
         description: "Unisciti a centinaia di studenti per 24 ore di creatività, codice e competizione. Pre-registrati ora!",
-        images: ["/img/Logo_Text_PoliNetwork.png"],
+        images: ["https://hacktheboot.it/img/Logo_Text.png"],
         creator: "@hacktheboot",
     },
     alternates: {

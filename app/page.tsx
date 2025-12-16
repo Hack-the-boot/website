@@ -200,7 +200,7 @@ export default function Home() {
                             audienceType: "Students",
                         },
                         url: "https://hacktheboot.it",
-                        image: "https://hacktheboot.it/img/Logo_Text_PoliNetwork.png",
+                        image: "https://hacktheboot.it/img/Logo_Text.png",
                     }),
                 }}
             />
