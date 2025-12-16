@@ -54,6 +54,11 @@ body {
 .cardInfo {
     @apply text-3xl w-[280px] h-[200px] rounded-3xl font-extrabold 
            flex flex-col justify-end text-center items-center;
+    position: relative;
+}
+
+.infoCardIcon {
+    @apply absolute top-6 text-[#2655FF];
 }
 
 .containerTextInfo {
@@ -114,11 +119,43 @@ body {
     background: #1d45d6;
 }
 .supportedBy {
-    @apply flex flex-col items-center justify-center ml-15 mt-6 mb-10;
+    @apply flex flex-col items-center justify-center ml-15 mt-12 mb-14;
 }
 .supportedByText {
     @apply text-white text-lg italic;
 }
 .sponsorImageContainer {
     @apply mt-6;
+}
+
+.big-title {
+    @apply font-extrabold text-4xl text-center uppercase ;
+}
+.medium-title {
+    @apply font-bold text-3xl text-center uppercase mt-30 mb-10 italic;
+}
+
+.highlight-container {
+    @apply flex items-center gap-6 w-full max-w-[1500px] mx-auto px-6 mt-20;
+}
+
+/* The connecting line */
+.highlight-connector {
+    flex: 1;
+    height: 3px;
+    background: linear-gradient(to right, transparent, #2655ff, transparent);
+    border-radius: 9999px;
+    min-width: 40px;
+}
+
+/* Highlight pill */
+.highlight {
+    background-color: #2655ff;
+    color: white;
+    padding: 1rem 1.25rem;
+    border-radius: 0.75rem;
+    display: inline-block;
+    font-size: 2.25rem;
+    font-weight: 800;
+    white-space: nowrap;
 }

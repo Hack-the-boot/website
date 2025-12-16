@@ -1,4 +1,6 @@
 import NavBar from "@/components/NavBar";
+import { MapPin, Calendar, Info } from "lucide-react";
+import Highlight from "@/components/Highlight";
 export default function Home() {
     return (
         <>
@@ -75,6 +77,7 @@ export default function Home() {
                 <div className="eventInfoCard">
                     {/* WHERE CARD */}
                     <div className="cardInfo">
+                        <MapPin className="infoCardIcon" size={48} />
                         <div className="containerTextInfo">
                             <p className="topInfoCard">WHERE</p>
                             <p className="mainInfoCard">MILAN, ITALY</p>
@@ -82,6 +85,7 @@ export default function Home() {
                     </div>
                     {/* WHEN CARD */}
                     <div className="cardInfo">
+                        <Calendar className="infoCardIcon" size={48} />
                         <div className="containerTextInfo">
                             <p className="topInfoCard">WHEN</p>
                             <p className="mainInfoCard">SPRING 2026</p>
@@ -89,6 +93,7 @@ export default function Home() {
                     </div>
                     {/* MORE INFO CARD */}
                     <div className="cardInfo">
+                        <Info className="infoCardIcon" size={48} />
                         <div className="containerTextInfo">
                             <p className="topInfoCard">MORE INFO</p>
                             <p className="mainInfoCard">VERY SOON</p>
@@ -110,6 +115,23 @@ export default function Home() {
                 <input type="email" className="email-input" placeholder="Be the first to know when applications open" />
                 <button className="email-btn">REMIND ME</button>
             </div>
+
+            <h3 className="medium-title">There's no time for plans or overthinking.</h3>
+            <div className="highlight-container">
+                <Highlight className="highlight">24 HOURS</Highlight>
+
+                <span className="highlight-connector" />
+
+                <Highlight className="highlight">GROUPS OF 4</Highlight>
+
+                <span className="highlight-connector" />
+
+                <Highlight className="highlight">BEST PROJECT WINS</Highlight>
+            </div>
+            <h2 className="big-title leading-[1.3] !mt-12">
+                WILL YOU TAKE THE CROWN AND WIN <br></br>THE FIRST ITALIAN STUDENT HACKATHON?
+            </h2>
+            <h2 className="big-title !mt-12">WHY JOIN</h2>
         </>
     );
 }
