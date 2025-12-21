@@ -23,6 +23,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+    metadataBase: new URL("https://hacktheboot.it"),
     title: "Hack The Boot: L'hackathon Made In Italy",
     description: "Hack The Boot — l'hackathon studentesco internazionale in Italia. 24 ore di innovazione, creatività e competizione a Milano. Pre-registrati per la Spring 2026!",
     keywords: "Hack The Boot, Hackathon Italia, Hackathon Studenti Milano, Hack The Boot 2026, Hackathon Internazionale Europa, Competizione Tech Italia, Hackathon per Studenti",
@@ -60,10 +61,11 @@ export const metadata: Metadata = {
         description: "Partecipa all'hackathon studentesco internazionale in Italia — 24 ore di innovazione a Milano.",
         images: [
             {
-                url: "https://hacktheboot.it/img/Logo_Text.png",
+                url: "/img/Logo_Text.png",
                 width: 1200,
                 height: 630,
                 alt: "Logo Hack The Boot Hackathon",
+                type: "image/png",
             },
         ],
         alternateLocale: ["en_US"],
@@ -72,7 +74,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Hack The Boot: L'hackathon Made In Italy",
         description: "Unisciti a centinaia di studenti per 24 ore di creatività, codice e competizione. Pre-registrati ora!",
-        images: ["https://hacktheboot.it/img/Logo_Text.png"],
+        images: ["/img/Logo_Text.png"],
         creator: "@hacktheboot",
     },
     alternates: {
