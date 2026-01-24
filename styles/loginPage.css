@@ -1,0 +1,53 @@
+.loginPage {
+    background: #151515;
+    font-family: "Montserrat", sans-serif;
+}
+
+.pageLogin {
+    @apply flex flex-col items-center justify-center w-full min-h-screen text-center;
+    background-color: #151515;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 150px 150px;
+}
+.logoAndTextRegister {
+    @apply flex flex-row items-center scale-75;
+}
+.logoAndTextRegister > h1 {
+    @apply text-gray-100 text-5xl font-bold ml-7;
+}
+.desc {
+    @apply text-xl mt-2 font-medium text-gray-200;
+}
+
+.fullNameContainer {
+    @apply flex flex-row items-center justify-between gap-6;
+}
+
+.name {
+    @apply w-1/2;
+}
+.surname {
+    @apply w-1/2;
+}
+
+.selectionRole {
+    @apply flex flex-col items-start gap-2 font-mono text-[18px];
+}
+
+.register {
+    @apply w-full bg-blue-500 p-3 h-[44px] rounded-xl text-base cursor-pointer text-white font-semibold;
+}
+.agree {
+    @apply flex flex-row items-baseline gap-2 text-gray-400 font-mono text-[12px];
+}
+.externalLoginButton {
+    @apply flex items-center justify-center gap-3 
+    rounded-xl border border-white/20 
+    bg-[#232323] text-gray-100
+    focus:outline-none
+    h-13 px-6 text-base w-full
+    cursor-pointer;
+}
+.line {
+    @apply flex-1 h-px bg-gray-600 hover:bg-gray-500 transition-colors;
+}
